@@ -32,9 +32,9 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         enableSystem
       >
         <Header />
-        <div className="grid md:grid-cols-[200px_1fr]">
+        <div className="grid">
           <Sidebar />
-          <div className="py-8 pr-4 pl-4 sm:py-16 md:pl-0">
+          <div className="py-8 pr-4 pl-4 sm:py-16">
             <div className="prose mx-auto w-full">
               {children}
               <Footer />

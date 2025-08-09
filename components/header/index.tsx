@@ -90,7 +90,7 @@ export const Header = () => {
           >
             Get in touch
           </Link>
-          <div className="md:hidden">
+          <div className="">
             <button
               className="cursor-pointer rounded-full p-2.5 text-sm transition-colors hover:bg-muted"
               onClick={() => setIsOpen(!isOpen)}
@@ -102,7 +102,7 @@ export const Header = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="fixed top-16 right-0 left-0 z-50 border-b bg-background pb-4 md:hidden">
+        <div className="fixed top-16 right-0 left-0 z-50 border-b bg-background pb-4">
           <Navigation />
         </div>
       )}
