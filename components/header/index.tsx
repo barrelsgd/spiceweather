@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { MenuIcon } from "lucide-react";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { type SVGProps, useEffect, useState } from "react";
-import { Link } from "../link";
-import { Navigation } from "../navigation";
-import avatar from "./avatar.jpg";
-import spicewx from "./spicewx.png";
-import { logoutAction } from "@/app/actions/auth/logout";
-import { Theme } from "../theme";
+import { MenuIcon } from 'lucide-react';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { type SVGProps, useEffect, useState } from 'react';
+import { logoutAction } from '@/app/actions/auth/logout';
+import { Link } from '../link';
+import { Navigation } from '../navigation';
+import { Theme } from '../theme';
+import avatar from './avatar.jpg';
+import spicewx from './spicewx.png';
 
 const X = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -55,7 +55,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className=" mx-auto max-w-7xl sticky top-0 z-50 flex h-16 items-center justify-between bg-background p-4">
+      <div className=" sticky top-0 z-50 mx-auto flex h-16 max-w-7xl items-center justify-between bg-background p-4">
         <Link className="flex items-center gap-4" href="/">
           <Image
             alt=""
@@ -97,9 +97,9 @@ export const Header = () => {
           </Link>
           <form action={logoutAction} className="hidden sm:block">
             <button
-              type="submit"
-              className="rounded-full px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
               aria-label="Log out"
+              className="rounded-full px-4 py-2.5 font-medium text-sm transition-colors hover:bg-muted"
+              type="submit"
             >
               Logout
             </button>
@@ -130,6 +130,6 @@ export const Header = () => {
 // Header
 const WeatherHeader = ({ appName }: { appName: string }) => (
   <header className="mb-2 hidden md:block">
-    <h1 className="text-2xl font-semibold">{appName}</h1>
+    <h1 className="font-semibold text-2xl">{appName}</h1>
   </header>
 );

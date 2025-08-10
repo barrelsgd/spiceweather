@@ -1,14 +1,14 @@
 'use client';
 
-import { contact } from '@/app/actions/contact';
-import { Input } from '@/components/input';
-import { Textarea } from '@/components/textarea';
-import { cn } from '@/lib/utils';
 import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
 import { useReCaptcha } from 'next-recaptcha-v3';
 import { Form } from 'radix-ui';
 import { type FormEventHandler, useState } from 'react';
 import { toast } from 'sonner';
+import { contact } from '@/app/actions/contact';
+import { Input } from '@/components/input';
+import { Textarea } from '@/components/textarea';
+import { cn } from '@/lib/utils';
 
 export const emailRegex = /.+@.+/u;
 
@@ -58,45 +58,45 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form.Root onSubmit={handleSubmit} className="grid w-full gap-6">
+    <Form.Root className="grid w-full gap-6" onSubmit={handleSubmit}>
       <Input
         label="Name"
+        maxLength={256}
         name="name"
         placeholder="Jane Doe"
         required
-        maxLength={256}
       />
       <Input
         label="Email address"
-        name="email"
-        placeholder="jane@example.com"
-        pattern={emailRegex.source}
-        required
         maxLength={256}
+        name="email"
+        pattern={emailRegex.source}
+        placeholder="jane@example.com"
+        required
       />
       <Textarea
         label="Message"
+        maxLength={1000}
         name="message"
         placeholder="Hi there! I wanted to reach out to you about..."
         required
-        maxLength={1000}
       />
       <div className="hidden">
         <Input
           label="Subject"
+          maxLength={256}
           name="subject"
           placeholder="I want to know more about your services"
-          maxLength={256}
         />
       </div>
       <Form.Submit asChild>
         <button
-          type="submit"
-          disabled={loading}
           className={cn(
             'flex w-fit cursor-pointer select-none items-center justify-center gap-2 rounded-md bg-foreground px-3 py-2 text-background text-sm',
             'disabled:cursor-not-allowed disabled:opacity-50'
           )}
+          disabled={loading}
+          type="submit"
         >
           {loading ? (
             <div className="flex h-5 w-5 items-center justify-center">

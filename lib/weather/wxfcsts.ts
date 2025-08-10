@@ -69,7 +69,7 @@ export const wxfcsts = {
       seas: 'Moderate; waves 4 - 6 ft in open waters',
     },
     temperature: { max_c: 32.0, min_c: 24.5 },
-    tides: { low_time: '13:45', high_time: '06:45'}, // first high/low pair
+    tides: { low_time: '13:45', high_time: '06:45' }, // first high/low pair
     outlook: {
       thursday: {
         date: '2025-07-31',
@@ -101,8 +101,5 @@ export const wxfcsts = {
   },
 } as const;
 
-
 // Inferred types for convenient reuse
 export type WxForecasts = typeof wxfcsts;
-
-

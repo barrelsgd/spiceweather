@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { createItemAction } from "@/app/(protected)/items/actions";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert } from "@/components/ui/alert";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { createItemAction } from '@/app/(protected)/items/actions';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default async function NewItemPage({
   searchParams,
@@ -12,29 +12,41 @@ export default async function NewItemPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const sp = await searchParams;
-  const error = sp?.error || "";
+  const error = sp?.error || '';
 
   return (
     <main className="mx-auto mt-8 w-full max-w-2xl px-4">
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold">New item</h1>
-        <Button asChild variant="link" className="p-0 h-auto">
+        <h1 className="font-semibold text-3xl">New item</h1>
+        <Button asChild className="h-auto p-0" variant="link">
           <Link href="/items">Back to items</Link>
         </Button>
       </div>
 
       {error ? (
-        <Alert role="alert" aria-live="assertive" variant="destructive" className="mb-4">{error}</Alert>
+        <Alert
+          aria-live="assertive"
+          className="mb-4"
+          role="alert"
+          variant="destructive"
+        >
+          {error}
+        </Alert>
       ) : null}
 
       <form action={createItemAction} className="space-y-4">
         <div>
           <Label htmlFor="title">Title</Label>
-          <Input id="title" name="title" type="text" required />
+          <Input id="title" name="title" required type="text" />
         </div>
         <div>
           <Label htmlFor="description">Description</Label>
-          <textarea id="description" name="description" rows={4} className="w-full rounded-md border px-3 py-2" />
+          <textarea
+            className="w-full rounded-md border px-3 py-2"
+            id="description"
+            name="description"
+            rows={4}
+          />
         </div>
         <Button type="submit">Create item</Button>
       </form>
@@ -43,7 +55,7 @@ export default async function NewItemPage({
 }
 
 export const metadata: Metadata = {
-  title: "New item",
-  description: "Create a new item.",
-  alternates: { canonical: "/items/new" },
+  title: 'New item',
+  description: 'Create a new item.',
+  alternates: { canonical: '/items/new' },
 };

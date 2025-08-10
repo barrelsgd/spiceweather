@@ -1,9 +1,9 @@
-import { forgotPasswordAction } from "@/app/actions/auth/forgot";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert } from "@/components/ui/alert";
+import type { Metadata } from 'next';
+import { forgotPasswordAction } from '@/app/actions/auth/forgot';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default async function ForgotPage({
   searchParams,
@@ -11,34 +11,48 @@ export default async function ForgotPage({
   searchParams: Promise<{ error?: string; success?: string; next?: string }>;
 }) {
   const sp = await searchParams;
-  const error = sp?.error || "";
-  const success = sp?.success || "";
-  const next = sp?.next || "/";
+  const error = sp?.error || '';
+  const success = sp?.success || '';
+  const next = sp?.next || '/';
 
   return (
     <main className="mx-auto mt-8 w-full max-w-md px-4">
-      <h1 className="mb-4 text-2xl font-semibold">Forgot password</h1>
+      <h1 className="mb-4 font-semibold text-2xl">Forgot password</h1>
 
       {error ? (
-        <Alert role="alert" aria-live="assertive" variant="destructive" className="mb-4">
+        <Alert
+          aria-live="assertive"
+          className="mb-4"
+          role="alert"
+          variant="destructive"
+        >
           {error}
         </Alert>
       ) : null}
       {success ? (
-        <Alert role="status" aria-live="polite" variant="success" className="mb-4">
+        <output
+          aria-live="polite"
+          className="mb-4 block rounded border bg-card px-4 py-3 text-foreground"
+        >
           {success}
-        </Alert>
+        </output>
       ) : null}
 
       <form action={forgotPasswordAction} className="space-y-4">
-        <input type="hidden" name="next" value={next} />
+        <input name="next" type="hidden" value={next} />
 
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" autoComplete="email" required />
+          <Input
+            autoComplete="email"
+            id="email"
+            name="email"
+            required
+            type="email"
+          />
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button className="w-full" type="submit">
           Send reset link
         </Button>
       </form>
@@ -47,7 +61,7 @@ export default async function ForgotPage({
 }
 
 export const metadata: Metadata = {
-  title: "Forgot password",
-  description: "Request a password reset link.",
-  alternates: { canonical: "/forgot" },
+  title: 'Forgot password',
+  description: 'Request a password reset link.',
+  alternates: { canonical: '/forgot' },
 };

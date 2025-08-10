@@ -1,8 +1,8 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { env } from '@/lib/env';
 import { resend } from '@/lib/resend';
-import { revalidatePath } from 'next/cache';
 
 const verifyRecaptcha = async (token: string) => {
   const recaptchaUrl = new URL(

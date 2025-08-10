@@ -1,52 +1,52 @@
 // lib/api.ts
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
+import { client as apiClient } from '@/lib/api/client.gen';
 import {
+  type BodyLoginLoginAccessToken,
+  itemsCreateItem,
+  itemsDeleteItem,
+  itemsReadItem,
+  itemsReadItems,
+  itemsUpdateItem,
   loginLoginAccessToken,
   loginRecoverPassword,
   loginResetPassword,
-  usersReadUserMe,
-  usersRegisterUser,
-  usersUpdateUserMe,
-  usersUpdatePasswordMe,
-  usersReadUsers,
-  usersCreateUser,
-  usersReadUserById,
-  usersUpdateUser,
-  usersDeleteUser,
-  itemsReadItems,
-  itemsCreateItem,
-  itemsReadItem,
-  itemsUpdateItem,
-  itemsDeleteItem,
-  type BodyLoginLoginAccessToken,
   type NewPassword,
-} from "@/lib/api/index"; // explicit index to avoid resolving this file
-import { client as apiClient } from "@/lib/api/client.gen";
+  usersCreateUser,
+  usersDeleteUser,
+  usersReadUserById,
+  usersReadUserMe,
+  usersReadUsers,
+  usersRegisterUser,
+  usersUpdatePasswordMe,
+  usersUpdateUser,
+  usersUpdateUserMe,
+} from '@/lib/api/index'; // explicit index to avoid resolving this file
 
 // Configure API base URL from env, defaulting to the live API
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.barrels.gd";
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.barrels.gd';
 
 // Dev-time validation: enforce HTTPS and call out missing envs
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
     console.warn(
-      "[api] NEXT_PUBLIC_API_BASE_URL not set; using default https://api.barrels.gd. Set it in .env.local to avoid surprises."
+      '[api] NEXT_PUBLIC_API_BASE_URL not set; using default https://api.barrels.gd. Set it in .env.local to avoid surprises.'
     );
   }
-  if (API_BASE_URL.startsWith("http://")) {
+  if (API_BASE_URL.startsWith('http://')) {
     throw new Error(
-      "[api] In development, API baseURL must be HTTPS. Update NEXT_PUBLIC_API_BASE_URL to use https://"
+      '[api] In development, API baseURL must be HTTPS. Update NEXT_PUBLIC_API_BASE_URL to use https://'
     );
   }
 }
 
 apiClient.setConfig({ baseURL: API_BASE_URL });
-console.info("[api] baseURL configured", { baseURL: API_BASE_URL });
+console.info('[api] baseURL configured', { baseURL: API_BASE_URL });
 
 async function authHeaders() {
   const jar = await cookies();
-  const token = jar.get("access_token")?.value;
+  const token = jar.get('access_token')?.value;
   return token ? { Authorization: `Bearer ${token}` } : undefined;
 }
 
@@ -59,7 +59,7 @@ export function loginApi() {
       loginRecoverPassword({
         client: apiClient,
         // path param substitution for {email}
-        params: { path: { email } },
+        path: { email },
         throwOnError: true,
       }),
     resetPassword: (body: NewPassword) =>
@@ -113,14 +113,26 @@ export function usersApi() {
       usersCreateUser({
         client: apiClient,
         headers: await authHeaders(),
-        body,
+        body: {
+          email: body.email,
+          password: body.password,
+          // Full name allows null per OpenAPI type
+          full_name: body.full_name ?? null,
+          // Booleans don't allow null in UserCreate; coerce null to undefined
+          is_active:
+            typeof body.is_active === 'boolean' ? body.is_active : undefined,
+          is_superuser:
+            typeof body.is_superuser === 'boolean'
+              ? body.is_superuser
+              : undefined,
+        },
         throwOnError: true,
       }),
     readUserById: async (user_id: string) =>
       usersReadUserById({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { user_id } },
+        path: { user_id },
       }),
     updateUser: async (
       user_id: string,
@@ -135,15 +147,25 @@ export function usersApi() {
       usersUpdateUser({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { user_id } },
-        body,
+        path: { user_id },
+        body: {
+          email: body.email,
+          full_name: body.full_name,
+          password: body.password,
+          is_active:
+            typeof body.is_active === 'boolean' ? body.is_active : undefined,
+          is_superuser:
+            typeof body.is_superuser === 'boolean'
+              ? body.is_superuser
+              : undefined,
+        },
         throwOnError: true,
       }),
     deleteUser: async (user_id: string) =>
       usersDeleteUser({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { user_id } },
+        path: { user_id },
         throwOnError: true,
       }),
   } as const;
@@ -168,7 +190,7 @@ export function itemsApi() {
       itemsReadItem({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { id } },
+        path: { id },
       }),
     updateItem: async (
       id: string,
@@ -177,7 +199,7 @@ export function itemsApi() {
       itemsUpdateItem({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { id } },
+        path: { id },
         body,
         throwOnError: true,
       }),
@@ -185,8 +207,11 @@ export function itemsApi() {
       itemsDeleteItem({
         client: apiClient,
         headers: await authHeaders(),
-        params: { path: { id } },
+        path: { id },
         throwOnError: true,
       }),
   } as const;
 }
+
+// Re-export commonly-used types for convenience
+export type { Token } from '@/lib/api/types.gen';

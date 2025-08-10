@@ -1,55 +1,60 @@
-"use server";
+'use server';
 
-import { redirect } from "next/navigation";
-import { loginWithPassword } from "@/lib/auth";
-import { usersApi } from "@/lib/api";
+import { redirect } from 'next/navigation';
+import { usersApi } from '@/lib/api';
+import { loginWithPassword } from '@/lib/auth';
 
 export async function signupAction(formData: FormData) {
-  const full_nameRaw = String(formData.get("full_name") || "").trim();
+  const full_nameRaw = String(formData.get('full_name') || '').trim();
   const full_name = full_nameRaw.length ? full_nameRaw : null;
-  const email = String(formData.get("email") || "").trim();
-  const password = String(formData.get("password") || "");
-  const remember = String(formData.get("remember") || "") === "on";
-  const next = String(formData.get("next") || "/") || "/";
+  const email = String(formData.get('email') || '').trim();
+  const password = String(formData.get('password') || '');
+  const remember = String(formData.get('remember') || '') === 'on';
+  const next = String(formData.get('next') || '/') || '/';
 
   try {
-    if (!email || !password) throw new Error("Missing credentials");
-    console.info("[signupAction] Registering user", { email, full_name, next });
+    if (!(email && password)) {
+      throw new Error('Missing credentials');
+    }
 
     await usersApi().registerUser({ email, password, full_name });
-
-    console.info("[signupAction] Registration success, logging in", {
-      email,
-      remember,
-    });
-
     await loginWithPassword(email, password, { remember });
-    console.info("[signupAction] Login after signup success, redirecting", {
-      email,
-      next,
-    });
   } catch (e) {
-    const anyErr = e as {
-      response?: { status?: number; data?: any; statusText?: string };
-      message?: string;
-    };
-    const detailRaw = anyErr.response?.data;
-    const detailText =
-      typeof detailRaw === "string"
-        ? detailRaw
-        : detailRaw?.detail
-          ? JSON.stringify(detailRaw.detail)
-          : undefined;
-
-    const message = detailText || anyErr.message || "Signup failed";
-    console.warn("[signupAction] Signup failed", { email, message, next });
+    let message = 'Signup failed';
+    const err = e as unknown;
+    // Extract a helpful message from known API error shapes
+    if (typeof err === 'object' && err && 'response' in err) {
+      const resp = (err as { response?: { data?: unknown; statusText?: string } }).response;
+      if (resp?.data) {
+        const data = resp.data as unknown;
+        if (typeof data === 'string') {
+          message = data || message;
+        } else if (
+          typeof data === 'object' && data && 'detail' in data && data.detail
+        ) {
+          const detail = (data as { detail?: unknown }).detail;
+          message =
+            typeof detail === 'string'
+              ? detail
+              : JSON.stringify(detail);
+        } else if (resp.statusText) {
+          message = resp.statusText;
+        }
+      } else if (resp?.statusText) {
+        message = resp.statusText;
+      }
+    } else if (err instanceof Error && err.message) {
+      message = err.message;
+    }
 
     const url = new URL(
-      "/auth/signup",
+      '/auth/signup',
       process.env.VERCEL_PROJECT_PRODUCTION_URL as string
     );
-    url.searchParams.set("error", message);
-    if (next && next !== "/") url.searchParams.set("next", next);
+    url.searchParams.set('error', message);
+    if (next && next !== '/') {
+      url.searchParams.set('next', next);
+    }
     redirect(url.toString());
   }
 

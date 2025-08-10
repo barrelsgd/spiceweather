@@ -1,8 +1,8 @@
 export const ImpactFcst = {
-  openapi: "3.1.0",
+  openapi: '3.1.0',
   info: {
-    title: "Impact-Based Forecasting (IBF) – WMO 1150 aligned",
-    version: "1.0.0",
+    title: 'Impact-Based Forecasting (IBF) – WMO 1150 aligned',
+    version: '1.0.0',
     description:
       "OpenAPI component schemas for IBF v1.0. Field names and enums mirror the IBF XML. Date-times follow IBF's offset pattern. Geometries use WGS-84 strings.",
   },
@@ -10,411 +10,411 @@ export const ImpactFcst = {
   components: {
     schemas: {
       IBFProduct: {
-        type: "object",
+        type: 'object',
         required: [
-          "id",
-          "issued",
-          "issuer",
-          "hazard",
-          "riskAssessment",
-          "areas",
-          "impacts",
+          'id',
+          'issued',
+          'issuer',
+          'hazard',
+          'riskAssessment',
+          'areas',
+          'impacts',
         ],
         properties: {
-          id: { type: "string", description: "Unique product identifier." },
-          issued: { type: "string", format: "date-time" },
-          validFrom: { type: "string", format: "date-time" },
-          validTo: { type: "string", format: "date-time" },
-          issuer: { $ref: "#/components/schemas/Organization" },
+          id: { type: 'string', description: 'Unique product identifier.' },
+          issued: { type: 'string', format: 'date-time' },
+          validFrom: { type: 'string', format: 'date-time' },
+          validTo: { type: 'string', format: 'date-time' },
+          issuer: { $ref: '#/components/schemas/Organization' },
           status: {
-            type: "string",
-            enum: ["Draft", "Operational", "Exercise", "Test", "Cancelled"],
+            type: 'string',
+            enum: ['Draft', 'Operational', 'Exercise', 'Test', 'Cancelled'],
           },
-          language: { type: "string", description: "BCP-47 tag." },
+          language: { type: 'string', description: 'BCP-47 tag.' },
 
-          hazard: { $ref: "#/components/schemas/HazardSpec" },
-          exposureModel: { $ref: "#/components/schemas/ExposureModelRef" },
+          hazard: { $ref: '#/components/schemas/HazardSpec' },
+          exposureModel: { $ref: '#/components/schemas/ExposureModelRef' },
           vulnerabilityModel: {
-            $ref: "#/components/schemas/VulnerabilityModelRef",
+            $ref: '#/components/schemas/VulnerabilityModelRef',
           },
 
-          riskAssessment: { $ref: "#/components/schemas/RiskAssessment" },
+          riskAssessment: { $ref: '#/components/schemas/RiskAssessment' },
 
           areas: {
-            type: "array",
+            type: 'array',
             minItems: 1,
-            items: { $ref: "#/components/schemas/AreaTarget" },
+            items: { $ref: '#/components/schemas/AreaTarget' },
           },
 
           impacts: {
-            type: "array",
+            type: 'array',
             minItems: 1,
-            items: { $ref: "#/components/schemas/ImpactStatement" },
+            items: { $ref: '#/components/schemas/ImpactStatement' },
           },
 
           actions: {
-            type: "array",
-            items: { $ref: "#/components/schemas/ActionGuidance" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/ActionGuidance' },
           },
 
-          confidence: { $ref: "#/components/schemas/Confidence" },
+          confidence: { $ref: '#/components/schemas/Confidence' },
 
           partners: {
-            type: "array",
-            description: "Participating DRCPAs and stakeholders.",
-            items: { $ref: "#/components/schemas/PartnerRole" },
+            type: 'array',
+            description: 'Participating DRCPAs and stakeholders.',
+            items: { $ref: '#/components/schemas/PartnerRole' },
           },
 
-          dissemination: { $ref: "#/components/schemas/Dissemination" },
+          dissemination: { $ref: '#/components/schemas/Dissemination' },
 
-          monitoring: { $ref: "#/components/schemas/ImpactMonitoringPlan" },
+          monitoring: { $ref: '#/components/schemas/ImpactMonitoringPlan' },
 
-          validation: { $ref: "#/components/schemas/PostEventValidation" },
+          validation: { $ref: '#/components/schemas/PostEventValidation' },
 
-          governance: { $ref: "#/components/schemas/Governance" },
+          governance: { $ref: '#/components/schemas/Governance' },
 
           capReferences: {
-            type: "array",
+            type: 'array',
             description:
-              "CAP sender,identifier,sent triplets or message IDs if published via CAP.",
-            items: { type: "string" },
+              'CAP sender,identifier,sent triplets or message IDs if published via CAP.',
+            items: { type: 'string' },
           },
 
           attachments: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Attachment" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Attachment' },
           },
 
-          notes: { type: "string" },
-          version: { type: "string" },
+          notes: { type: 'string' },
+          version: { type: 'string' },
           parameters: {
-            type: "array",
-            items: { $ref: "#/components/schemas/KeyValue" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/KeyValue' },
           },
         },
       },
 
       HazardSpec: {
-        type: "object",
-        required: ["type", "description", "leadTime"],
+        type: 'object',
+        required: ['type', 'description', 'leadTime'],
         properties: {
           type: {
-            type: "string",
+            type: 'string',
             description:
-              "Hazard type (hydrometeorological, geophysical, or human-induced).",
+              'Hazard type (hydrometeorological, geophysical, or human-induced).',
           },
-          description: { type: "string" },
+          description: { type: 'string' },
           leadTime: {
-            type: "string",
-            description: "ISO 8601 duration (e.g., P2D, PT6H).",
+            type: 'string',
+            description: 'ISO 8601 duration (e.g., P2D, PT6H).',
           },
           forecastWindow: {
-            type: "object",
+            type: 'object',
             properties: {
-              start: { type: "string", format: "date-time" },
-              end: { type: "string", format: "date-time" },
+              start: { type: 'string', format: 'date-time' },
+              end: { type: 'string', format: 'date-time' },
             },
           },
           method: {
-            type: "string",
-            enum: ["Deterministic", "Probabilistic", "Ensemble"],
+            type: 'string',
+            enum: ['Deterministic', 'Probabilistic', 'Ensemble'],
           },
-          meteorologicalSummary: { type: "string" },
+          meteorologicalSummary: { type: 'string' },
           thresholdsUsed: {
-            type: "array",
+            type: 'array',
             description:
-              "Thresholds may vary in space/time to reflect vulnerability differences.",
-            items: { $ref: "#/components/schemas/Threshold" },
+              'Thresholds may vary in space/time to reflect vulnerability differences.',
+            items: { $ref: '#/components/schemas/Threshold' },
           },
           dataSources: {
-            type: "array",
-            items: { $ref: "#/components/schemas/DataSource" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/DataSource' },
           },
         },
       },
 
       ExposureModelRef: {
-        type: "object",
+        type: 'object',
         properties: {
           datasets: {
-            type: "array",
-            items: { $ref: "#/components/schemas/DataSource" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/DataSource' },
           },
-          timeSlice: { type: "string", format: "date-time" },
-          notes: { type: "string" },
+          timeSlice: { type: 'string', format: 'date-time' },
+          notes: { type: 'string' },
         },
         description:
-          "Who/what is in harm’s way; varies with time and location.",
+          'Who/what is in harm’s way; varies with time and location.',
       },
 
       VulnerabilityModelRef: {
-        type: "object",
+        type: 'object',
         properties: {
           datasets: {
-            type: "array",
-            items: { $ref: "#/components/schemas/DataSource" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/DataSource' },
           },
-          version: { type: "string" },
-          notes: { type: "string" },
+          version: { type: 'string' },
+          notes: { type: 'string' },
         },
-        description: "Susceptibility of exposed elements; situation-specific.",
+        description: 'Susceptibility of exposed elements; situation-specific.',
       },
 
       RiskAssessment: {
-        type: "object",
-        required: ["likelihood", "impactLevel", "riskLevel"],
+        type: 'object',
+        required: ['likelihood', 'impactLevel', 'riskLevel'],
         properties: {
           likelihood: {
-            type: "string",
-            enum: ["VeryLow", "Low", "Medium", "High"],
-            description: "Forecast likelihood.",
+            type: 'string',
+            enum: ['VeryLow', 'Low', 'Medium', 'High'],
+            description: 'Forecast likelihood.',
           },
           impactLevel: {
-            type: "string",
-            enum: ["VeryLow", "Low", "Medium", "High"],
-            description: "Expected severity of consequences.",
+            type: 'string',
+            enum: ['VeryLow', 'Low', 'Medium', 'High'],
+            description: 'Expected severity of consequences.',
           },
           riskLevel: {
-            type: "string",
-            enum: ["Green", "Yellow", "Orange", "Red"],
-            description: "Color per likelihood × impact matrix.",
+            type: 'string',
+            enum: ['Green', 'Yellow', 'Orange', 'Red'],
+            description: 'Color per likelihood × impact matrix.',
           },
-          matrixRationale: { type: "string" },
+          matrixRationale: { type: 'string' },
         },
       },
 
       AreaTarget: {
-        type: "object",
-        required: ["areaName", "geometry"],
+        type: 'object',
+        required: ['areaName', 'geometry'],
         properties: {
-          areaName: { type: "string" },
+          areaName: { type: 'string' },
           adminCodes: {
-            type: "array",
-            items: { type: "string" },
+            type: 'array',
+            items: { type: 'string' },
           },
-          populationEstimate: { type: "integer", minimum: 0 },
-          geometry: { $ref: "#/components/schemas/GeoJSONGeometry" },
+          populationEstimate: { type: 'integer', minimum: 0 },
+          geometry: { $ref: '#/components/schemas/GeoJSONGeometry' },
           geocodes: {
-            type: "array",
-            items: { $ref: "#/components/schemas/KeyValue" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/KeyValue' },
           },
         },
       },
 
       ImpactStatement: {
-        type: "object",
-        required: ["headline", "audience"],
+        type: 'object',
+        required: ['headline', 'audience'],
         properties: {
           headline: {
-            type: "string",
-            description: "Actionable, plain-language impact.",
+            type: 'string',
+            description: 'Actionable, plain-language impact.',
           },
           audience: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "string",
-              description: "Population segments or sectors.",
+              type: 'string',
+              description: 'Population segments or sectors.',
             },
           },
-          sectors: { type: "array", items: { type: "string" } },
-          details: { type: "string" },
-          confidenceNote: { type: "string" },
+          sectors: { type: 'array', items: { type: 'string' } },
+          details: { type: 'string' },
+          confidenceNote: { type: 'string' },
           expectedEffects: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Effect" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Effect' },
           },
         },
       },
 
       ActionGuidance: {
-        type: "object",
-        required: ["action", "audience"],
+        type: 'object',
+        required: ['action', 'audience'],
         properties: {
-          action: { type: "string", description: "What to do." },
-          audience: { type: "string" },
+          action: { type: 'string', description: 'What to do.' },
+          audience: { type: 'string' },
           urgency: {
-            type: "string",
-            enum: ["Immediate", "Soon", "Prepare", "Monitor"],
+            type: 'string',
+            enum: ['Immediate', 'Soon', 'Prepare', 'Monitor'],
           },
-          sourceAgency: { $ref: "#/components/schemas/Organization" },
+          sourceAgency: { $ref: '#/components/schemas/Organization' },
         },
       },
 
       Confidence: {
-        type: "object",
+        type: 'object',
         properties: {
-          summary: { type: "string" },
-          ensembleSupport: { type: "number", minimum: 0, maximum: 1 },
-          keyUncertainties: { type: "array", items: { type: "string" } },
+          summary: { type: 'string' },
+          ensembleSupport: { type: 'number', minimum: 0, maximum: 1 },
+          keyUncertainties: { type: 'array', items: { type: 'string' } },
         },
         description:
-          "Expresses forecast uncertainty relevant to risk communication.",
+          'Expresses forecast uncertainty relevant to risk communication.',
       },
 
       Dissemination: {
-        type: "object",
+        type: 'object',
         properties: {
           channels: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "string",
+              type: 'string',
               enum: [
-                "CAP",
-                "Web",
-                "Email",
-                "SMS",
-                "Broadcast",
-                "Social",
-                "GIS",
+                'CAP',
+                'Web',
+                'Email',
+                'SMS',
+                'Broadcast',
+                'Social',
+                'GIS',
               ],
             },
           },
           capFeed: {
-            type: "object",
+            type: 'object',
             properties: {
-              endpoint: { type: "string", format: "uri" },
-              alertIds: { type: "array", items: { type: "string" } },
+              endpoint: { type: 'string', format: 'uri' },
+              alertIds: { type: 'array', items: { type: 'string' } },
             },
           },
           gisLayers: {
-            type: "array",
-            items: { $ref: "#/components/schemas/GISLayer" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/GISLayer' },
           },
         },
       },
 
       ImpactMonitoringPlan: {
-        type: "object",
+        type: 'object',
         properties: {
           observationChannels: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "string",
+              type: 'string',
               description:
-                "e.g., social media, crowdsourcing, webcams, transport feeds",
+                'e.g., social media, crowdsourcing, webcams, transport feeds',
             },
           },
-          metrics: { type: "array", items: { type: "string" } },
+          metrics: { type: 'array', items: { type: 'string' } },
         },
-        description: "Real-time impact monitoring and feedback.",
+        description: 'Real-time impact monitoring and feedback.',
       },
 
       PostEventValidation: {
-        type: "object",
+        type: 'object',
         properties: {
-          eventId: { type: "string" },
-          observedImpacts: { type: "string" },
-          evaluationNotes: { type: "string" },
-          stakeholderFeedback: { type: "string" },
-          improvementActions: { type: "string" },
-          meetingsHeld: { type: "boolean" },
+          eventId: { type: 'string' },
+          observedImpacts: { type: 'string' },
+          evaluationNotes: { type: 'string' },
+          stakeholderFeedback: { type: 'string' },
+          improvementActions: { type: 'string' },
+          meetingsHeld: { type: 'boolean' },
         },
-        description: "System-level evaluation after significant events.",
+        description: 'System-level evaluation after significant events.',
       },
 
       PartnerRole: {
-        type: "object",
-        required: ["organization", "role"],
+        type: 'object',
+        required: ['organization', 'role'],
         properties: {
-          organization: { $ref: "#/components/schemas/Organization" },
+          organization: { $ref: '#/components/schemas/Organization' },
           role: {
-            type: "string",
-            description: "e.g., DRCPA lead, sector partner, media.",
+            type: 'string',
+            description: 'e.g., DRCPA lead, sector partner, media.',
           },
-          mouRef: { type: "string" },
+          mouRef: { type: 'string' },
         },
       },
 
       Governance: {
-        type: "object",
+        type: 'object',
         properties: {
-          sopRef: { type: "string" },
+          sopRef: { type: 'string' },
           changeManagement: {
-            type: "string",
-            description: "Phase or notes aligned with ADKAR stages.",
+            type: 'string',
+            description: 'Phase or notes aligned with ADKAR stages.',
           },
         },
       },
 
       Threshold: {
-        type: "object",
+        type: 'object',
         properties: {
-          name: { type: "string" },
-          metric: { type: "string" },
-          value: { type: "number" },
+          name: { type: 'string' },
+          metric: { type: 'string' },
+          value: { type: 'number' },
           duration: {
-            type: "string",
-            description: "ISO 8601 duration if applicable.",
+            type: 'string',
+            description: 'ISO 8601 duration if applicable.',
           },
           spatialQualifier: {
-            type: "string",
-            description: "e.g., low-lying areas, elevations >1500 m",
+            type: 'string',
+            description: 'e.g., low-lying areas, elevations >1500 m',
           },
           temporalQualifier: {
-            type: "string",
-            description: "e.g., rush hour, early season",
+            type: 'string',
+            description: 'e.g., rush hour, early season',
           },
         },
       },
 
       Effect: {
-        type: "object",
+        type: 'object',
         properties: {
           type: {
-            type: "string",
+            type: 'string',
             description:
-              "e.g., road closures, power outages, transport cancellations",
+              'e.g., road closures, power outages, transport cancellations',
           },
           severity: {
-            type: "string",
-            enum: ["Minor", "Moderate", "Major", "Severe"],
+            type: 'string',
+            enum: ['Minor', 'Moderate', 'Major', 'Severe'],
           },
-          probability: { type: "number", minimum: 0, maximum: 1 },
+          probability: { type: 'number', minimum: 0, maximum: 1 },
         },
       },
 
       GISLayer: {
-        type: "object",
+        type: 'object',
         properties: {
-          name: { type: "string" },
-          uri: { type: "string", format: "uri" },
-          format: { type: "string", enum: ["GeoJSON", "WMS", "WFS", "KML"] },
+          name: { type: 'string' },
+          uri: { type: 'string', format: 'uri' },
+          format: { type: 'string', enum: ['GeoJSON', 'WMS', 'WFS', 'KML'] },
         },
       },
 
       GeoJSONGeometry: {
-        type: "object",
-        description: "Subset of RFC 7946.",
+        type: 'object',
+        description: 'Subset of RFC 7946.',
         oneOf: [
-          { $ref: "#/components/schemas/GeoJSONPoint" },
-          { $ref: "#/components/schemas/GeoJSONPolygon" },
-          { $ref: "#/components/schemas/GeoJSONMultiPolygon" },
+          { $ref: '#/components/schemas/GeoJSONPoint' },
+          { $ref: '#/components/schemas/GeoJSONPolygon' },
+          { $ref: '#/components/schemas/GeoJSONMultiPolygon' },
         ],
       },
       GeoJSONPoint: {
-        type: "object",
+        type: 'object',
         properties: {
-          type: { const: "Point" },
+          type: { const: 'Point' },
           coordinates: {
-            type: "array",
-            items: { type: "number" },
+            type: 'array',
+            items: { type: 'number' },
             minItems: 2,
             maxItems: 3,
           },
         },
-        required: ["type", "coordinates"],
+        required: ['type', 'coordinates'],
       },
       GeoJSONPolygon: {
-        type: "object",
+        type: 'object',
         properties: {
-          type: { const: "Polygon" },
+          type: { const: 'Polygon' },
           coordinates: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "array",
+              type: 'array',
               items: {
-                type: "array",
-                items: { type: "number" },
+                type: 'array',
+                items: { type: 'number' },
                 minItems: 2,
                 maxItems: 3,
               },
@@ -422,21 +422,21 @@ export const ImpactFcst = {
             minItems: 1,
           },
         },
-        required: ["type", "coordinates"],
+        required: ['type', 'coordinates'],
       },
       GeoJSONMultiPolygon: {
-        type: "object",
+        type: 'object',
         properties: {
-          type: { const: "MultiPolygon" },
+          type: { const: 'MultiPolygon' },
           coordinates: {
-            type: "array",
+            type: 'array',
             items: {
-              type: "array",
+              type: 'array',
               items: {
-                type: "array",
+                type: 'array',
                 items: {
-                  type: "array",
-                  items: { type: "number" },
+                  type: 'array',
+                  items: { type: 'number' },
                   minItems: 2,
                   maxItems: 3,
                 },
@@ -444,49 +444,49 @@ export const ImpactFcst = {
             },
           },
         },
-        required: ["type", "coordinates"],
+        required: ['type', 'coordinates'],
       },
 
       Organization: {
-        type: "object",
-        required: ["name"],
+        type: 'object',
+        required: ['name'],
         properties: {
-          name: { type: "string" },
-          unit: { type: "string" },
-          contact: { type: "string" },
-          web: { type: "string", format: "uri" },
-          country: { type: "string" },
+          name: { type: 'string' },
+          unit: { type: 'string' },
+          contact: { type: 'string' },
+          web: { type: 'string', format: 'uri' },
+          country: { type: 'string' },
         },
       },
 
       DataSource: {
-        type: "object",
+        type: 'object',
         properties: {
-          name: { type: "string" },
+          name: { type: 'string' },
           type: {
-            type: "string",
-            description: "e.g., NWP, crowd-sourced, remote sensing",
+            type: 'string',
+            description: 'e.g., NWP, crowd-sourced, remote sensing',
           },
-          uri: { type: "string", format: "uri" },
-          version: { type: "string" },
+          uri: { type: 'string', format: 'uri' },
+          version: { type: 'string' },
         },
       },
 
       Attachment: {
-        type: "object",
+        type: 'object',
         properties: {
-          description: { type: "string" },
-          mimeType: { type: "string" },
-          uri: { type: "string", format: "uri" },
+          description: { type: 'string' },
+          mimeType: { type: 'string' },
+          uri: { type: 'string', format: 'uri' },
         },
       },
 
       KeyValue: {
-        type: "object",
-        required: ["key", "value"],
+        type: 'object',
+        required: ['key', 'value'],
         properties: {
-          key: { type: "string" },
-          value: { type: "string" },
+          key: { type: 'string' },
+          value: { type: 'string' },
         },
       },
     },

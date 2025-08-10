@@ -1,7 +1,7 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { usersApi, itemsApi } from "@/lib/api";
-import { Button } from "@/components/ui/button";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { itemsApi, usersApi } from '@/lib/api';
 
 export default async function AdminPage() {
   // Auth is enforced by app/(protected)/layout.tsx via requireAuthOrRedirect
@@ -13,14 +13,19 @@ export default async function AdminPage() {
   return (
     <main className="mx-auto mt-8 w-full max-w-5xl px-4">
       <div className="mb-6">
-        <h1 className="text-3xl font-semibold">Admin</h1>
-        <p className="text-sm text-muted-foreground">Welcome{user?.full_name ? `, ${user.full_name}` : user?.email ? `, ${user.email}` : ''}. This area is protected.</p>
+        <h1 className="font-semibold text-3xl">Admin</h1>
+        <p className="text-muted-foreground text-sm">
+          {(() => {
+            const name = user?.full_name || user?.email || '';
+            return `Welcome${name ? `, ${name}` : ''}`;
+          })()}. This area is protected.
+        </p>
       </div>
 
       <section className="grid gap-4 md:grid-cols-3">
         <div className="rounded border p-4">
-          <div className="text-sm text-muted-foreground">Items</div>
-          <div className="mt-1 text-2xl font-semibold">{itemsCount}</div>
+          <div className="text-muted-foreground text-sm">Items</div>
+          <div className="mt-1 font-semibold text-2xl">{itemsCount}</div>
           <div className="mt-3 flex gap-2">
             <Button asChild size="sm">
               <Link href="/items">View items</Link>
@@ -32,8 +37,8 @@ export default async function AdminPage() {
         </div>
 
         <div className="rounded border p-4">
-          <div className="text-sm text-muted-foreground">Account</div>
-          <div className="mt-1 text-2xl font-semibold">Profile</div>
+          <div className="text-muted-foreground text-sm">Account</div>
+          <div className="mt-1 font-semibold text-2xl">Profile</div>
           <div className="mt-3">
             <Button asChild size="sm" variant="outline">
               <Link href="/profile">Manage profile</Link>
@@ -42,10 +47,11 @@ export default async function AdminPage() {
         </div>
 
         <div className="rounded border p-4">
-          <div className="text-sm text-muted-foreground">System</div>
-          <div className="mt-1 text-2xl font-semibold">Environment</div>
-          <div className="mt-2 text-sm text-muted-foreground break-all">
-            API: {process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.barrels.gd"}
+          <div className="text-muted-foreground text-sm">System</div>
+          <div className="mt-1 font-semibold text-2xl">Environment</div>
+          <div className="mt-2 break-all text-muted-foreground text-sm">
+            API:{' '}
+            {process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.barrels.gd'}
           </div>
         </div>
       </section>
@@ -54,7 +60,7 @@ export default async function AdminPage() {
 }
 
 export const metadata: Metadata = {
-  title: "Admin",
-  description: "Administrative tools and settings.",
-  alternates: { canonical: "/admin" },
+  title: 'Admin',
+  description: 'Administrative tools and settings.',
+  alternates: { canonical: '/admin' },
 };

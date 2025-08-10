@@ -1,9 +1,9 @@
-import { resetPasswordAction } from "@/app/actions/auth/reset";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert } from "@/components/ui/alert";
+import type { Metadata } from 'next';
+import { resetPasswordAction } from '@/app/actions/auth/reset';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default async function ResetPage({
   searchParams,
@@ -11,34 +11,51 @@ export default async function ResetPage({
   searchParams: Promise<{ error?: string; token?: string; next?: string }>;
 }) {
   const sp = await searchParams;
-  const error = sp?.error || "";
-  const token = sp?.token || "";
-  const next = sp?.next || "/";
+  const error = sp?.error || '';
+  const token = sp?.token || '';
+  const next = sp?.next || '/';
 
   return (
     <main className="mx-auto mt-8 w-full max-w-md px-4">
-      <h1 className="mb-4 text-2xl font-semibold">Reset password</h1>
+      <h1 className="mb-4 font-semibold text-2xl">Reset password</h1>
 
       {error ? (
-        <Alert role="alert" aria-live="assertive" variant="destructive" className="mb-4">
+        <Alert
+          aria-live="assertive"
+          className="mb-4"
+          role="alert"
+          variant="destructive"
+        >
           {error}
         </Alert>
       ) : null}
 
       <form action={resetPasswordAction} className="space-y-4">
-        <input type="hidden" name="next" value={next} />
+        <input name="next" type="hidden" value={next} />
 
         <div>
           <Label htmlFor="token">Reset token</Label>
-          <Input id="token" name="token" type="text" defaultValue={token} required />
+          <Input
+            defaultValue={token}
+            id="token"
+            name="token"
+            required
+            type="text"
+          />
         </div>
 
         <div>
           <Label htmlFor="new_password">New password</Label>
-          <Input id="new_password" name="new_password" type="password" autoComplete="new-password" required />
+          <Input
+            autoComplete="new-password"
+            id="new_password"
+            name="new_password"
+            required
+            type="password"
+          />
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button className="w-full" type="submit">
           Reset password
         </Button>
       </form>
@@ -47,7 +64,7 @@ export default async function ResetPage({
 }
 
 export const metadata: Metadata = {
-  title: "Reset password",
-  description: "Set a new password using your reset token.",
-  alternates: { canonical: "/reset" },
+  title: 'Reset password',
+  description: 'Set a new password using your reset token.',
+  alternates: { canonical: '/reset' },
 };

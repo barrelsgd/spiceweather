@@ -49,7 +49,7 @@ const defaultPathSerializer = ({ path, url: _url }: PathSerializer) => {
       if (Array.isArray(value)) {
         url = url.replace(
           match,
-          serializeArrayParam({ explode, name, style, value }),
+          serializeArrayParam({ explode, name, style, value })
         );
         continue;
       }
@@ -63,7 +63,7 @@ const defaultPathSerializer = ({ path, url: _url }: PathSerializer) => {
             style,
             value: value as Record<string, unknown>,
             valueOnly: true,
-          }),
+          })
         );
         continue;
       }
@@ -74,13 +74,13 @@ const defaultPathSerializer = ({ path, url: _url }: PathSerializer) => {
           `;${serializePrimitiveParam({
             name,
             value: value as string,
-          })}`,
+          })}`
         );
         continue;
       }
 
       const replaceValue = encodeURIComponent(
-        style === 'label' ? `.${value as string}` : (value as string),
+        style === 'label' ? `.${value as string}` : (value as string)
       );
       url = url.replace(match, replaceValue);
     }
@@ -184,7 +184,7 @@ export const buildUrl: Client['buildUrl'] = (options) => {
   const url = getUrl({
     path: options.path,
     // let `paramsSerializer()` handle query params if it exists
-    query: !options.paramsSerializer ? options.query : undefined,
+    query: options.paramsSerializer ? undefined : options.query,
     querySerializer:
       typeof options.querySerializer === 'function'
         ? options.querySerializer
@@ -253,7 +253,7 @@ export const mergeHeaders = (
     for (const [key, value] of iterator) {
       if (
         axiosHeadersKeywords.includes(
-          key as (typeof axiosHeadersKeywords)[number],
+          key as (typeof axiosHeadersKeywords)[number]
         ) &&
         typeof value === 'object'
       ) {
@@ -280,7 +280,7 @@ export const mergeHeaders = (
 };
 
 export const createConfig = <T extends ClientOptions = ClientOptions>(
-  override: Config<Omit<ClientOptions, keyof T> & T> = {},
+  override: Config<Omit<ClientOptions, keyof T> & T> = {}
 ): Config<Omit<ClientOptions, keyof T> & T> => ({
   ...override,
 });

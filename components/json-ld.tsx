@@ -1,6 +1,6 @@
+import type { Person, WithContext } from 'schema-dts';
 import { env } from '@/lib/env';
 import { social } from '@/lib/social';
-import type { Person, WithContext } from 'schema-dts';
 
 const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 const baseUrl = `${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`;

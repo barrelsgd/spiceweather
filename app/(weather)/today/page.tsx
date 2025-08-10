@@ -1,7 +1,7 @@
-import { TodayWeather } from "@/components/weather/today";
+import { TodayWeather } from '@/components/weather/today';
 
 export const metadata = {
-  title: "Weather • Today",
+  title: 'Weather • Today',
 };
 
 export default function WeatherTodayPage() {

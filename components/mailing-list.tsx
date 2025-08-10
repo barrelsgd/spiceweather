@@ -1,11 +1,11 @@
 'use client';
 
-import { subscribe } from '@/app/actions/subscribe';
-import { Input } from '@/components/input';
 import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
 import { Form } from 'radix-ui';
 import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
+import { subscribe } from '@/app/actions/subscribe';
+import { Input } from '@/components/input';
 
 const initialState = {
   message: '',
@@ -35,24 +35,24 @@ export const MailingList = () => {
   return (
     <Form.Root action={formAction} className="relative mt-6">
       <Input
+        className="pr-8"
         id="email"
         label="Email address"
         name="email"
-        type="email"
-        placeholder="jane@acme.com"
         pattern={emailRegex.source}
-        className="pr-8"
+        placeholder="jane@acme.com"
         required
+        type="email"
       />
 
       <Form.Submit asChild>
         <button
-          type="submit"
           className="absolute right-0 bottom-0 flex aspect-square size-9 cursor-pointer items-center justify-center rounded-full"
           disabled={isPending}
+          type="submit"
         >
           {isPending ? (
-            <Loader2Icon size={16} className="animate-spin" />
+            <Loader2Icon className="animate-spin" size={16} />
           ) : (
             <ArrowRightIcon size={16} />
           )}

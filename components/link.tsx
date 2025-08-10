@@ -7,5 +7,5 @@ export const Link = (props: LinkProps) =>
   props.href?.startsWith('/') || props.href?.startsWith('#') ? (
     <NextLink href={props.href} {...props} />
   ) : (
-    <a {...props} target="_blank" rel="noopener noreferrer" />
+    <a {...props} rel="noopener noreferrer" target="_blank" />
   );

@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
 import { Form } from 'radix-ui';
 import type { InputHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;

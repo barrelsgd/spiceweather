@@ -1,10 +1,13 @@
-import { usersApi } from "@/lib/api";
-import { updatePasswordAction, updateProfileAction } from "@/app/(protected)/profile/actions";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert } from "@/components/ui/alert";
+import type { Metadata } from 'next';
+import {
+  updatePasswordAction,
+  updateProfileAction,
+} from '@/app/(protected)/profile/actions';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { usersApi } from '@/lib/api';
 
 export default async function ProfilePage({
   searchParams,
@@ -12,52 +15,84 @@ export default async function ProfilePage({
   searchParams: Promise<{ error?: string; success?: string }>;
 }) {
   const sp = await searchParams;
-  const error = sp?.error || "";
-  const success = sp?.success || "";
+  const error = sp?.error || '';
+  const success = sp?.success || '';
 
   const me = await usersApi().readUserMe();
   const user = me?.data;
 
   return (
     <main className="mx-auto mt-8 w-full max-w-2xl px-4">
-      <h1 className="mb-6 text-3xl font-semibold">Profile</h1>
+      <h1 className="mb-6 font-semibold text-3xl">Profile</h1>
 
       {error ? (
-        <Alert role="alert" aria-live="assertive" variant="destructive" className="mb-4">
+        <Alert
+          aria-live="assertive"
+          className="mb-4"
+          role="alert"
+          variant="destructive"
+        >
           {error}
         </Alert>
       ) : null}
       {success ? (
-        <Alert role="status" aria-live="polite" variant="success" className="mb-4">
+        <output
+          aria-live="polite"
+          className="mb-4 block rounded border bg-card px-4 py-3 text-foreground"
+        >
           {success}
-        </Alert>
+        </output>
       ) : null}
 
       <section className="mb-8 rounded border p-4">
-        <h2 className="mb-3 text-xl font-medium">Account</h2>
+        <h2 className="mb-3 font-medium text-xl">Account</h2>
         <form action={updateProfileAction} className="space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" autoComplete="email" defaultValue={user?.email} />
+            <Input
+              autoComplete="email"
+              defaultValue={user?.email}
+              id="email"
+              name="email"
+              type="email"
+            />
           </div>
           <div>
             <Label htmlFor="full_name">Full name</Label>
-            <Input id="full_name" name="full_name" type="text" autoComplete="name" defaultValue={user?.full_name ?? ""} />
+            <Input
+              autoComplete="name"
+              defaultValue={user?.full_name ?? ''}
+              id="full_name"
+              name="full_name"
+              type="text"
+            />
           </div>
           <Button type="submit">Save changes</Button>
         </form>
       </section>
 
       <section className="rounded border p-4">
-        <h2 className="mb-3 text-xl font-medium">Change password</h2>
+        <h2 className="mb-3 font-medium text-xl">Change password</h2>
         <form action={updatePasswordAction} className="space-y-4">
           <div>
             <Label htmlFor="current_password">Current password</Label>
-            <Input id="current_password" name="current_password" type="password" autoComplete="current-password" required />
+            <Input
+              autoComplete="current-password"
+              id="current_password"
+              name="current_password"
+              required
+              type="password"
+            />
           </div>
           <div>
             <Label htmlFor="new_password">New password</Label>
-            <Input id="new_password" name="new_password" type="password" autoComplete="new-password" required />
+            <Input
+              autoComplete="new-password"
+              id="new_password"
+              name="new_password"
+              required
+              type="password"
+            />
           </div>
           <Button type="submit">Update password</Button>
         </form>
@@ -67,7 +102,7 @@ export default async function ProfilePage({
 }
 
 export const metadata: Metadata = {
-  title: "Profile",
-  description: "Manage your account and password.",
-  alternates: { canonical: "/profile" },
+  title: 'Profile',
+  description: 'Manage your account and password.',
+  alternates: { canonical: '/profile' },
 };

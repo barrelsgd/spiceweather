@@ -1,147 +1,147 @@
 export const TAF = {
-  openapi: "3.1.0",
+  openapi: '3.1.0',
   info: {
-    title: "IWXXM TAF JSON mapping (2025-2 v3.0.1)",
-    version: "1.0.0",
+    title: 'IWXXM TAF JSON mapping (2025-2 v3.0.1)',
+    version: '1.0.0',
     description:
-      "OpenAPI component schemas mapping IWXXM TAF XSD to JSON. Preserves GML time semantics, CAVOK, UCUM units, nilReason, code lists, and TAF-specific change indicators including PROB30/40 and TEMPO combinations.",
+      'OpenAPI component schemas mapping IWXXM TAF XSD to JSON. Preserves GML time semantics, CAVOK, UCUM units, nilReason, code lists, and TAF-specific change indicators including PROB30/40 and TEMPO combinations.',
   },
   paths: {},
   components: {
     schemas: {
       IWXXM_TAF: {
-        type: "object",
-        description: "TAF report root.",
+        type: 'object',
+        description: 'TAF report root.',
         properties: {
-          issueTime: { $ref: "#/components/schemas/TimeInstant" },
-          aerodrome: { $ref: "#/components/schemas/AirportHeliport" },
-          validPeriod: { $ref: "#/components/schemas/TimePeriod" },
+          issueTime: { $ref: '#/components/schemas/TimeInstant' },
+          aerodrome: { $ref: '#/components/schemas/AirportHeliport' },
+          validPeriod: { $ref: '#/components/schemas/TimePeriod' },
           cancelledReportValidPeriod: {
-            $ref: "#/components/schemas/TimePeriod",
+            $ref: '#/components/schemas/TimePeriod',
           },
           baseForecast: {
-            $ref: "#/components/schemas/MeteorologicalAerodromeForecast_Base",
+            $ref: '#/components/schemas/MeteorologicalAerodromeForecast_Base',
           },
           changeForecast: {
-            type: "array",
+            type: 'array',
             items: {
-              $ref: "#/components/schemas/MeteorologicalAerodromeForecast_Change",
+              $ref: '#/components/schemas/MeteorologicalAerodromeForecast_Change',
             },
-            description: "Normally ≤ 5 groups; adjust limit per OPS policy.",
+            description: 'Normally ≤ 5 groups; adjust limit per OPS policy.',
             maxItems: 5,
           },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
-          isCancelReport: { type: "boolean" },
+          isCancelReport: { type: 'boolean' },
         },
-        required: ["issueTime", "aerodrome"],
+        required: ['issueTime', 'aerodrome'],
         allOf: [
           {
             if: { properties: { isCancelReport: { const: true } } },
             then: {
-              required: ["cancelledReportValidPeriod"],
+              required: ['cancelledReportValidPeriod'],
               not: {
                 anyOf: [
-                  { required: ["baseForecast"] },
-                  { required: ["changeForecast"] },
+                  { required: ['baseForecast'] },
+                  { required: ['changeForecast'] },
                 ],
               },
             },
           },
           {
             if: { properties: { isCancelReport: { const: false } } },
-            then: { required: ["baseForecast", "validPeriod"] },
+            then: { required: ['baseForecast', 'validPeriod'] },
           },
         ],
       },
 
       MeteorologicalAerodromeForecast_Base: {
-        type: "object",
+        type: 'object',
         description:
-          "Prevailing (base) forecast conditions. No changeIndicator. Temps allowed.",
+          'Prevailing (base) forecast conditions. No changeIndicator. Temps allowed.',
         properties: {
-          phenomenonTime: { $ref: "#/components/schemas/TimePeriod" },
-          prevailingVisibility: { $ref: "#/components/schemas/Distance_m" },
+          phenomenonTime: { $ref: '#/components/schemas/TimePeriod' },
+          prevailingVisibility: { $ref: '#/components/schemas/Distance_m' },
           prevailingVisibilityOperator: {
-            $ref: "#/components/schemas/RelationalOperatorType",
+            $ref: '#/components/schemas/RelationalOperatorType',
           },
           surfaceWind: {
-            $ref: "#/components/schemas/AerodromeSurfaceWindForecast",
+            $ref: '#/components/schemas/AerodromeSurfaceWindForecast',
           },
           weather: {
-            type: "array",
+            type: 'array',
             maxItems: 3,
-            items: { $ref: "#/components/schemas/PresentOrForecastWeather" },
+            items: { $ref: '#/components/schemas/PresentOrForecastWeather' },
           },
-          cloud: { $ref: "#/components/schemas/AerodromeCloudForecast" },
+          cloud: { $ref: '#/components/schemas/AerodromeCloudForecast' },
           temperature: {
-            type: "array",
+            type: 'array',
             maxItems: 2,
             items: {
-              $ref: "#/components/schemas/AerodromeAirTemperatureForecast",
+              $ref: '#/components/schemas/AerodromeAirTemperatureForecast',
             },
           },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
-          cloudAndVisibilityOK: { type: "boolean" },
+          cloudAndVisibilityOK: { type: 'boolean' },
         },
-        required: ["phenomenonTime"],
-        allOf: [{ $ref: "#/components/schemas/CAVOK_Constraint" }],
+        required: ['phenomenonTime'],
+        allOf: [{ $ref: '#/components/schemas/CAVOK_Constraint' }],
       },
 
       MeteorologicalAerodromeForecast_Change: {
-        type: "object",
+        type: 'object',
         description:
-          "Forecast group that modifies base. Requires changeIndicator. Temps disallowed.",
+          'Forecast group that modifies base. Requires changeIndicator. Temps disallowed.',
         properties: {
-          phenomenonTime: { $ref: "#/components/schemas/TimePeriodOrInstant" },
-          prevailingVisibility: { $ref: "#/components/schemas/Distance_m" },
+          phenomenonTime: { $ref: '#/components/schemas/TimePeriodOrInstant' },
+          prevailingVisibility: { $ref: '#/components/schemas/Distance_m' },
           prevailingVisibilityOperator: {
-            $ref: "#/components/schemas/RelationalOperatorType",
+            $ref: '#/components/schemas/RelationalOperatorType',
           },
           surfaceWind: {
-            $ref: "#/components/schemas/AerodromeSurfaceWindForecast",
+            $ref: '#/components/schemas/AerodromeSurfaceWindForecast',
           },
           weather: {
-            type: "array",
+            type: 'array',
             maxItems: 3,
-            items: { $ref: "#/components/schemas/PresentOrForecastWeather" },
+            items: { $ref: '#/components/schemas/PresentOrForecastWeather' },
           },
-          cloud: { $ref: "#/components/schemas/AerodromeCloudForecast" },
+          cloud: { $ref: '#/components/schemas/AerodromeCloudForecast' },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
-          cloudAndVisibilityOK: { type: "boolean" },
+          cloudAndVisibilityOK: { type: 'boolean' },
           changeIndicator: {
-            $ref: "#/components/schemas/AerodromeForecastChangeIndicatorType",
+            $ref: '#/components/schemas/AerodromeForecastChangeIndicatorType',
           },
         },
-        required: ["phenomenonTime", "changeIndicator"],
+        required: ['phenomenonTime', 'changeIndicator'],
         allOf: [
-          { $ref: "#/components/schemas/CAVOK_Constraint" },
+          { $ref: '#/components/schemas/CAVOK_Constraint' },
           {
-            not: { required: ["temperature"] },
-            description: "Temperature forecast not allowed in change groups.",
+            not: { required: ['temperature'] },
+            description: 'Temperature forecast not allowed in change groups.',
           },
         ],
       },
 
       CAVOK_Constraint: {
-        type: "object",
+        type: 'object',
         allOf: [
           {
             if: { properties: { cloudAndVisibilityOK: { const: true } } },
             then: {
               not: {
                 anyOf: [
-                  { required: ["prevailingVisibility"] },
-                  { required: ["weather"] },
-                  { required: ["cloud"] },
+                  { required: ['prevailingVisibility'] },
+                  { required: ['weather'] },
+                  { required: ['cloud'] },
                 ],
               },
             },
@@ -150,203 +150,203 @@ export const TAF = {
       },
 
       AerodromeAirTemperatureForecast: {
-        type: "object",
+        type: 'object',
         description:
-          "TX/TN and their times. Times must lie within the containing phenomenonTime period.",
+          'TX/TN and their times. Times must lie within the containing phenomenonTime period.',
         properties: {
           maximumAirTemperature: {
-            $ref: "#/components/schemas/Measure_Celsius",
+            $ref: '#/components/schemas/Measure_Celsius',
           },
           maximumAirTemperatureTime: {
-            $ref: "#/components/schemas/TimeInstant",
+            $ref: '#/components/schemas/TimeInstant',
           },
           minimumAirTemperature: {
-            $ref: "#/components/schemas/Measure_Celsius",
+            $ref: '#/components/schemas/Measure_Celsius',
           },
           minimumAirTemperatureTime: {
-            $ref: "#/components/schemas/TimeInstant",
+            $ref: '#/components/schemas/TimeInstant',
           },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
         },
         required: [
-          "maximumAirTemperature",
-          "maximumAirTemperatureTime",
-          "minimumAirTemperature",
-          "minimumAirTemperatureTime",
+          'maximumAirTemperature',
+          'maximumAirTemperatureTime',
+          'minimumAirTemperature',
+          'minimumAirTemperatureTime',
         ],
       },
 
       AerodromeSurfaceWindForecast: {
-        type: "object",
+        type: 'object',
         properties: {
-          meanWindDirection: { $ref: "#/components/schemas/Angle_deg" },
-          meanWindSpeed: { $ref: "#/components/schemas/Velocity_ms_or_kt" },
+          meanWindDirection: { $ref: '#/components/schemas/Angle_deg' },
+          meanWindSpeed: { $ref: '#/components/schemas/Velocity_ms_or_kt' },
           meanWindSpeedOperator: {
-            $ref: "#/components/schemas/RelationalOperatorType",
+            $ref: '#/components/schemas/RelationalOperatorType',
           },
-          windGustSpeed: { $ref: "#/components/schemas/Velocity_ms_or_kt" },
+          windGustSpeed: { $ref: '#/components/schemas/Velocity_ms_or_kt' },
           windGustSpeedOperator: {
-            $ref: "#/components/schemas/RelationalOperatorType",
+            $ref: '#/components/schemas/RelationalOperatorType',
           },
-          variableWindDirection: { type: "boolean" },
+          variableWindDirection: { type: 'boolean' },
           extremeClockwiseWindDirection: {
-            $ref: "#/components/schemas/Angle_deg",
+            $ref: '#/components/schemas/Angle_deg',
           },
           extremeCounterClockwiseWindDirection: {
-            $ref: "#/components/schemas/Angle_deg",
+            $ref: '#/components/schemas/Angle_deg',
           },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
         },
       },
 
       AerodromeCloudForecast: {
-        type: "object",
+        type: 'object',
         properties: {
-          verticalVisibility: { $ref: "#/components/schemas/Length_m_or_ft" },
+          verticalVisibility: { $ref: '#/components/schemas/Length_m_or_ft' },
           layer: {
-            type: "array",
+            type: 'array',
             maxItems: 4,
-            items: { $ref: "#/components/schemas/CloudLayer" },
+            items: { $ref: '#/components/schemas/CloudLayer' },
           },
           extension: {
-            type: "array",
-            items: { $ref: "#/components/schemas/Extension" },
+            type: 'array',
+            items: { $ref: '#/components/schemas/Extension' },
           },
         },
       },
 
       CloudLayer: {
-        type: "object",
+        type: 'object',
         properties: {
-          amount: { $ref: "#/components/schemas/CloudAmountCode" },
-          base: { $ref: "#/components/schemas/Length_m_or_ft" },
-          cloudType: { $ref: "#/components/schemas/CloudTypeCode" },
+          amount: { $ref: '#/components/schemas/CloudAmountCode' },
+          base: { $ref: '#/components/schemas/Length_m_or_ft' },
+          cloudType: { $ref: '#/components/schemas/CloudTypeCode' },
         },
       },
 
       PresentOrForecastWeather: {
-        type: "object",
+        type: 'object',
         description:
-          "CodeList http://codes.wmo.int/49-2/AerodromePresentOrForecastWeather",
+          'CodeList http://codes.wmo.int/49-2/AerodromePresentOrForecastWeather',
         properties: {
-          code: { type: "string" },
-          uri: { type: "string", format: "uri" },
-          name: { type: "string" },
+          code: { type: 'string' },
+          uri: { type: 'string', format: 'uri' },
+          name: { type: 'string' },
         },
-        required: ["code"],
+        required: ['code'],
       },
 
       AerodromeForecastChangeIndicatorType: {
-        type: "string",
+        type: 'string',
         enum: [
-          "BECOMING",
-          "TEMPORARY_FLUCTUATIONS",
-          "FROM",
-          "PROBABILITY_30",
-          "PROBABILITY_30_TEMPORARY_FLUCTUATIONS",
-          "PROBABILITY_40",
-          "PROBABILITY_40_TEMPORARY_FLUCTUATIONS",
+          'BECOMING',
+          'TEMPORARY_FLUCTUATIONS',
+          'FROM',
+          'PROBABILITY_30',
+          'PROBABILITY_30_TEMPORARY_FLUCTUATIONS',
+          'PROBABILITY_40',
+          'PROBABILITY_40_TEMPORARY_FLUCTUATIONS',
         ],
       },
 
       RelationalOperatorType: {
-        type: "string",
-        enum: ["above", "below"],
+        type: 'string',
+        enum: ['above', 'below'],
       },
 
       CloudAmountCode: {
-        type: "string",
-        enum: ["FEW", "SCT", "BKN", "OVC"],
+        type: 'string',
+        enum: ['FEW', 'SCT', 'BKN', 'OVC'],
       },
       CloudTypeCode: {
-        type: "string",
-        enum: ["CB", "TCU", "NSC", "NCD", "///"],
+        type: 'string',
+        enum: ['CB', 'TCU', 'NSC', 'NCD', '///'],
       },
 
       AirportHeliport: {
-        type: "object",
+        type: 'object',
         properties: {
-          icaoCode: { type: "string", minLength: 3, maxLength: 4 },
-          name: { type: "string" },
-          wmoStationId: { type: "string" },
-          position: { $ref: "#/components/schemas/GeoPoint" },
-          elevation: { $ref: "#/components/schemas/Length_m_or_ft" },
+          icaoCode: { type: 'string', minLength: 3, maxLength: 4 },
+          name: { type: 'string' },
+          wmoStationId: { type: 'string' },
+          position: { $ref: '#/components/schemas/GeoPoint' },
+          elevation: { $ref: '#/components/schemas/Length_m_or_ft' },
         },
       },
 
-      TimeInstant: { type: "string", format: "date-time" },
+      TimeInstant: { type: 'string', format: 'date-time' },
       TimePeriod: {
-        type: "object",
+        type: 'object',
         properties: {
-          start: { $ref: "#/components/schemas/TimeInstant" },
-          end: { $ref: "#/components/schemas/TimeInstant" },
+          start: { $ref: '#/components/schemas/TimeInstant' },
+          end: { $ref: '#/components/schemas/TimeInstant' },
         },
-        required: ["start", "end"],
+        required: ['start', 'end'],
       },
       TimePeriodOrInstant: {
         oneOf: [
-          { $ref: "#/components/schemas/TimePeriod" },
-          { $ref: "#/components/schemas/TimeInstant" },
+          { $ref: '#/components/schemas/TimePeriod' },
+          { $ref: '#/components/schemas/TimeInstant' },
         ],
       },
 
       Measure_Celsius: {
         allOf: [
-          { $ref: "#/components/schemas/QuantityWithUnit" },
-          { type: "object", properties: { uom: { enum: ["Cel"] } } },
+          { $ref: '#/components/schemas/QuantityWithUnit' },
+          { type: 'object', properties: { uom: { enum: ['Cel'] } } },
         ],
       },
       Distance_m: {
         allOf: [
-          { $ref: "#/components/schemas/QuantityWithUnit" },
-          { type: "object", properties: { uom: { enum: ["m"] } } },
+          { $ref: '#/components/schemas/QuantityWithUnit' },
+          { type: 'object', properties: { uom: { enum: ['m'] } } },
         ],
       },
       Length_m_or_ft: {
         allOf: [
-          { $ref: "#/components/schemas/QuantityWithUnit" },
-          { type: "object", properties: { uom: { enum: ["m", "[ft_i]"] } } },
+          { $ref: '#/components/schemas/QuantityWithUnit' },
+          { type: 'object', properties: { uom: { enum: ['m', '[ft_i]'] } } },
         ],
       },
       Velocity_ms_or_kt: {
         allOf: [
-          { $ref: "#/components/schemas/QuantityWithUnit" },
-          { type: "object", properties: { uom: { enum: ["m/s", "[kn_i]"] } } },
+          { $ref: '#/components/schemas/QuantityWithUnit' },
+          { type: 'object', properties: { uom: { enum: ['m/s', '[kn_i]'] } } },
         ],
       },
       Angle_deg: {
         allOf: [
-          { $ref: "#/components/schemas/QuantityWithUnit" },
-          { type: "object", properties: { uom: { enum: ["deg"] } } },
+          { $ref: '#/components/schemas/QuantityWithUnit' },
+          { type: 'object', properties: { uom: { enum: ['deg'] } } },
         ],
       },
 
       QuantityWithUnit: {
-        type: "object",
+        type: 'object',
         properties: {
-          value: { type: "number" },
-          uom: { type: "string" },
+          value: { type: 'number' },
+          uom: { type: 'string' },
         },
-        required: ["value", "uom"],
+        required: ['value', 'uom'],
       },
 
       GeoPoint: {
-        type: "object",
+        type: 'object',
         properties: {
-          lat: { type: "number", minimum: -90, maximum: 90 },
-          lon: { type: "number", minimum: -180, maximum: 180 },
-          alt: { type: "number" },
+          lat: { type: 'number', minimum: -90, maximum: 90 },
+          lon: { type: 'number', minimum: -180, maximum: 180 },
+          alt: { type: 'number' },
         },
-        required: ["lat", "lon"],
+        required: ['lat', 'lon'],
       },
 
-      Extension: { type: "object", additionalProperties: true },
+      Extension: { type: 'object', additionalProperties: true },
     },
   },
 };

@@ -2,6 +2,7 @@
 @import "shadcn-prose";
 @import "tw-animate-css";
 
+/* biome-ignore lint/nursery/noUnknownAtRule: Tailwind CSS plugin directive */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -172,16 +173,23 @@
   .prose h2 + p {
     @apply mt-0!;
   }
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     @apply font-medium!;
   }
-  .prose b, .prose strong {
+  .prose b,
+  .prose strong {
     @apply font-medium;
   }
 }
 
 @layer base {
-  .shiki, .shiki span {
+  .shiki,
+  .shiki span {
     @apply text-[var(--shiki-light)] dark:text-[var(--shiki-dark)];
   }
 
