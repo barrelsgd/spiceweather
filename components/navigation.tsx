@@ -35,6 +35,11 @@ const links = [
     label: 'Live',
     active: (pathname: string) => pathname.startsWith('/live'),
   },
+    {
+    href: '/login',
+    label: 'Login',
+    active: (pathname: string) => pathname.startsWith('/login'),
+  },
 ];
 
 export const Navigation = () => {

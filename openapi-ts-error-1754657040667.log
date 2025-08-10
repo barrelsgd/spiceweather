@@ -1,9 +1,0 @@
-[2025-08-08T12:44:00.668Z] Error: unknown plugin dependency "fetch" - do you need to register a custom plugin with this name?
-Stack:
-Error: unknown plugin dependency "fetch" - do you need to register a custom plugin with this name?
-    at a (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\dist\index.cjs:36:142499)
-    at ph (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\dist\index.cjs:36:143160)
-    at xm (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\dist\index.cjs:36:143777)
-    at bm (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\dist\index.cjs:36:144852)
-    at async rL (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\dist\index.cjs:1338:4492)
-    at async start (C:\Users\eugin\OneDrive\DEV\mbia\spicewx\node_modules\.pnpm\@hey-api+openapi-ts@0.80.5_typescript@5.7.3\node_modules\@hey-api\openapi-ts\bin\index.cjs:139:21)

@@ -1,20 +1,20 @@
-import merge from 'deepmerge';
-import type { Metadata } from 'next';
+import merge from "deepmerge";
+import type { Metadata } from "next";
 
-type MetadataGenerator = Omit<Metadata, 'description' | 'title'> & {
+type MetadataGenerator = Omit<Metadata, "description" | "title"> & {
   title: string;
   description: string;
   ogText?: string;
   image?: string;
 };
 
-const applicationName = 'Hayden Bleasel';
-const author: Metadata['authors'] = {
-  name: 'Hayden Bleasel',
-  url: 'https://haydenbleasel.com/',
+const applicationName = "SpiceWeather";
+const author: Metadata["authors"] = {
+  name: "Eugine Whint",
+  url: "https://weather.gd/",
 };
-const publisher = 'Hayden Bleasel';
-const twitterHandle = '@haydenbleasel';
+const publisher = "Eugine Whint";
+const twitterHandle = "@euginewx";
 
 export const createMetadata = ({
   title,
@@ -36,18 +36,18 @@ export const createMetadata = ({
     },
     appleWebApp: {
       capable: true,
-      statusBarStyle: 'default',
+      statusBarStyle: "default",
       title: parsedTitle,
     },
     openGraph: {
       title: parsedTitle,
       description,
-      type: 'website',
+      type: "website",
       siteName: applicationName,
-      locale: 'en_US',
+      locale: "en_US",
       images: [
         {
-          url: image ?? `/og?title=${encodeURIComponent(ogText ?? '')}`,
+          url: image ?? `/og?title=${encodeURIComponent(ogText ?? "")}`,
           width: 1200,
           height: 630,
         },
@@ -58,11 +58,11 @@ export const createMetadata = ({
       title: parsedTitle,
       description,
       creatorId: twitterHandle,
-      card: 'summary_large_image',
+      card: "summary_large_image",
       creator: twitterHandle,
       images: [
         {
-          url: image ?? `/og?title=${encodeURIComponent(ogText ?? '')}`,
+          url: image ?? `/og?title=${encodeURIComponent(ogText ?? "")}`,
           width: 1200,
           height: 630,
         },

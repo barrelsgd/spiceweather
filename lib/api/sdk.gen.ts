@@ -25,6 +25,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 export const loginLoginAccessToken = <ThrowOnError extends boolean = false>(options: Options<LoginLoginAccessTokenData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<LoginLoginAccessTokenResponses, LoginLoginAccessTokenErrors, ThrowOnError>({
         ...urlSearchParamsBodySerializer,
+        responseType: 'json',
         url: '/api/v1/login/access-token',
         ...options,
         headers: {
@@ -40,6 +41,7 @@ export const loginLoginAccessToken = <ThrowOnError extends boolean = false>(opti
  */
 export const loginTestToken = <ThrowOnError extends boolean = false>(options?: Options<LoginTestTokenData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).post<LoginTestTokenResponses, unknown, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -57,6 +59,7 @@ export const loginTestToken = <ThrowOnError extends boolean = false>(options?: O
  */
 export const loginRecoverPassword = <ThrowOnError extends boolean = false>(options: Options<LoginRecoverPasswordData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<LoginRecoverPasswordResponses, LoginRecoverPasswordErrors, ThrowOnError>({
+        responseType: 'json',
         url: '/api/v1/password-recovery/{email}',
         ...options
     });
@@ -68,6 +71,7 @@ export const loginRecoverPassword = <ThrowOnError extends boolean = false>(optio
  */
 export const loginResetPassword = <ThrowOnError extends boolean = false>(options: Options<LoginResetPasswordData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<LoginResetPasswordResponses, LoginResetPasswordErrors, ThrowOnError>({
+        responseType: 'json',
         url: '/api/v1/reset-password/',
         ...options,
         headers: {
@@ -83,6 +87,7 @@ export const loginResetPassword = <ThrowOnError extends boolean = false>(options
  */
 export const loginRecoverPasswordHtmlContent = <ThrowOnError extends boolean = false>(options: Options<LoginRecoverPasswordHtmlContentData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<LoginRecoverPasswordHtmlContentResponses, LoginRecoverPasswordHtmlContentErrors, ThrowOnError>({
+        responseType: 'text',
         security: [
             {
                 scheme: 'bearer',
@@ -100,6 +105,7 @@ export const loginRecoverPasswordHtmlContent = <ThrowOnError extends boolean = f
  */
 export const usersReadUsers = <ThrowOnError extends boolean = false>(options?: Options<UsersReadUsersData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<UsersReadUsersResponses, UsersReadUsersErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -117,6 +123,7 @@ export const usersReadUsers = <ThrowOnError extends boolean = false>(options?: O
  */
 export const usersCreateUser = <ThrowOnError extends boolean = false>(options: Options<UsersCreateUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<UsersCreateUserResponses, UsersCreateUserErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -138,6 +145,7 @@ export const usersCreateUser = <ThrowOnError extends boolean = false>(options: O
  */
 export const usersDeleteUserMe = <ThrowOnError extends boolean = false>(options?: Options<UsersDeleteUserMeData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).delete<UsersDeleteUserMeResponses, unknown, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -155,6 +163,7 @@ export const usersDeleteUserMe = <ThrowOnError extends boolean = false>(options?
  */
 export const usersReadUserMe = <ThrowOnError extends boolean = false>(options?: Options<UsersReadUserMeData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<UsersReadUserMeResponses, unknown, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -172,6 +181,7 @@ export const usersReadUserMe = <ThrowOnError extends boolean = false>(options?: 
  */
 export const usersUpdateUserMe = <ThrowOnError extends boolean = false>(options: Options<UsersUpdateUserMeData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).patch<UsersUpdateUserMeResponses, UsersUpdateUserMeErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -193,6 +203,7 @@ export const usersUpdateUserMe = <ThrowOnError extends boolean = false>(options:
  */
 export const usersUpdatePasswordMe = <ThrowOnError extends boolean = false>(options: Options<UsersUpdatePasswordMeData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).patch<UsersUpdatePasswordMeResponses, UsersUpdatePasswordMeErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -214,6 +225,7 @@ export const usersUpdatePasswordMe = <ThrowOnError extends boolean = false>(opti
  */
 export const usersRegisterUser = <ThrowOnError extends boolean = false>(options: Options<UsersRegisterUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<UsersRegisterUserResponses, UsersRegisterUserErrors, ThrowOnError>({
+        responseType: 'json',
         url: '/api/v1/users/signup',
         ...options,
         headers: {
@@ -229,6 +241,7 @@ export const usersRegisterUser = <ThrowOnError extends boolean = false>(options:
  */
 export const usersDeleteUser = <ThrowOnError extends boolean = false>(options: Options<UsersDeleteUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<UsersDeleteUserResponses, UsersDeleteUserErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -246,6 +259,7 @@ export const usersDeleteUser = <ThrowOnError extends boolean = false>(options: O
  */
 export const usersReadUserById = <ThrowOnError extends boolean = false>(options: Options<UsersReadUserByIdData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<UsersReadUserByIdResponses, UsersReadUserByIdErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -263,6 +277,7 @@ export const usersReadUserById = <ThrowOnError extends boolean = false>(options:
  */
 export const usersUpdateUser = <ThrowOnError extends boolean = false>(options: Options<UsersUpdateUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).patch<UsersUpdateUserResponses, UsersUpdateUserErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -284,6 +299,7 @@ export const usersUpdateUser = <ThrowOnError extends boolean = false>(options: O
  */
 export const utilsTestEmail = <ThrowOnError extends boolean = false>(options: Options<UtilsTestEmailData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<UtilsTestEmailResponses, UtilsTestEmailErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -300,6 +316,7 @@ export const utilsTestEmail = <ThrowOnError extends boolean = false>(options: Op
  */
 export const utilsHealthCheck = <ThrowOnError extends boolean = false>(options?: Options<UtilsHealthCheckData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<UtilsHealthCheckResponses, unknown, ThrowOnError>({
+        responseType: 'json',
         url: '/api/v1/utils/health-check/',
         ...options
     });
@@ -311,6 +328,7 @@ export const utilsHealthCheck = <ThrowOnError extends boolean = false>(options?:
  */
 export const itemsReadItems = <ThrowOnError extends boolean = false>(options?: Options<ItemsReadItemsData, ThrowOnError>) => {
     return (options?.client ?? _heyApiClient).get<ItemsReadItemsResponses, ItemsReadItemsErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -328,6 +346,7 @@ export const itemsReadItems = <ThrowOnError extends boolean = false>(options?: O
  */
 export const itemsCreateItem = <ThrowOnError extends boolean = false>(options: Options<ItemsCreateItemData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<ItemsCreateItemResponses, ItemsCreateItemErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -349,6 +368,7 @@ export const itemsCreateItem = <ThrowOnError extends boolean = false>(options: O
  */
 export const itemsDeleteItem = <ThrowOnError extends boolean = false>(options: Options<ItemsDeleteItemData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).delete<ItemsDeleteItemResponses, ItemsDeleteItemErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -366,6 +386,7 @@ export const itemsDeleteItem = <ThrowOnError extends boolean = false>(options: O
  */
 export const itemsReadItem = <ThrowOnError extends boolean = false>(options: Options<ItemsReadItemData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).get<ItemsReadItemResponses, ItemsReadItemErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -383,6 +404,7 @@ export const itemsReadItem = <ThrowOnError extends boolean = false>(options: Opt
  */
 export const itemsUpdateItem = <ThrowOnError extends boolean = false>(options: Options<ItemsUpdateItemData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).put<ItemsUpdateItemResponses, ItemsUpdateItemErrors, ThrowOnError>({
+        responseType: 'json',
         security: [
             {
                 scheme: 'bearer',
@@ -404,6 +426,7 @@ export const itemsUpdateItem = <ThrowOnError extends boolean = false>(options: O
  */
 export const privateCreateUser = <ThrowOnError extends boolean = false>(options: Options<PrivateCreateUserData, ThrowOnError>) => {
     return (options.client ?? _heyApiClient).post<PrivateCreateUserResponses, PrivateCreateUserErrors, ThrowOnError>({
+        responseType: 'json',
         url: '/api/v1/private/users/',
         ...options,
         headers: {

@@ -3,6 +3,7 @@ import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
@@ -11,6 +12,10 @@ import { Navigation } from '@/components/navigation';
 import { Sidebar } from '@/components/sidebar';
 import { WindowsEmojiPolyfill } from '@/components/windows-emoji-polyfill';
 import { cn } from '@/lib/utils';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL as string),
+};
 
 type RootLayoutProps = {
   children: ReactNode;

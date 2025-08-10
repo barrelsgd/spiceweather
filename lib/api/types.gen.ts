@@ -924,5 +924,5 @@ export type PrivateCreateUserResponses = {
 export type PrivateCreateUserResponse = PrivateCreateUserResponses[keyof PrivateCreateUserResponses];
 
 export type ClientOptions = {
-    baseUrl: `${string}://${string}` | (string & {});
+    baseURL: 'https://api.barrels.gd' | (string & {});
 };

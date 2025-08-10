@@ -7,6 +7,8 @@ import { type SVGProps, useEffect, useState } from 'react';
 import { Link } from '../link';
 import { Navigation } from '../navigation';
 import avatar from './avatar.jpg';
+import spicewx from './spicewx.png';
+import { logoutAction } from '@/app/(auth)/logout/actions';
 
 const X = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -56,15 +58,15 @@ export const Header = () => {
         <Link className="flex items-center gap-4" href="/">
           <Image
             alt=""
-            className="size-8 rounded-full"
-            height={32}
+            className="size-10 rounded-full"
+            height={229}
             placeholder="blur"
             priority
-            src={avatar}
-            width={32}
+            src={spicewx}
+            width={299}
           />
           <p className="hidden font-medium text-foreground leading-normal sm:block">
-            Hayden Bleasel
+            Spice Weather
           </p>
         </Link>
         <div className="flex items-center gap-2">
@@ -90,6 +92,15 @@ export const Header = () => {
           >
             Get in touch
           </Link>
+          <form action={logoutAction} className="hidden sm:block">
+            <button
+              type="submit"
+              className="rounded-full px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+              aria-label="Log out"
+            >
+              Logout
+            </button>
+          </form>
           <div className="">
             <button
               className="cursor-pointer rounded-full p-2.5 text-sm transition-colors hover:bg-muted"
