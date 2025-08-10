@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
-import { MenuIcon } from 'lucide-react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { type SVGProps, useEffect, useState } from 'react';
-import { Link } from '../link';
-import { Navigation } from '../navigation';
-import avatar from './avatar.jpg';
-import spicewx from './spicewx.png';
-import { logoutAction } from '@/app/(auth)/logout/actions';
+import { MenuIcon } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { type SVGProps, useEffect, useState } from "react";
+import { Link } from "../link";
+import { Navigation } from "../navigation";
+import avatar from "./avatar.jpg";
+import spicewx from "./spicewx.png";
+import { logoutAction } from "@/app/actions/auth/logout";
+import { Theme } from "../theme";
 
 const X = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -54,21 +55,23 @@ export const Header = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 flex h-16 items-center justify-between bg-background p-4">
+      <div className=" mx-auto max-w-7xl sticky top-0 z-50 flex h-16 items-center justify-between bg-background p-4">
         <Link className="flex items-center gap-4" href="/">
           <Image
             alt=""
-            className="size-10 rounded-full"
+            className="size-12 rounded-full"
             height={229}
             placeholder="blur"
             priority
             src={spicewx}
             width={299}
           />
-          <p className="hidden font-medium text-foreground leading-normal sm:block">
-            Spice Weather
-          </p>
+          <WeatherHeader appName="SpiceWeather" />
         </Link>
+        {/* Desktop navigation */}
+        <div className="hidden md:block">
+          <Navigation />
+        </div>
         <div className="flex items-center gap-2">
           <Link
             className="rounded-full p-2.5 text-sm transition-colors hover:bg-muted"
@@ -101,9 +104,12 @@ export const Header = () => {
               Logout
             </button>
           </form>
+          <div>
+            <Theme />
+          </div>
           <div className="">
             <button
-              className="cursor-pointer rounded-full p-2.5 text-sm transition-colors hover:bg-muted"
+              className="cursor-pointer rounded-full p-2.5 text-sm transition-colors hover:bg-muted md:hidden"
               onClick={() => setIsOpen(!isOpen)}
               type="button"
             >
@@ -113,10 +119,17 @@ export const Header = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="fixed top-16 right-0 left-0 z-50 border-b bg-background pb-4">
+        <div className="fixed top-16 right-0 left-0 z-50 border-b bg-background pb-4 md:hidden">
           <Navigation />
         </div>
       )}
     </>
   );
 };
+
+// Header
+const WeatherHeader = ({ appName }: { appName: string }) => (
+  <header className="mb-2 hidden md:block">
+    <h1 className="text-2xl font-semibold">{appName}</h1>
+  </header>
+);

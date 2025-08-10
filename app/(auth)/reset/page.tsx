@@ -1,4 +1,4 @@
-import { resetPasswordAction } from "@/app/(auth)/reset/actions";
+import { resetPasswordAction } from "@/app/actions/auth/reset";
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

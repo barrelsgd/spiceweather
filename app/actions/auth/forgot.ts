@@ -14,13 +14,19 @@ export async function forgotPasswordAction(formData: FormData) {
     await loginApi().recoverPassword(email);
 
     const url = new URL("/forgot", base);
-    url.searchParams.set("success", "If that email exists, a reset link was sent.");
+    url.searchParams.set(
+      "success",
+      "If that email exists, a reset link was sent."
+    );
     if (next) url.searchParams.set("next", next);
     redirect(url.toString());
   } catch (err) {
     const anyErr = err as { message?: string };
     const url = new URL("/forgot", base);
-    url.searchParams.set("error", anyErr.message || "Failed to request password reset");
+    url.searchParams.set(
+      "error",
+      anyErr.message || "Failed to request password reset"
+    );
     if (next) url.searchParams.set("next", next);
     redirect(url.toString());
   }

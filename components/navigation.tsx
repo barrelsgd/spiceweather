@@ -35,7 +35,7 @@ const links = [
     label: 'Live',
     active: (pathname: string) => pathname.startsWith('/live'),
   },
-    {
+  {
     href: '/login',
     label: 'Login',
     active: (pathname: string) => pathname.startsWith('/login'),
@@ -46,7 +46,7 @@ export const Navigation = () => {
   const pathname = usePathname();
 
   return (
-    <ul>
+    <ul className="flex flex-col md:flex-row md:items-center md:gap-1">
       {links.map(({ href, label, active }) => (
         <li key={href}>
           <Link
