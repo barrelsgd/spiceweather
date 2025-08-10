@@ -1,44 +1,39 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import { Link } from '@/components/link';
-import { cn } from '@/lib/utils';
+import { usePathname } from "next/navigation";
+import { Link } from "@/components/link";
+import { cn } from "@/lib/utils";
 
 const links = [
   {
-    href: '/',
-    label: 'About',
-    active: (pathname: string) => pathname === '/',
+    href: "/",
+    label: "Alerts",
+    active: (pathname: string) => pathname === "/",
   },
   {
-    href: '/work',
-    label: 'Work',
-    active: (pathname: string) => pathname.startsWith('/work'),
+    href: "/weather",
+    label: "Weather & Climate",
+    active: (pathname: string) => pathname.startsWith("/weather"),
   },
   {
-    href: '/projects',
-    label: 'Projects',
-    active: (pathname: string) => pathname.startsWith('/projects'),
+    href: "/products",
+    label: "Products & Services",
+    active: (pathname: string) => pathname.startsWith("/products"),
   },
   {
-    href: '/blog',
-    label: 'Blog',
-    active: (pathname: string) => pathname.startsWith('/blog'),
+    href: "/news",
+    label: "News",
+    active: (pathname: string) => pathname.startsWith("/news"),
   },
   {
-    href: '/stack',
-    label: 'Stack',
-    active: (pathname: string) => pathname.startsWith('/stack'),
+    href: "/about",
+    label: "About",
+    active: (pathname: string) => pathname.startsWith("/about"),
   },
   {
-    href: '/live',
-    label: 'Live',
-    active: (pathname: string) => pathname.startsWith('/live'),
-  },
-  {
-    href: '/login',
-    label: 'Login',
-    active: (pathname: string) => pathname.startsWith('/login'),
+    href: "/login",
+    label: "Login",
+    active: (pathname: string) => pathname.startsWith("/login"),
   },
 ];
 
@@ -51,8 +46,8 @@ export const Navigation = () => {
         <li key={href}>
           <Link
             className={cn(
-              'block rounded-md px-3 py-2 text-sm hover:bg-muted',
-              active(pathname) ? 'text-primary' : 'border-none'
+              "block rounded-md px-3 py-2 text-sm hover:bg-muted",
+              active(pathname) ? "text-primary" : "border-none"
             )}
             href={href}
           >

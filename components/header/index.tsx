@@ -93,7 +93,7 @@ export const Header = () => {
             className="rounded-full bg-muted px-4 py-2.5 font-medium text-sm transition-colors hover:bg-muted/50"
             href="/contact"
           >
-            Get in touch
+            Contact
           </Link>
           <form action={logoutAction} className="hidden sm:block">
             <button

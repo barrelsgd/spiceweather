@@ -40,8 +40,8 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         <Header />
         <div className="grid">
           {/* <Sidebar /> */}
-          <div className="py-8 sm:py-16">
-            <div className="prose mx-auto w-full">
+          <div className="py-5 px-5 sm:py-16">
+            <div className="mx-auto max-w-4xl">
               {children}
               <Footer />
             </div>

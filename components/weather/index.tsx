@@ -405,18 +405,43 @@ const DailyForecast = ({ items }: { items: DailyForecastItem[] }) => (
 
 // Alerts
 const AlertsPanel = ({ items }: { items: AlertItem[] }) => (
-  <Section title="Alerts">
-    {items.length === 0 ? (
-      <p>No active alerts.</p>
-    ) : (
-      <ul>
+  <Section title="">
+    <div className="flex justify-center ">
+      <div
+        role="status"
+        aria-live="polite"
+        className="mx-auto w-full inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5"
+      >
+        {items.length === 0 ? (
+          <span className="text-sm text-muted-foreground">
+            No active alerts
+          </span>
+        ) : (
+          <span className="text-sm font-medium ">
+            {items.length} active alert{items.length > 1 ? "s" : ""}
+          </span>
+        )}
+      </div>
+    </div>
+
+    {items.length > 0 ? (
+      <ul className="mt-3 space-y-3">
         {items.map((a) => (
           <li key={a.id}>
-            <article aria-labelledby={`alert-${a.id}`}>
-              <h3 id={`alert-${a.id}`}>{a.title}</h3>
-              {a.severity ? <p>Severity: {a.severity}</p> : null}
+            <article
+              aria-labelledby={`alert-${a.id}`}
+              className="rounded-lg border bg-card/60 p-3 backdrop-blur-sm"
+            >
+              <h3 id={`alert-${a.id}`} className="text-base font-medium">
+                {a.title}
+              </h3>
+              {a.severity ? (
+                <p className="text-sm text-muted-foreground">
+                  Severity: {a.severity}
+                </p>
+              ) : null}
               {a.startsAtIso ? (
-                <p>
+                <p className="text-sm text-muted-foreground">
                   Starts:{" "}
                   <time dateTime={a.startsAtIso}>
                     {new Date(a.startsAtIso).toLocaleString()}
@@ -424,20 +449,26 @@ const AlertsPanel = ({ items }: { items: AlertItem[] }) => (
                 </p>
               ) : null}
               {a.endsAtIso ? (
-                <p>
+                <p className="text-sm text-muted-foreground">
                   Ends:{" "}
                   <time dateTime={a.endsAtIso}>
                     {new Date(a.endsAtIso).toLocaleString()}
                   </time>
                 </p>
               ) : null}
-              {a.description ? <p>{a.description}</p> : null}
-              {a.source ? <p>Source: {a.source}</p> : null}
+              {a.description ? (
+                <p className="text-sm">{a.description}</p>
+              ) : null}
+              {a.source ? (
+                <p className="text-sm text-muted-foreground">
+                  Source: {a.source}
+                </p>
+              ) : null}
             </article>
           </li>
         ))}
       </ul>
-    )}
+    ) : null}
   </Section>
 );
 
@@ -463,15 +494,6 @@ const RadarMap = () => (
       </figure>
     </div>
   </Section>
-);
-
-// Footer notes
-const WeatherFooter = () => (
-  <footer className="py-4 text-center">
-    <small className="text-xs text-muted-foreground">
-      Data sources and disclaimers go here.
-    </small>
-  </footer>
 );
 
 // Main composition
@@ -557,7 +579,7 @@ export const Weather = () => {
     <div
       role="region"
       aria-label="Weather layout"
-      className="mx-auto max-w-md space-y-6 md:max-w-2xl lg:max-w-4xl"
+      className="mx-auto space-y-6"
     >
       <AlertsPanel items={alerts} />
       <div className="flex justify-center">
@@ -600,8 +622,6 @@ export const Weather = () => {
       <MetricsCard m={metrics} />
 
       <RadarMap />
-
-      <WeatherFooter />
     </div>
   );
 };
