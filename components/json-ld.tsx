@@ -1,21 +1,20 @@
-import type { Person, WithContext } from 'schema-dts';
-import { env } from '@/lib/env';
-import { social } from '@/lib/social';
+import type { Person, WithContext } from "schema-dts";
+import { env, appBaseUrl } from "@/lib/env";
+import { social } from "@/lib/social";
 
-const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-const baseUrl = `${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
+const baseUrl = appBaseUrl;
 
 const person: WithContext<Person> = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Hayden Bleasel',
-  description: 'Design Engineer',
-  gender: 'male',
-  nationality: 'Australian',
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Eugine Whint",
+  description: "Meteorologist and Software Developer",
+  gender: "male",
+  nationality: "Grenadian",
   url: baseUrl,
-  image: new URL('/profile.jpg', baseUrl).toString(),
+  image: new URL("/profile.jpg", baseUrl).toString(),
   sameAs: Object.values(social).map(({ href }) => href),
-  alumniOf: 'University of Technology Sydney',
+  alumniOf: "Victoria University of Wellington",
 };
 
 export const JsonLd = () => (

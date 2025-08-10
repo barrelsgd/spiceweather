@@ -1,20 +1,21 @@
-import { mono, sans } from '@/lib/fonts';
-import './globals.css';
-import { Analytics } from '@vercel/analytics/react';
-import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
-import type { ReactNode } from 'react';
-import { Toaster } from 'sonner';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
-import { JsonLd } from '@/components/json-ld';
-import { Navigation } from '@/components/navigation';
-import { Sidebar } from '@/components/sidebar';
-import { WindowsEmojiPolyfill } from '@/components/windows-emoji-polyfill';
-import { cn } from '@/lib/utils';
+import { mono, sans } from "@/lib/fonts";
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
+import type { ReactNode } from "react";
+import { Toaster } from "sonner";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { JsonLd } from "@/components/json-ld";
+import { Navigation } from "@/components/navigation";
+import { Sidebar } from "@/components/sidebar";
+import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
+import { cn } from "@/lib/utils";
+import { appBaseUrl } from "@/lib/env";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL as string),
+  metadataBase: new URL(appBaseUrl),
 };
 
 type RootLayoutProps = {
@@ -27,7 +28,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       className={cn(
         sans.variable,
         mono.variable,
-        'font-sans leading-relaxed antialiased'
+        "font-sans leading-relaxed antialiased"
       )}
       suppressHydrationWarning
     >

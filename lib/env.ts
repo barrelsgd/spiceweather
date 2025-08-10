@@ -1,10 +1,10 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
 
 export const env = createEnv({
   server: {
     RESEND_AUDIENCE_ID: z.string(),
-    RESEND_TOKEN: z.string().startsWith('re_'),
+    RESEND_TOKEN: z.string().startsWith("re_"),
     RESEND_TO: z.email(),
     RECAPTCHA_SECRET_KEY: z.string(),
 
@@ -12,7 +12,7 @@ export const env = createEnv({
     VERCEL_PROJECT_PRODUCTION_URL: z.string(),
   },
   client: {
-    NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().startsWith('pk_'),
+    NEXT_PUBLIC_LOGO_DEV_TOKEN: z.string().startsWith("pk_"),
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string(),
   },
   runtimeEnv: {
@@ -25,3 +25,8 @@ export const env = createEnv({
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
   },
 });
+
+// Ensure we always have an absolute URL with protocol for building URLs
+export const appBaseUrl = env.VERCEL_PROJECT_PRODUCTION_URL.startsWith("http")
+  ? env.VERCEL_PROJECT_PRODUCTION_URL
+  : `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
