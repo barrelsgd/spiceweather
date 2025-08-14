@@ -10,6 +10,7 @@ import { Navigation } from "../../navigation";
 import { Theme } from "../../theme";
 import avatar from "./avatar.jpg";
 import spicewx from "./spicewx.png";
+import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 
 const X = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -73,7 +74,7 @@ export const Header = () => {
           <Navigation />
         </div>
         <div className="flex items-center gap-2">
-          <Link
+          {/* <Link
             className="rounded-full p-2.5 text-sm transition-colors hover:bg-muted"
             href="https://x.com/haydenbleasel"
             rel="noopener"
@@ -88,7 +89,7 @@ export const Header = () => {
             target="_blank"
           >
             <GitHub className="size-4" />
-          </Link>
+          </Link> */}
           <Link
             className="rounded-full bg-muted px-4 py-2.5 font-medium text-sm transition-colors hover:bg-muted/50"
             href="/contact"
@@ -105,7 +106,7 @@ export const Header = () => {
             </button>
           </form> */}
           <div>
-            <Theme />
+            <ThemeToggleButton />
           </div>
           <div className="">
             <button

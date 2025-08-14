@@ -495,12 +495,13 @@ export const Weather = () => {
   const activeTab = tabFromPath();
 
   return (
-    <div
-      aria-label="Weather layout"
-      className="mx-auto max-w-4xl mt-5 space-y-6"
-      role="region"
-    >
-      {/* <div className="flex justify-center">
+    <div className="mx-4">
+      <div
+        aria-label="Weather layout"
+        className="mx-auto max-w-4xl mt-5 space-y-6 "
+        role="region"
+      >
+        {/* <div className="flex justify-center">
         <SegmentedControl
           value={activeTab}
           onChange={(s) => {
@@ -523,21 +524,22 @@ export const Weather = () => {
         />
       </div> */}
 
-      {/* <LocationChips /> */}
-      <LocationTitle name={"St. George's, Grenada"} />
+        {/* <LocationChips /> */}
+        <LocationTitle name={"St. George's, Grenada"} />
 
-      <TemperatureSummary
-        condition={current.description}
-        maxC={maxC}
-        minC={minC}
-        tempC={current.temperatureC}
-      />
+        <TemperatureSummary
+          condition={current.description}
+          maxC={maxC}
+          minC={minC}
+          tempC={current.temperatureC}
+        />
 
-      <Narrative text={narrative} />
+        {/* <Narrative text={narrative} /> */}
 
-      {/* <HourlyStrip items={hourly} /> */}
+        {/* <HourlyStrip items={hourly} /> */}
 
-      <MetricsCard m={metrics} />
+        <MetricsCard m={metrics} />
+      </div>
     </div>
   );
 };

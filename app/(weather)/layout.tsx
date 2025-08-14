@@ -207,7 +207,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 }
 
 const RadarMap = () => (
-  <Section title="Radar">
+  <div className="m-4">
     <div className="rounded-xl border bg-card/60 p-3 backdrop-blur-sm mx-auto max-w-4xl">
       <figure className="grid aspect-video w-full place-content-center overflow-hidden rounded-lg bg-muted">
         <svg aria-labelledby="radar-title" className="h-full w-full" role="img">
@@ -226,5 +226,5 @@ const RadarMap = () => (
         </figcaption>
       </figure>
     </div>
-  </Section>
+  </div>
 );
