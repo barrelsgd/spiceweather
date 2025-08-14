@@ -2,11 +2,11 @@ import type {
   ArrayStyle,
   ObjectStyle,
   SerializerOptions,
-} from './pathSerializer';
+} from "./pathSerializer";
 
 export type QuerySerializer = (query: Record<string, unknown>) => string;
 
-export type BodySerializer = (body: any) => any;
+export type BodySerializer = (body: unknown) => unknown;
 
 export interface QuerySerializerOptions {
   allowReserved?: boolean;
@@ -19,7 +19,7 @@ const serializeFormDataPair = (
   key: string,
   value: unknown
 ): void => {
-  if (typeof value === 'string' || value instanceof Blob) {
+  if (typeof value === "string" || value instanceof Blob) {
     data.append(key, value);
   } else {
     data.append(key, JSON.stringify(value));
@@ -31,7 +31,7 @@ const serializeUrlSearchParamsPair = (
   key: string,
   value: unknown
 ): void => {
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     data.append(key, value);
   } else {
     data.append(key, JSON.stringify(value));
@@ -39,12 +39,11 @@ const serializeUrlSearchParamsPair = (
 };
 
 export const formDataBodySerializer = {
-  bodySerializer: <T extends Record<string, any> | Array<Record<string, any>>>(
-    body: T
-  ): FormData => {
+  bodySerializer: (body: unknown): FormData => {
     const data = new FormData();
+    const obj = (body ?? {}) as Record<string, unknown>;
 
-    Object.entries(body).forEach(([key, value]) => {
+    Object.entries(obj).forEach(([key, value]) => {
       if (value === undefined || value === null) {
         return;
       }
@@ -62,17 +61,16 @@ export const formDataBodySerializer = {
 export const jsonBodySerializer = {
   bodySerializer: <T>(body: T): string =>
     JSON.stringify(body, (_key, value) =>
-      typeof value === 'bigint' ? value.toString() : value
+      typeof value === "bigint" ? value.toString() : value
     ),
 };
 
 export const urlSearchParamsBodySerializer = {
-  bodySerializer: <T extends Record<string, any> | Array<Record<string, any>>>(
-    body: T
-  ): string => {
+  bodySerializer: (body: unknown): string => {
     const data = new URLSearchParams();
+    const obj = (body ?? {}) as Record<string, unknown>;
 
-    Object.entries(body).forEach(([key, value]) => {
+    Object.entries(obj).forEach(([key, value]) => {
       if (value === undefined || value === null) {
         return;
       }

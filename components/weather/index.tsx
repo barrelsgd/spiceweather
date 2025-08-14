@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { usePathname, useRouter } from 'next/navigation';
-import { useId } from 'react';
+import { usePathname, useRouter } from "next/navigation";
+import { useId } from "react";
 
 // Types
 export type Location = {
@@ -62,12 +62,12 @@ const Section = ({
   children: React.ReactNode;
 }) => (
   <section
-    aria-labelledby={title.replace(/\s+/g, '-').toLowerCase()}
+    aria-labelledby={title.replace(/\s+/g, "-").toLowerCase()}
     className="space-y-4"
   >
     <h2
       className="font-medium text-xl"
-      id={title.replace(/\s+/g, '-').toLowerCase()}
+      id={title.replace(/\s+/g, "-").toLowerCase()}
     >
       {title}
     </h2>
@@ -178,8 +178,8 @@ const SegmentedControl = ({
         aria-selected={value === s}
         className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
           value === s
-            ? 'bg-primary text-primary-foreground shadow'
-            : 'text-muted-foreground hover:text-foreground'
+            ? "bg-primary text-primary-foreground shadow"
+            : "text-muted-foreground hover:text-foreground"
         }`}
         key={s}
         onClick={() => onChange?.(s)}
@@ -211,11 +211,11 @@ const HourlyStrip = ({ items }: { items: HourlyForecastItem[] }) => (
               className="text-muted-foreground text-xs"
               dateTime={h.timeIso}
             >
-              {new Date(h.timeIso).toLocaleTimeString([], { hour: 'numeric' })}
+              {new Date(h.timeIso).toLocaleTimeString([], { hour: "numeric" })}
             </time>
           </div>
           <div>
-            {typeof h.precipPct === 'number' ? (
+            {typeof h.precipPct === "number" ? (
               <span className="text-blue-600 text-xs dark:text-blue-400">{`${Math.round(h.precipPct)}%`}</span>
             ) : null}
           </div>
@@ -240,40 +240,40 @@ const MetricsCard = ({ m }: { m: WeatherMetrics }) => (
     >
       <h3 className="mb-2 font-medium text-base">Fair</h3>
       <dl className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        {typeof m.precipitationPct === 'number' && (
+        {typeof m.precipitationPct === "number" && (
           <MetricRow
             label="Precipitation"
             value={`${Math.round(m.precipitationPct)}%`}
           />
         )}
-        {typeof m.rainIn === 'number' && (
+        {typeof m.rainIn === "number" && (
           <MetricRow label="Rain" value={`${m.rainIn.toFixed(1)} in`} />
         )}
-        {typeof m.feelsLikeC === 'number' && (
+        {typeof m.feelsLikeC === "number" && (
           <MetricRow
             label="Feels Like"
             value={`${Math.round(m.feelsLikeC)}°`}
           />
         )}
-        {typeof m.pressureInHg === 'number' && (
+        {typeof m.pressureInHg === "number" && (
           <MetricRow
             label="Pressure"
             value={`${m.pressureInHg.toFixed(2)} inHg`}
           />
         )}
-        {typeof m.dewPointC === 'number' && (
+        {typeof m.dewPointC === "number" && (
           <MetricRow label="Dew Point" value={`${Math.round(m.dewPointC)}°`} />
         )}
-        {typeof m.humidityPct === 'number' && (
+        {typeof m.humidityPct === "number" && (
           <MetricRow label="Humidity" value={`${Math.round(m.humidityPct)}%`} />
         )}
-        {typeof m.uvIndex === 'number' && (
+        {typeof m.uvIndex === "number" && (
           <MetricRow label="UV Index" value={`${m.uvIndex}`} />
         )}
-        {typeof m.visibilityMi === 'number' && (
+        {typeof m.visibilityMi === "number" && (
           <MetricRow label="Visibility" value={`${m.visibilityMi} mi`} />
         )}
-        {typeof m.cloudCoverPct === 'number' && (
+        {typeof m.cloudCoverPct === "number" && (
           <MetricRow
             label="Cloud Cover"
             value={`${Math.round(m.cloudCoverPct)}%`}
@@ -284,8 +284,8 @@ const MetricsCard = ({ m }: { m: WeatherMetrics }) => (
           <MetricRow
             label="Sunrise"
             value={new Date(m.sunriseIso).toLocaleTimeString([], {
-              hour: 'numeric',
-              minute: '2-digit',
+              hour: "numeric",
+              minute: "2-digit",
             })}
           />
         )}
@@ -293,15 +293,15 @@ const MetricsCard = ({ m }: { m: WeatherMetrics }) => (
           <MetricRow
             label="Sunset"
             value={new Date(m.sunsetIso).toLocaleTimeString([], {
-              hour: 'numeric',
-              minute: '2-digit',
+              hour: "numeric",
+              minute: "2-digit",
             })}
           />
         )}
         {m.airQualityText && (
           <MetricRow label="Air Quality" value={m.airQualityText} />
         )}
-        {typeof m.aqi === 'number' && (
+        {typeof m.aqi === "number" && (
           <MetricRow label="AQI" value={`${m.aqi}`} />
         )}
       </dl>
@@ -327,7 +327,7 @@ const LocationSelector = ({
         id={selectId}
         name="location"
         onChange={(e) => onChange(e.target.value)}
-        value={selectedId ?? locations[0]?.id ?? ''}
+        value={selectedId ?? locations[0]?.id ?? ""}
       >
         {locations.map((loc) => (
           <option key={loc.id} value={loc.id}>
@@ -366,7 +366,7 @@ const HourlyForecast = ({ items }: { items: HourlyForecastItem[] }) => (
             {new Date(h.timeIso).toLocaleTimeString()}
           </time>
           <span>{`${h.temperatureC.toFixed(0)}°C`}</span>
-          {typeof h.precipitationMm === 'number' ? (
+          {typeof h.precipitationMm === "number" ? (
             <span>{`${h.precipitationMm.toFixed(1)} mm`}</span>
           ) : null}
           {h.summary ? <span>{h.summary}</span> : null}
@@ -421,8 +421,8 @@ const RadarMap = () => (
 export const Weather = () => {
   // Placeholder demo data so the layout renders without backend wiring.
   const locations: Location[] = [
-    { id: 'gnd', name: 'Grenada', latitude: 12.05, longitude: -61.75 },
-    { id: 'carriacou', name: 'Carriacou', latitude: 12.48, longitude: -61.46 },
+    { id: "gnd", name: "Grenada", latitude: 12.05, longitude: -61.75 },
+    { id: "carriacou", name: "Carriacou", latitude: 12.48, longitude: -61.46 },
   ];
 
   const current: CurrentConditions = {
@@ -430,12 +430,12 @@ export const Weather = () => {
     windKts: 11,
     humidityPct: 74,
     pressureHpa: 1012,
-    description: 'Fair',
+    description: "Fair",
   };
 
   const minC = 26;
   const maxC = 31;
-  const narrative = 'Partly cloudy. Lows overnight in the upper 70s.';
+  const narrative = "Partly cloudy. Lows overnight in the upper 70s.";
 
   const hourly: HourlyForecastItem[] = Array.from({ length: 8 }).map((_, i) => {
     const now = new Date();
@@ -457,10 +457,10 @@ export const Weather = () => {
     uvIndex: 0,
     visibilityMi: 6.0,
     cloudCoverPct: 59,
-    windText: 'ESE 13 mph',
+    windText: "ESE 13 mph",
     sunriseIso: new Date(new Date().setHours(5, 55, 0, 0)).toISOString(),
     sunsetIso: new Date(new Date().setHours(18, 29, 0, 0)).toISOString(),
-    airQualityText: 'Good',
+    airQualityText: "Good",
     aqi: 1,
   };
 
@@ -469,26 +469,26 @@ export const Weather = () => {
 
   // Derive active tab from pathname
   const tabFromPath = () => {
-    if (!pathname) return 'Hourly';
-    const parts = pathname.split('/').filter(Boolean);
+    if (!pathname) return "Hourly";
+    const parts = pathname.split("/").filter(Boolean);
     // Expecting paths like /weather, /weather/today, /weather/tues, ...
-    if (parts[0] !== 'weather' || parts.length === 1) return 'Hourly';
+    if (parts[0] !== "weather" || parts.length === 1) return "Hourly";
     const slug = parts[1]?.toLowerCase();
     switch (slug) {
-      case 'today':
-        return 'Today';
-      case 'tues':
-        return 'Tues';
-      case 'wed':
-        return 'Wed';
-      case 'thur':
-        return 'Thur';
-      case 'outlook':
-        return 'Outlook';
-      case 'marine':
-        return 'Marine';
+      case "today":
+        return "Today";
+      case "tues":
+        return "Tues";
+      case "wed":
+        return "Wed";
+      case "thur":
+        return "Thur";
+      case "outlook":
+        return "Outlook";
+      case "marine":
+        return "Marine";
       default:
-        return 'Hourly';
+        return "Hourly";
     }
   };
 
@@ -497,7 +497,7 @@ export const Weather = () => {
   return (
     <div
       aria-label="Weather layout"
-      className="mx-auto space-y-6"
+      className="mx-auto max-w-4xl mt-5 space-y-6"
       role="region"
     >
       {/* <div className="flex justify-center">

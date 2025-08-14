@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { Footer } from "@/components/weather/footer";
+import { Header } from "@/components/weather/header";
 import { JsonLd } from "@/components/json-ld";
 import { Navigation } from "@/components/navigation";
 import { Sidebar } from "@/components/sidebar";
@@ -24,6 +24,17 @@ type RootLayoutProps = {
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+    <head>
+      {/* FullCalendar styles via CDN to avoid node_modules CSS resolution issues */}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/main.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/main.min.css"
+      />
+    </head>
     <body
       className={cn(
         sans.variable,
@@ -38,13 +49,13 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         disableTransitionOnChange
         enableSystem
       >
-        <Header />
+        {/* <Header /> */}
         <div className="grid">
           {/* <Sidebar /> */}
-          <div className="px-5 sm:py-16">
-            <div className="mx-auto max-w-4xl">
+          <div className="">
+            <div className="">
               {children}
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </div>
         </div>
