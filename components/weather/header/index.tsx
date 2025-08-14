@@ -95,7 +95,7 @@ export const Header = () => {
           >
             Contact
           </Link>
-          <form action={logoutAction} className="hidden sm:block">
+          {/* <form action={logoutAction} className="hidden sm:block">
             <button
               aria-label="Log out"
               className="rounded-full px-4 py-2.5 font-medium text-sm transition-colors hover:bg-muted"
@@ -103,7 +103,7 @@ export const Header = () => {
             >
               Logout
             </button>
-          </form>
+          </form> */}
           <div>
             <Theme />
           </div>

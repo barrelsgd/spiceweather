@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { wxfcsts } from '@/lib/weather/wxfcsts';
+import { wxfcsts } from "@/lib/weather/wxfcsts";
 
 // Types inferred from wxfcsts usage
 type Morning = typeof wxfcsts.morning;
@@ -45,10 +45,10 @@ export const ForecastTemplate = ({ f }: { f: MorningView }) => (
       className="mx-auto max-w-5xl space-y-6 p-4"
     >
       <ForecastCard f={f} />
-      <Warnings f={f} />
-      <LikelihoodImpactResponse f={f} />
+
+      {/* <LikelihoodImpactResponse f={f} /> */}
     </section>
-    <Header f={f} />
+    {/* <Header f={f} /> */}
   </main>
 );
 
@@ -61,8 +61,8 @@ export const TodayWeather = () => {
 // Types inferred from wxfcsts.morning usage
 type HeaderProps = { f: MorningView };
 const Header = ({ f }: HeaderProps) => {
-  const issuedText = f.report_date ?? '';
-  const forecaster = f.forecaster ?? '';
+  const issuedText = f.report_date ?? "";
+  const forecaster = f.forecaster ?? "";
   return (
     <header
       aria-labelledby="forecast-title"
@@ -85,28 +85,19 @@ const Header = ({ f }: HeaderProps) => {
 
 type WarningsProps = { f: MorningView };
 const Warnings = ({ f }: WarningsProps) => {
-  const warning = f.forecast?.warning ?? '';
-  const hasWarning = warning && warning.toLowerCase() !== 'none';
+  const warning = f.forecast?.warning ?? "";
+  const hasWarning = warning && warning.toLowerCase() !== "none";
   return (
     <article
       aria-labelledby="headline-warnings"
-      className="flex gap-4 rounded-xl border bg-card p-6 shadow"
+      className="gap-4 rounded-xl border bg-card p-6 shadow"
     >
-      <h2 className="sr-only" id="headline-warnings">
-        Warnings
-      </h2>
       <span
-        className="flex w-1/2 items-center gap-1 rounded bg-muted px-3 py-1 text-foreground shadow"
+        aria-label={f.marine?.seas ? "Marine conditions" : "No marine info"}
+        className="items-center gap-1 rounded bg-muted px-3 py-1 text-foreground shadow"
         role="status"
       >
-        {hasWarning ? `⚠️ ${warning}` : '✅ No weather warnings'}
-      </span>
-      <span
-        aria-label={f.marine?.seas ? 'Marine conditions' : 'No marine info'}
-        className="flex w-1/2 items-center gap-1 rounded bg-muted px-3 py-1 text-foreground shadow"
-        role="status"
-      >
-        🌊 {f.marine?.seas ?? 'Seas information unavailable'}
+        🌊 {f.marine?.seas ?? "Seas information unavailable"}
       </span>
     </article>
   );
@@ -121,22 +112,10 @@ const ForecastCard = ({ f }: ForecastCardProps) => {
       className="rounded-xl border bg-card p-6 shadow"
     >
       {/* Headline summary */}
-      <h2 className="font-semibold text-lg" id="headline-summary">
-        Weather summary
-      </h2>
       <div className="mb-6 flex items-start gap-4 text-foreground">
         <div aria-hidden className="grid grid-cols-2 gap-2">
           <div className="grid h-14 w-14 place-content-center rounded bg-muted text-xl">
             🌤️
-          </div>
-          <div className="grid h-14 w-14 place-content-center rounded bg-muted text-xl">
-            �️
-          </div>
-          <div className="grid h-14 w-14 place-content-center rounded bg-muted text-xl">
-            🌬️
-          </div>
-          <div className="grid h-14 w-14 place-content-center rounded bg-muted text-xl">
-            🌊
           </div>
         </div>
         <p className="text-balance text-lg leading-relaxed">
@@ -145,35 +124,28 @@ const ForecastCard = ({ f }: ForecastCardProps) => {
       </div>
 
       {/* Key stats */}
-      <dl className="grid gap-4 sm:grid-cols-3">
-        <div>
-          <dt className="text-muted-foreground text-sm">Air Temperature</dt>
-          <dd className="font-medium text-xl">
-            {typeof f.temperature?.min_c === 'number'
-              ? `${f.temperature.min_c}–${f.temperature.max_c ?? ''}°C`
-              : typeof f.temperature?.max_c === 'number'
-                ? `${f.temperature.max_c}°C`
-                : '—'}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-muted-foreground text-sm">Wind</dt>
-          <dd className="font-medium text-xl">{f.marine?.wind ?? '—'}</dd>
-        </div>
-        <div>
-          <dt className="text-muted-foreground text-sm">Sun</dt>
-          <dd className="font-medium text-xl">
-            {f.astronomy?.sunset_today ?? '—'} /{' '}
-            {f.astronomy?.sunrise_tomorrow ?? '—'}
-          </dd>
-        </div>
-      </dl>
+
+      <div>
+        <dt className="text-muted-foreground text-sm">Air Temperature</dt>
+        <dd className="font-medium text-xl">
+          {typeof f.temperature?.min_c === "number"
+            ? `${f.temperature.min_c}–${f.temperature.max_c ?? ""}°C`
+            : typeof f.temperature?.max_c === "number"
+              ? `${f.temperature.max_c}°C`
+              : "—"}
+        </dd>
+      </div>
+      <div>
+        <dt className="text-muted-foreground text-sm">Wind</dt>
+        <dd className="font-medium text-xl">{f.marine?.wind ?? "—"}</dd>
+      </div>
 
       {/* Marine & Tides */}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <SunCard f={f} />
-        <TideCard f={f} />
-      </div>
+
+      <SunCard f={f} />
+      <TideCard f={f} />
+
+      <Warnings f={f} />
     </article>
   );
 };
@@ -189,7 +161,7 @@ const SunCard = ({ f }: AstroTideProps) => (
         �
       </div>
       <p className="font-medium text-lg">
-        {f.astronomy?.sunset_today ?? f.astronomy?.sunset_today ?? '—'}
+        {f.astronomy?.sunset_today ?? f.astronomy?.sunset_today ?? "—"}
       </p>
     </figure>
     <figure className="text-center">
@@ -200,7 +172,7 @@ const SunCard = ({ f }: AstroTideProps) => (
         �
       </div>
       <p className="font-medium text-lg">
-        {f.astronomy?.sunrise_tomorrow ?? f.astronomy?.sunrise_tomorrow ?? '—'}
+        {f.astronomy?.sunrise_tomorrow ?? f.astronomy?.sunrise_tomorrow ?? "—"}
       </p>
     </figure>
   </div>
@@ -213,14 +185,14 @@ const TideCard = ({ f }: AstroTideProps) => (
       <div aria-label="high tide" className="text-2xl" role="img">
         🌊⬆️
       </div>
-      <p className="font-medium text-lg">{f.tides?.high_time ?? '—'}</p>
+      <p className="font-medium text-lg">{f.tides?.high_time ?? "—"}</p>
     </figure>
     <figure className="text-center">
       <figcaption className="text-slate-600 text-xs">Low Tide</figcaption>
       <div aria-label="low tide" className="text-2xl" role="img">
         🌊⬇️
       </div>
-      <p className="font-medium text-lg">{f.tides?.low_time ?? '—'}</p>
+      <p className="font-medium text-lg">{f.tides?.low_time ?? "—"}</p>
     </figure>
   </div>
 );
@@ -243,9 +215,9 @@ const InfoPanel = ({ title, items }: PanelProps) => (
 
 type LikelihoodImpactResponseProps = { f: MorningView };
 const LikelihoodImpactResponse = ({ f }: LikelihoodImpactResponseProps) => {
-  const likelihood = f.likelihood ?? 'High';
-  const impact = f.impact ?? 'Minimal';
-  const response = f.response ?? 'No Action';
+  const likelihood = f.likelihood ?? "High";
+  const impact = f.impact ?? "Minimal";
+  const response = f.response ?? "No Action";
   return (
     <section
       aria-label="Likelihood, impact and recommended response"

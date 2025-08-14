@@ -176,7 +176,7 @@ const SegmentedControl = ({
     {segments.map((s) => (
       <button
         aria-selected={value === s}
-        className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+        className={`rounded-full px-2 py-1.5 text-sm transition-colors ${
           value === s
             ? "bg-primary text-primary-foreground shadow"
             : "text-muted-foreground hover:text-foreground"

@@ -40,21 +40,24 @@ const alerts: AlertItem[] = [];
 // Alerts
 const AlertsPanel = ({ items }: { items: AlertItem[] }) => (
   <Section title="">
-    <div className="flex justify-center ">
-      <output
-        aria-live="polite"
-        className="mx-auto max-w-4xl inline-flex w-full items-center rounded-full bg-muted px-4 py-2"
-      >
-        {items.length === 0 ? (
-          <span className="text-muted-foreground text-sm">
-            No active alerts
-          </span>
-        ) : (
-          <span className="font-medium text-sm ">
-            {items.length} active alert{items.length > 1 ? "s" : ""}
-          </span>
-        )}
-      </output>
+    <div className="mx-4">
+      {" "}
+      <div className="flex justify-center mx-auto max-w-4xl">
+        <output
+          aria-live="polite"
+          className=" inline-flex w-full items-center rounded-full bg-muted px-4 py-2"
+        >
+          {items.length === 0 ? (
+            <span className="text-muted-foreground text-sm">
+              No active alerts
+            </span>
+          ) : (
+            <span className="font-medium text-sm ">
+              {items.length} active alert{items.length > 1 ? "s" : ""}
+            </span>
+          )}
+        </output>
+      </div>{" "}
     </div>
 
     {items.length > 0 ? (
@@ -116,13 +119,13 @@ const SegmentedControl = ({
 }) => (
   <div
     aria-label="Forecast range"
-    className="rounded-full bg-muted p-1"
+    className="rounded-full bg-muted mx-4"
     role="tablist"
   >
     {segments.map((s) => (
       <button
         aria-selected={value === s}
-        className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+        className={`rounded-full px-2 py-1.5 text-sm transition-colors ${
           value === s
             ? "bg-primary text-primary-foreground shadow"
             : "text-muted-foreground hover:text-foreground"
