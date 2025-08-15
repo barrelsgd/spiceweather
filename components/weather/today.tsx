@@ -1,4 +1,12 @@
 "use client";
+import {
+  Cloud,
+  ThermometerSun,
+  Wind,
+  Sunrise,
+  Sunset,
+  Waves,
+} from "lucide-react";
 
 import { wxfcsts } from "@/lib/weather/wxfcsts";
 
@@ -97,7 +105,7 @@ const Warnings = ({ f }: WarningsProps) => {
         className="items-center gap-1 rounded bg-muted px-3 py-1 text-foreground shadow"
         role="status"
       >
-        🌊 {f.marine?.seas ?? "Seas information unavailable"}
+        <Waves /> {f.marine?.seas ?? "Seas information unavailable"}
       </span>
     </article>
   );
@@ -113,10 +121,8 @@ const ForecastCard = ({ f }: ForecastCardProps) => {
     >
       {/* Headline summary */}
       <div className="mb-6 flex items-start gap-4 text-foreground">
-        <div aria-hidden className="grid grid-cols-2 gap-2">
-          <div className="grid h-14 w-14 place-content-center rounded bg-muted text-xl">
-            🌤️
-          </div>
+        <div aria-hidden>
+          <Cloud />
         </div>
         <p className="text-balance text-lg leading-relaxed">
           {f.forecast?.overview}
@@ -126,6 +132,8 @@ const ForecastCard = ({ f }: ForecastCardProps) => {
       {/* Key stats */}
 
       <div>
+        <ThermometerSun />
+
         <dt className="text-muted-foreground text-sm">Air Temperature</dt>
         <dd className="font-medium text-xl">
           {typeof f.temperature?.min_c === "number"
@@ -136,6 +144,7 @@ const ForecastCard = ({ f }: ForecastCardProps) => {
         </dd>
       </div>
       <div>
+        <Wind />
         <dt className="text-muted-foreground text-sm">Wind</dt>
         <dd className="font-medium text-xl">{f.marine?.wind ?? "—"}</dd>
       </div>
@@ -158,7 +167,7 @@ const SunCard = ({ f }: AstroTideProps) => (
     <figure className="text-center">
       <figcaption className="text-slate-600 text-xs">Sunset</figcaption>
       <div aria-label="sunset" className="text-2xl" role="img">
-        �
+        <Sunset />
       </div>
       <p className="font-medium text-lg">
         {f.astronomy?.sunset_today ?? f.astronomy?.sunset_today ?? "—"}
@@ -169,7 +178,7 @@ const SunCard = ({ f }: AstroTideProps) => (
         Sunrise (tomorrow)
       </figcaption>
       <div aria-label="sunrise" className="text-2xl" role="img">
-        �
+        <Sunrise />
       </div>
       <p className="font-medium text-lg">
         {f.astronomy?.sunrise_tomorrow ?? f.astronomy?.sunrise_tomorrow ?? "—"}
