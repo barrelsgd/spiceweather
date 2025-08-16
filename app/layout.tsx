@@ -22,7 +22,7 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => (
+const WeatherLayout = ({ children }: RootLayoutProps) => (
   <html className="scroll-smooth" lang="en" suppressHydrationWarning>
     <head>
       {/* FullCalendar styles via CDN to avoid node_modules CSS resolution issues */}
@@ -68,4 +68,4 @@ const RootLayout = ({ children }: RootLayoutProps) => (
   </html>
 );
 
-export default RootLayout;
+export default WeatherLayout;
