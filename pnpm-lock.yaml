@@ -125,12 +125,6 @@ importers:
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
-      ag-grid-community:
-        specifier: ^34.1.1
-        version: 34.1.1
-      ag-grid-react:
-        specifier: ^34.1.1
-        version: 34.1.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       axios:
         specifier: ^1.11.0
         version: 1.11.0
@@ -176,9 +170,6 @@ importers:
       next-recaptcha-v3:
         specifier: ^1.5.2
         version: 1.5.2(next@15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
-      next-safe:
-        specifier: ^3.5.0
-        version: 3.5.0(next@15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -3081,18 +3072,6 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ag-charts-types@12.1.1:
-    resolution: {integrity: sha512-VbAOfp1E7+Z/TBufJOIjUYdx70kQRDg49WoluiVKVSB0r0el/uvxARp9xjzx4ByBq9+Xq/V23tJVsRj1MS2A/g==}
-
-  ag-grid-community@34.1.1:
-    resolution: {integrity: sha512-ODVvGoMTkyGvMT8b5lzvum5r93bG6CKdJdNrk6u/aYS7oqZ5rUEXJJHC8n8Zq+o76KhFiXMBQrU39xuhz8i+Tg==}
-
-  ag-grid-react@34.1.1:
-    resolution: {integrity: sha512-ZffTltCJe5+yzC57LVTMFpjZiYUzFiX8+G4NNfM1MfiLV6cMl5kCEE6w3Afc0nSt8b1JCAZOiX6K0+VXqjIfYQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
   ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
     engines: {node: '>=6'}
@@ -4256,11 +4235,6 @@ packages:
     peerDependencies:
       next: ^13 || ^14 || ^15
       react: ^18 || ^19
-
-  next-safe@3.5.0:
-    resolution: {integrity: sha512-TzXfEvAn4T+mPvhz8mlg9AloXfsE6JwxFPr1Vkw/YDKIRDpZzuh1q33vipfSZoWN5BeGpyh0cnCo0Cqp4Lzi6A==}
-    peerDependencies:
-      next: ^9.5.0 || ^10.2.1 || ^11.1.0 || ^12.1.0 || ^13.0.0 || ^14.0.0
 
   next-themes@0.4.6:
     resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
@@ -8019,19 +7993,6 @@ snapshots:
 
   acorn@8.15.0: {}
 
-  ag-charts-types@12.1.1: {}
-
-  ag-grid-community@34.1.1:
-    dependencies:
-      ag-charts-types: 12.1.1
-
-  ag-grid-react@34.1.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
-    dependencies:
-      ag-grid-community: 34.1.1
-      prop-types: 15.8.1
-      react: 19.1.1
-      react-dom: 19.1.1(react@19.1.1)
-
   ansi-colors@4.1.3: {}
 
   apexcharts@5.3.3:
@@ -9455,10 +9416,6 @@ snapshots:
     dependencies:
       next: 15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
-
-  next-safe@3.5.0(next@15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)):
-    dependencies:
-      next: 15.4.4(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   next-themes@0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
