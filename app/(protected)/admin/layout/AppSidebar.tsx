@@ -1,22 +1,22 @@
 "use client";
- import React, { useEffect, useRef, useState, useCallback } from "react";
- import Link from "next/link";
- import Image from "next/image";
- import { usePathname } from "next/navigation";
- import { useSidebar } from "../context/SidebarContext";
- import {
-   Box,
-   Calendar,
-   ChevronDown,
-   LayoutGrid,
-   Ellipsis,
-   List,
-   FileText,
-   PieChart,
-   Plug,
-   Table,
-   UserCircle,
- } from "lucide-react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useSidebar } from "../context/SidebarContext";
+import {
+  Box,
+  Calendar,
+  ChevronDown,
+  LayoutGrid,
+  Ellipsis,
+  List,
+  FileText,
+  PieChart,
+  Plug,
+  Table,
+  UserCircle,
+} from "lucide-react";
 import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
@@ -57,14 +57,14 @@ const navItems: NavItem[] = [
       { name: "Basic Tables", path: "/admin/basic-tables", pro: false },
     ],
   },
-  {
-    name: "Pages",
-    icon: <FileText />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
-    ],
-  },
+  // {
+  //   name: "Pages",
+  //   icon: <FileText />,
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [
@@ -368,17 +368,17 @@ const AppSidebar: React.FC = () => {
                     : "justify-start"
                 }`}
               >
-                {isExpanded || isHovered || isMobileOpen ? (
+                {/* {isExpanded || isHovered || isMobileOpen ? (
                   "Others"
                 ) : (
                   <Ellipsis />
-                )}
+                )} */}
               </h2>
-              {renderMenuItems(othersItems, "others")}
+              {/* {renderMenuItems(othersItems, "others")} */}
             </div>
           </div>
         </nav>
-        {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null}
+        {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
       </div>
     </aside>
   );
