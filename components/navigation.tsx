@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Link } from "@/components/link";
 import { cn } from "@/lib/utils";
-
+import { NavigationMenuDemo } from "@/components/navigation2";
 const links = [
   {
     href: "/",
@@ -36,20 +36,27 @@ export const Navigation = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="flex flex-col md:flex-row md:items-center md:gap-1">
-      {links.map(({ href, label, active }) => (
-        <li key={href}>
-          <Link
-            className={cn(
-              "block rounded-md px-3 py-2 text-sm hover:bg-muted",
-              active(pathname) ? "text-primary" : "border-none"
-            )}
-            href={href}
-          >
-            {label}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <div className="hidden md:block">
+        <NavigationMenuDemo />
+      </div>
+      <div className="md:hidden">
+        <ul className="flex flex-col md:flex-row md:items-center md:gap-1">
+          {links.map(({ href, label, active }) => (
+            <li key={href}>
+              <Link
+                className={cn(
+                  "block rounded-md px-3 py-2 text-sm hover:bg-muted",
+                  active(pathname) ? "text-primary" : "border-none"
+                )}
+                href={href}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };

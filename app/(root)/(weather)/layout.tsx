@@ -1,5 +1,5 @@
 import { mono, sans } from "@/lib/fonts";
-import "./weather.css";
+// import "./weather.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -22,18 +22,11 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-const HomeRootLayout = ({ children }: RootLayoutProps) => (
-  <ThemeProvider
-    attribute="class"
-    defaultTheme="system"
-    disableTransitionOnChange
-    enableSystem
-  >
-    <Header />
-
+const WeatherLayout = ({ children }: RootLayoutProps) => (
+  <div>
+    <div>Testing</div>
     {children}
-    <Footer />
-  </ThemeProvider>
+  </div>
 );
 
-export default HomeRootLayout;
+export default WeatherLayout;

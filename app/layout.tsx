@@ -22,14 +22,14 @@ const RootLayout = ({ children }: RootLayoutProps) => (
   <html className="scroll-smooth" lang="en" suppressHydrationWarning>
     <head>
       {/* FullCalendar styles via CDN to avoid node_modules CSS resolution issues */}
-      <link
+      {/* <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/main.min.css"
       />
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/main.min.css"
-      />
+      /> */}
     </head>
     <body
       className={cn(
@@ -39,18 +39,18 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       )}
       suppressHydrationWarning
     >
-      <ThemeProvider
+      {/* <ThemeProvider
         attribute="class"
         defaultTheme="system"
         disableTransitionOnChange
         enableSystem
-      >
-        {children}
-        <Toaster />
-        <WindowsEmojiPolyfill />
-        <JsonLd />
-        <Analytics />
-      </ThemeProvider>
+      > */}
+      {children}
+      <Toaster />
+      {/* <WindowsEmojiPolyfill /> */}
+      {/* <JsonLd /> */}
+      <Analytics />
+      {/* </ThemeProvider> */}
     </body>
   </html>
 );
