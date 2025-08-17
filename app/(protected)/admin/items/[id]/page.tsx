@@ -34,7 +34,7 @@ export default async function ItemDetailPage({
       <div className="mb-4 flex items-center justify-between">
         <h1 className="font-semibold text-3xl">Item</h1>
         <Button asChild className="h-auto p-0" variant="link">
-          <Link href="/items">Back to items</Link>
+          <Link href="/admin/items">Back to items</Link>
         </Button>
       </div>
 

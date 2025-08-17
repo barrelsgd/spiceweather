@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Alert } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { itemsApi } from '@/lib/api';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { itemsApi } from "@/lib/api";
 
 export default async function ItemsPage({
   searchParams,
@@ -17,8 +17,8 @@ export default async function ItemsPage({
   const sp = await searchParams;
   const skip = Number(sp?.skip ?? 0) || 0;
   const limit = Number(sp?.limit ?? 20) || 20;
-  const error = sp?.error || '';
-  const success = sp?.success || '';
+  const error = sp?.error || "";
+  const success = sp?.success || "";
 
   const resp = await itemsApi().readItems({ skip, limit });
   const items = resp?.data?.data ?? [];
@@ -32,7 +32,7 @@ export default async function ItemsPage({
       <div className="mb-4 flex items-center justify-between">
         <h1 className="font-semibold text-3xl">Items</h1>
         <Button asChild size="sm">
-          <Link href="/items/new">New item</Link>
+          <Link href="/admin/items/new">New item</Link>
         </Button>
       </div>
 
@@ -78,8 +78,8 @@ export default async function ItemsPage({
       <div className="mt-4 flex items-center justify-between">
         <Link
           aria-disabled={skip === 0}
-          className={`rounded px-3 py-2 text-sm ${skip === 0 ? 'pointer-events-none opacity-50' : 'underline'}`}
-          href={`/items?skip=${prevSkip}&limit=${limit}`}
+          className={`rounded px-3 py-2 text-sm ${skip === 0 ? "pointer-events-none opacity-50" : "underline"}`}
+          href={`/admin/items?skip=${prevSkip}&limit=${limit}`}
         >
           Previous
         </Link>
@@ -88,8 +88,8 @@ export default async function ItemsPage({
         </div>
         <Link
           aria-disabled={nextSkip === skip}
-          className={`rounded px-3 py-2 text-sm ${nextSkip === skip ? 'pointer-events-none opacity-50' : 'underline'}`}
-          href={`/items?skip=${nextSkip}&limit=${limit}`}
+          className={`rounded px-3 py-2 text-sm ${nextSkip === skip ? "pointer-events-none opacity-50" : "underline"}`}
+          href={`/admin/items?skip=${nextSkip}&limit=${limit}`}
         >
           Next
         </Link>
@@ -99,7 +99,7 @@ export default async function ItemsPage({
 }
 
 export const metadata: Metadata = {
-  title: 'Items',
-  description: 'Browse your items.',
-  alternates: { canonical: '/items' },
+  title: "Items",
+  description: "Browse your items.",
+  alternates: { canonical: "/admin/items" },
 };

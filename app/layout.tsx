@@ -1,5 +1,5 @@
 import { mono, sans } from "@/lib/fonts";
-import "./globals.css";
+import "./global.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";

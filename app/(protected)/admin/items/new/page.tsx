@@ -19,7 +19,7 @@ export default async function NewItemPage({
       <div className="mb-4 flex items-center justify-between">
         <h1 className="font-semibold text-3xl">New item</h1>
         <Button asChild className="h-auto p-0" variant="link">
-          <Link href="/items">Back to items</Link>
+          <Link href="/admin/items">Back to items</Link>
         </Button>
       </div>
 
@@ -57,5 +57,5 @@ export default async function NewItemPage({
 export const metadata: Metadata = {
   title: "New item",
   description: "Create a new item.",
-  alternates: { canonical: "/items/new" },
+  alternates: { canonical: "/admin/items/new" },
 };

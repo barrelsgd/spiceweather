@@ -15,12 +15,12 @@ export async function createItemAction(formData: FormData) {
       throw new Error("Title is required");
     }
     await itemsApi().createItem({ title, description });
-    const url = new URL("/items", base);
+    const url = new URL("/admin/items", base);
     url.searchParams.set("success", "Item created");
     redirect(url.toString());
   } catch (err) {
     const anyErr = err as { message?: string };
-    const url = new URL("/items/new", base);
+    const url = new URL("/admin/items/new", base);
     url.searchParams.set("error", anyErr.message || "Failed to create item");
     redirect(url.toString());
   }
@@ -39,12 +39,12 @@ export async function updateItemAction(formData: FormData) {
       throw new Error("Item id is required");
     }
     await itemsApi().updateItem(id, { title, description });
-    const url = new URL(`/items/${id}`, base);
+    const url = new URL(`/admin/items/${id}`, base);
     url.searchParams.set("success", "Item updated");
     redirect(url.toString());
   } catch (err) {
     const anyErr = err as { message?: string };
-    const url = new URL(`/items/${id}`, base);
+    const url = new URL(`/admin/items/${id}`, base);
     url.searchParams.set("error", anyErr.message || "Failed to update item");
     redirect(url.toString());
   }
@@ -59,12 +59,12 @@ export async function deleteItemAction(formData: FormData) {
       throw new Error("Item id is required");
     }
     await itemsApi().deleteItem(id);
-    const url = new URL("/items", base);
+    const url = new URL("/admin/items", base);
     url.searchParams.set("success", "Item deleted");
     redirect(url.toString());
   } catch (err) {
     const anyErr = err as { message?: string };
-    const url = new URL(`/items/${id}`, base);
+    const url = new URL(`/admin/items/${id}`, base);
     url.searchParams.set("error", anyErr.message || "Failed to delete item");
     redirect(url.toString());
   }

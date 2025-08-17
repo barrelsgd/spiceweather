@@ -49,13 +49,13 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
         disableTransitionOnChange
         enableSystem
       >
-        {/* <Header /> */}
+        <Header />
         <div className="grid">
           {/* <Sidebar /> */}
           <div className="">
             <div className="">
               {children}
-              {/* <Footer /> */}
+              <Footer />
             </div>
           </div>
         </div>
