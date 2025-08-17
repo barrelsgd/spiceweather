@@ -51,7 +51,9 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
         enableSystem
       >
         <Header />
-        <NavigationMenuDemo />
+        <div className="hidden md:block">
+          <NavigationMenuDemo />
+        </div>
         <div className="grid">
           {/* <Sidebar /> */}
           <div className="">
