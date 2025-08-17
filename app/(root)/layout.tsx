@@ -13,6 +13,7 @@ import { Sidebar } from "@/components/sidebar";
 import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
+import { NavigationMenuDemo } from "@/components/navigation2";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appBaseUrl),
@@ -50,6 +51,7 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
         enableSystem
       >
         <Header />
+        <NavigationMenuDemo />
         <div className="grid">
           {/* <Sidebar /> */}
           <div className="">
