@@ -1,4 +1,4 @@
-import { logoutAction } from '@/app/(auth)/logout/actions';
+import { logoutAction } from "@/app/(root)/(auth)/logout/actions";
 
 export default function LogoutForm() {
   return (

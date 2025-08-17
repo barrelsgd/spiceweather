@@ -5,11 +5,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
-import { Footer } from "@/components/weather/footer";
-import { Header } from "@/components/weather/header";
 import { JsonLd } from "@/components/json-ld";
-import { Navigation } from "@/components/navigation";
-import { Sidebar } from "@/components/sidebar";
 import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
@@ -49,16 +45,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         disableTransitionOnChange
         enableSystem
       >
-        {/* <Header /> */}
-        <div className="grid">
-          {/* <Sidebar /> */}
-          <div className="">
-            <div className="">
-              {children}
-              {/* <Footer /> */}
-            </div>
-          </div>
-        </div>
+        {children}
         <Toaster />
         <WindowsEmojiPolyfill />
         <JsonLd />
