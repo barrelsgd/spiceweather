@@ -1,7 +1,8 @@
 "use client";
-import Checkbox from "@/components/form/input/Checkbox";
-import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/app/icons";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -32,7 +33,7 @@ export default function SignUpForm() {
           </div>
           <div>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
-              <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
+              <Button variant="outline" size="sm" className="justify-center gap-3">
                 <svg
                   width="20"
                   height="20"
@@ -58,8 +59,8 @@ export default function SignUpForm() {
                   />
                 </svg>
                 Sign up with Google
-              </button>
-              <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
+              </Button>
+              <Button variant="outline" size="sm" className="justify-center gap-3">
                 <svg
                   width="21"
                   className="fill-current"
@@ -71,7 +72,7 @@ export default function SignUpForm() {
                   <path d="M15.6705 1.875H18.4272L12.4047 8.75833L19.4897 18.125H13.9422L9.59717 12.4442L4.62554 18.125H1.86721L8.30887 10.7625L1.51221 1.875H7.20054L11.128 7.0675L15.6705 1.875ZM14.703 16.475H16.2305L6.37054 3.43833H4.73137L14.703 16.475Z" />
                 </svg>
                 Sign up with X
-              </button>
+              </Button>
             </div>
             <div className="relative py-3 sm:py-5">
               <div className="absolute inset-0 flex items-center">
@@ -88,7 +89,7 @@ export default function SignUpForm() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   {/* <!-- First Name --> */}
                   <div className="sm:col-span-1">
-                    <Label>
+                    <Label htmlFor="fname">
                       First Name<span className="text-error-500">*</span>
                     </Label>
                     <Input
@@ -100,7 +101,7 @@ export default function SignUpForm() {
                   </div>
                   {/* <!-- Last Name --> */}
                   <div className="sm:col-span-1">
-                    <Label>
+                    <Label htmlFor="lname">
                       Last Name<span className="text-error-500">*</span>
                     </Label>
                     <Input
@@ -113,7 +114,7 @@ export default function SignUpForm() {
                 </div>
                 {/* <!-- Email --> */}
                 <div>
-                  <Label>
+                  <Label htmlFor="email">
                     Email<span className="text-error-500">*</span>
                   </Label>
                   <Input
@@ -125,11 +126,12 @@ export default function SignUpForm() {
                 </div>
                 {/* <!-- Password --> */}
                 <div>
-                  <Label>
+                  <Label htmlFor="password">
                     Password<span className="text-error-500">*</span>
                   </Label>
                   <div className="relative">
                     <Input
+                      id="password"
                       placeholder="Enter your password"
                       type={showPassword ? "text" : "password"}
                     />
@@ -150,7 +152,8 @@ export default function SignUpForm() {
                   <Checkbox
                     className="w-5 h-5"
                     checked={isChecked}
-                    onChange={setIsChecked}
+                    onCheckedChange={(v) => setIsChecked(v === true)}
+                    id="terms"
                   />
                   <p className="inline-block font-normal text-gray-500 dark:text-gray-400">
                     By creating an account means you agree to the{" "}
@@ -165,9 +168,9 @@ export default function SignUpForm() {
                 </div>
                 {/* <!-- Button --> */}
                 <div>
-                  <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+                  <Button className="w-full" size="sm">
                     Sign Up
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>

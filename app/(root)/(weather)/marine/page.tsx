@@ -1,20 +1,14 @@
-import { marineBulletin } from '@/lib/weather/marine';
+import { marineBulletin } from "@/lib/weather/marine";
 
 export default function WeatherMarinePage() {
   const m = marineBulletin;
   return (
-    <section
-      aria-labelledby="marine-title"
-      className="mx-auto max-w-5xl space-y-6 p-4"
-    >
+    <section aria-labelledby="marine-title" className="mx-auto max-w-5xl">
       <h1 className="font-semibold text-2xl" id="marine-title">
         Marine Bulletin
       </h1>
 
-      <article
-        aria-label="Synopsis"
-        className="rounded-xl border bg-card p-6 shadow"
-      >
+      <article aria-label="Synopsis" className="rounded-xl shadow">
         <h2 className="font-medium text-lg">Synopsis</h2>
         <p className="mt-1 text-muted-foreground text-sm">
           Issued {m.issued_at} • Status {m.status_color}

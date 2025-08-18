@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import ComponentCard from "../../common/ComponentCard";
-
-import { Modal } from "../../ui/modal";
-import Button from "../../ui/button/Button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/useModal";
 
 export default function DefaultModal() {
@@ -19,34 +18,33 @@ export default function DefaultModal() {
         <Button size="sm" onClick={openModal}>
           Open Modal
         </Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={closeModal}
-          className="max-w-[600px] p-5 lg:p-10"
-        >
-          <h4 className="font-semibold text-gray-800 mb-7 text-title-sm dark:text-white/90">
-            Modal Heading
-          </h4>
-          <p className="text-sm leading-6 text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque euismod est quis mauris lacinia pharetra. Sed a ligula
-            ac odio condimentum aliquet a nec nulla. Aliquam bibendum ex sit
-            amet ipsum rutrum feugiat ultrices enim quam.
-          </p>
-          <p className="mt-5 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque euismod est quis mauris lacinia pharetra. Sed a ligula
-            ac odio.
-          </p>
-          <div className="flex items-center justify-end w-full gap-3 mt-8">
-            <Button size="sm" variant="outline" onClick={closeModal}>
-              Close
-            </Button>
-            <Button size="sm" onClick={handleSave}>
-              Save Changes
-            </Button>
-          </div>
-        </Modal>
+        <Dialog open={isOpen} onOpenChange={(open) => { if (!open) closeModal(); }}>
+          <DialogContent className="max-w-[600px] p-5 lg:p-10">
+            <DialogHeader>
+              <DialogTitle>Modal Heading</DialogTitle>
+              <DialogDescription>
+                Use this dialog to confirm or review changes.
+              </DialogDescription>
+            </DialogHeader>
+            <p className="text-sm leading-6 text-gray-500 dark:text-gray-400">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque euismod est quis mauris lacinia pharetra. Sed a ligula
+              ac odio condimentum aliquet a nec nulla. Aliquam bibendum ex sit
+              amet ipsum rutrum feugiat ultrices enim quam.
+            </p>
+            <p className="mt-5 text-sm leading-6 text-gray-500 dark:text-gray-400">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque euismod est quis mauris lacinia pharetra. Sed a ligula
+              ac odio.
+            </p>
+            <DialogFooter className="mt-8">
+              <DialogClose asChild>
+                <Button size="sm" variant="outline">Close</Button>
+              </DialogClose>
+              <Button size="sm" onClick={handleSave}>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </ComponentCard>
     </div>
   );

@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 
@@ -13,6 +14,7 @@ export default function TAFFormPage() {
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isCancelReport, setIsCancelReport] = useState(false);
+  const [isCavok, setIsCavok] = useState(false);
 
   // Convert a datetime-local value (no timezone) to UTC ISO string with timezone
   const toIso = (v: FormDataEntryValue | null) => {
@@ -50,7 +52,7 @@ export default function TAFFormPage() {
           start: toIso(data.get("baseStart")) || undefined,
           end: toIso(data.get("baseEnd")) || undefined,
         },
-        cloudAndVisibilityOK: data.get("cavok") === "on" ? true : undefined,
+        cloudAndVisibilityOK: isCavok ? true : undefined,
       };
 
       const visValue = data.get("prevVisValue");
@@ -173,7 +175,7 @@ export default function TAFFormPage() {
                     </div>
 
                     <div className="flex items-center gap-3 pt-2">
-                      <Input id="cavok" name="cavok" type="checkbox" className="h-4 w-4" aria-describedby="cavok-help" />
+                      <Checkbox id="cavok" checked={isCavok} onCheckedChange={(v) => setIsCavok(v === true)} aria-describedby="cavok-help" />
                       <Label htmlFor="cavok">CAVOK</Label>
                     </div>
                     <p id="cavok-help" className="text-sm text-muted-foreground">If CAVOK is set, visibility, weather and cloud should be omitted.</p>

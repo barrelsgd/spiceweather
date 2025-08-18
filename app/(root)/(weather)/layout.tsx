@@ -1,20 +1,10 @@
-import { mono, sans } from "@/lib/fonts";
-// import "./weather.css";
-import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
-import { Footer } from "@/components/weather/footer";
-import { Header } from "@/components/weather/header";
-import { JsonLd } from "@/components/json-ld";
-import { Navigation } from "@/components/navigation";
-import { Sidebar } from "@/components/sidebar";
-import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
-import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
 import { WeatherSubnav } from "@/components/weather/subnav";
-import Alert from "@/components/ui/alert/Alert";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { PopcornIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appBaseUrl),
@@ -26,9 +16,20 @@ type RootLayoutProps = {
 
 const WeatherLayout = ({ children }: RootLayoutProps) => (
   <div className="mx-2">
-    <Alert variant="warning" title="Warning" message="This is a warning" />
+    <div className="mx-auto max-w-4xl">
+      <Alert>
+        <PopcornIcon />
+        <AlertTitle>There are no watches or warnings in effect!</AlertTitle>
+      </Alert>
+    </div>
     <WeatherSubnav />
-    {children}
+    <div className="mx-auto max-w-4xl mt-4">
+      <Card>
+        <CardContent className="py-4">
+          {children}
+        </CardContent>
+      </Card>
+    </div>
   </div>
 );
 

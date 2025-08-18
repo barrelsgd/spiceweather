@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../../../../react-fastapi/fast-back"
+		},
+		{
+			"path": "../../../../spicewx-m"
 		}
 	],
 	"settings": {

@@ -1,4 +1,4 @@
-import { wxfcsts } from '@/lib/weather/wxfcsts';
+import { wxfcsts } from "@/lib/weather/wxfcsts";
 
 export default function WeatherOutlookPage() {
   const outlook = wxfcsts.evening.outlook;
@@ -17,7 +17,7 @@ export default function WeatherOutlookPage() {
         {entries.map(([key, d]) => (
           <article
             aria-labelledby={`day-${key}`}
-            className="rounded-xl border bg-card p-6 shadow"
+            className="rounded-xl shadow"
             key={key}
           >
             <h2 className="font-medium text-lg capitalize" id={`day-${key}`}>
@@ -30,19 +30,19 @@ export default function WeatherOutlookPage() {
               <div>
                 <dt className="text-muted-foreground text-sm">Temperature</dt>
                 <dd className="font-medium">
-                  {typeof d.temperature?.min_c === 'number'
+                  {typeof d.temperature?.min_c === "number"
                     ? `${d.temperature.min_c}°C`
-                    : '--'}{' '}
-                  /{' '}
-                  {typeof d.temperature?.max_c === 'number'
+                    : "--"}{" "}
+                  /{" "}
+                  {typeof d.temperature?.max_c === "number"
                     ? `${d.temperature.max_c}°C`
-                    : '--'}
+                    : "--"}
                 </dd>
               </div>
               <div>
                 <dt className="text-muted-foreground text-sm">Marine</dt>
                 <dd className="font-medium">
-                  {d.marine?.wind ?? '-'}; {d.marine?.seas ?? '-'}
+                  {d.marine?.wind ?? "-"}; {d.marine?.seas ?? "-"}
                 </dd>
               </div>
             </dl>

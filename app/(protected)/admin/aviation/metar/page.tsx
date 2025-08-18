@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -154,12 +155,11 @@ export default function MetarSpeciFormPage() {
             <fieldset className="grid gap-4 border p-4 rounded-md">
               <legend className="px-1 text-sm font-medium">Observation</legend>
               <div className="flex items-center gap-3">
-                <Input
+                <Checkbox
                   id="cloudAndVisibilityOK"
                   name="cloudAndVisibilityOK"
-                  type="checkbox"
-                  className="h-4 w-4"
-                  onChange={(e) => setIsCavok(e.currentTarget.checked)}
+                  checked={isCavok}
+                  onCheckedChange={(v) => setIsCavok(v === true)}
                   aria-describedby="cavok-help"
                 />
                 <Label htmlFor="cloudAndVisibilityOK">CAVOK</Label>

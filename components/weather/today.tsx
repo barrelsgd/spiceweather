@@ -48,10 +48,7 @@ type MorningView = {
 
 export const ForecastTemplate = ({ f }: { f: MorningView }) => (
   <main className="font-sans antialiased">
-    <section
-      aria-labelledby="forecast-title"
-      className="mx-auto max-w-5xl space-y-6 p-4"
-    >
+    <section aria-labelledby="forecast-title" className="mx-auto max-w-5xl">
       <ForecastCard f={f} />
 
       {/* <LikelihoodImpactResponse f={f} /> */}
@@ -115,10 +112,7 @@ const Warnings = ({ f }: WarningsProps) => {
 type ForecastCardProps = { f: MorningView };
 const ForecastCard = ({ f }: ForecastCardProps) => {
   return (
-    <article
-      aria-labelledby="headline-summary"
-      className="rounded-xl border bg-card p-6 shadow"
-    >
+    <article aria-labelledby="headline-summary" className="rounded-xl">
       {/* Headline summary */}
       <div className="mb-6 flex items-start gap-4 text-foreground">
         <div aria-hidden>
