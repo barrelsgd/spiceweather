@@ -8,14 +8,8 @@ import RosterForm from "@/components/hrd/Roster";
 
 export default function FormsDemoPage() {
   return (
-    <main className="container mx-auto grid gap-8 py-8">
-      <DailyAirportStatusReportForm />
-      <LeaveOfAbsenceForm />
+    <div className="grid gap-8">
       <AbsenteeReportForm />
-      <ShiftExchangeForm />
-      <ParkingAccessApplicationForm />
-      <TimeSheetForm />
-      <RosterForm />
-    </main>
+    </div>
   );
 }

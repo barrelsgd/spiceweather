@@ -28,35 +28,69 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    icon: <LayoutGrid />,
-    name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
-  },
-  {
     icon: <Calendar />,
     name: "Calendar",
     path: "/admin/calendar",
   },
   {
-    icon: <UserCircle />,
-    name: "User Profile",
-    path: "/admin/profile",
+    icon: <Calendar />,
+    name: "Roster",
+    path: "/admin/hrd/roster",
   },
-
   {
     name: "Forms",
     icon: <List />,
     subItems: [
-      { name: "Form Elements", path: "/admin/form-elements", pro: false },
+      {
+        name: "Daily Status Report",
+        path: "/admin/hrd/dailystatus",
+        pro: false,
+      },
+      {
+        name: "Leaves",
+        path: "/admin/hrd/leaves",
+        pro: false,
+      },
+      {
+        name: "Absentee Report",
+        path: "/admin/hrd/abscent",
+        pro: false,
+      },
+      {
+        name: "Shift Exchange Requistion",
+        path: "/admin/hrd/exchanges",
+        pro: false,
+      },
+      {
+        name: "Parking Access Application",
+        path: "/admin/hrd/parking",
+        pro: false,
+      },
+      {
+        name: "Time Sheet",
+        path: "/admin/hrd/timesheet",
+        pro: false,
+      },
     ],
   },
-  {
-    name: "Tables",
-    icon: <Table />,
-    subItems: [
-      { name: "Basic Tables", path: "/admin/basic-tables", pro: false },
-    ],
-  },
+
+  // {
+  //   icon: <LayoutGrid />,
+  //   name: "Dashboard",
+  //   subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
+  // },
+  // {
+  //   icon: <UserCircle />,
+  //   name: "User Profile",
+  //   path: "/admin/profile",
+  // },
+  // {
+  //   name: "Tables",
+  //   icon: <Table />,
+  //   subItems: [
+  //     { name: "Basic Tables", path: "/admin/basic-tables", pro: false },
+  //   ],
+  // },
   // {
   //   name: "Pages",
   //   icon: <FileText />,
@@ -69,31 +103,56 @@ const navItems: NavItem[] = [
 
 const othersItems: NavItem[] = [
   {
-    icon: <PieChart />,
-    name: "Charts",
+    name: "Alerts",
+    icon: <FileText />,
     subItems: [
-      { name: "Line Chart", path: "/admin/line-chart", pro: false },
-      { name: "Bar Chart", path: "/admin/bar-chart", pro: false },
+      { name: "Impact-Based Forecast", path: "/error-404", pro: false },
+      { name: "Common Alerting Protocol", path: "/error-404", pro: false },
+      { name: "Tsunami", path: "/error-404", pro: false },
+      { name: "Heat Index", path: "/error-404", pro: false },
+      { name: "Tropical Cyclones", path: "/error-404", pro: false },
+      { name: "Volcanic Advisory", path: "/error-404", pro: false },
+      { name: "Dust", path: "/error-404", pro: false },
     ],
   },
   {
-    icon: <Box />,
-    name: "UI Elements",
+    name: "Weather & Marine",
+    icon: <FileText />,
     subItems: [
-      { name: "Alerts", path: "/admin/alerts", pro: false },
-      { name: "Avatar", path: "/admin/avatars", pro: false },
-      { name: "Badge", path: "/admin/badge", pro: false },
-      { name: "Buttons", path: "/admin/buttons", pro: false },
-      { name: "Images", path: "/admin/images", pro: false },
-      { name: "Videos", path: "/admin/videos", pro: false },
+      { name: "Hourly", path: "/blank", pro: false },
+      { name: "Morning Forecast", path: "/blank", pro: false },
+      { name: "Midday Forecast", path: "/error-404", pro: false },
+      { name: "Evening Forecast", path: "/error-404", pro: false },
+      { name: "Marine Bulletin", path: "/error-404", pro: false },
+      { name: "Tropical Weather Outlook", path: "/error-404", pro: false },
     ],
   },
   {
-    icon: <Plug />,
-    name: "Authentication",
+    name: "Aviation",
+    icon: <FileText />,
     subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
+      { name: "METAR/SPECI", path: "/blank", pro: false },
+      { name: "TAF", path: "/error-404", pro: false },
+      { name: "Pilot Briefings", path: "/error-404", pro: false },
+      { name: "Air Traffic Services", path: "/error-404", pro: false },
+    ],
+  },
+  {
+    name: "Products",
+    icon: <FileText />,
+    subItems: [
+      { name: "Satellite/GeoNetCast", path: "/blank", pro: false },
+      { name: "Instruments", path: "/blank", pro: false },
+      { name: "Numerical Weather Prediction", path: "/error-404", pro: false },
+    ],
+  },
+  {
+    name: "Climatology",
+    icon: <FileText />,
+    subItems: [
+      { name: "Monthly Climo Bulletin", path: "/blank", pro: false },
+      { name: "AgroBulletin", path: "/blank", pro: false },
+      { name: "Statistics", path: "/error-404", pro: false },
     ],
   },
 ];
@@ -352,7 +411,7 @@ const AppSidebar: React.FC = () => {
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Menu"
+                  "Internal"
                 ) : (
                   <Ellipsis />
                 )}
@@ -368,13 +427,13 @@ const AppSidebar: React.FC = () => {
                     : "justify-start"
                 }`}
               >
-                {/* {isExpanded || isHovered || isMobileOpen ? (
-                  "Others"
+                {isExpanded || isHovered || isMobileOpen ? (
+                  "SpiceWeather"
                 ) : (
                   <Ellipsis />
-                )} */}
+                )}
               </h2>
-              {/* {renderMenuItems(othersItems, "others")} */}
+              {renderMenuItems(othersItems, "others")}
             </div>
           </div>
         </nav>

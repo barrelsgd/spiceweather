@@ -18,7 +18,7 @@ export default function FormShell({
   actions,
 }: FormShellProps) {
   return (
-    <div className="mx-auto w-full max-w-3xl rounded-2xl border p-6 shadow-sm">
+    <div className="mx-auto w-full rounded-2xl border p-6 shadow-sm">
       <header className="mb-6 space-y-1">
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
         {description ? (

@@ -59,7 +59,7 @@ export const Header = () => {
       <div className=" sticky top-0 z-50 mx-auto flex h-16 max-w-7xl items-center justify-between bg-background p-4 mt-4">
         <Link className="flex items-center gap-4" href="/">
           <Image
-            alt=""
+            alt="SpiceWeather logo"
             className="size-12 rounded-full"
             height={229}
             placeholder="blur"

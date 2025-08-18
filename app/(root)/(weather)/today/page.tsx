@@ -7,7 +7,6 @@ export const metadata = {
 export default function WeatherTodayPage() {
   return (
     <>
-      <div>Testing2</div>
       <TodayWeather />
     </>
   );

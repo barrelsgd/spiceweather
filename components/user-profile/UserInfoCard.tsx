@@ -5,14 +5,22 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import type { UserPublic } from "@/lib/api/types.gen";
 
-export default function UserInfoCard() {
+type Props = {
+  user?: UserPublic;
+};
+
+export default function UserInfoCard({ user }: Props) {
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
     closeModal();
   };
+  const fullName = user?.full_name || "";
+  const [firstName, ...rest] = fullName.split(" ");
+  const lastName = rest.join(" ");
   return (
     <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -27,7 +35,7 @@ export default function UserInfoCard() {
                 First Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Musharof
+                {firstName || "—"}
               </p>
             </div>
 
@@ -36,7 +44,7 @@ export default function UserInfoCard() {
                 Last Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Chowdhury
+                {lastName || "—"}
               </p>
             </div>
 
@@ -45,7 +53,7 @@ export default function UserInfoCard() {
                 Email address
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                randomuser@pimjo.com
+                {user?.email || "—"}
               </p>
             </div>
 
@@ -54,7 +62,7 @@ export default function UserInfoCard() {
                 Phone
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                +09 363 398 46
+                —
               </p>
             </div>
 
@@ -63,13 +71,15 @@ export default function UserInfoCard() {
                 Bio
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Team Manager
+                —
               </p>
             </div>
           </div>
         </div>
 
         <button
+          type="button"
+          aria-label="Edit personal information"
           onClick={openModal}
           className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
         >
@@ -81,6 +91,7 @@ export default function UserInfoCard() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
+            <title>Edit icon</title>
             <path
               fillRule="evenodd"
               clipRule="evenodd"

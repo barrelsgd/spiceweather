@@ -13,6 +13,8 @@ import { Sidebar } from "@/components/sidebar";
 import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
+import { WeatherSubnav } from "@/components/weather/subnav";
+import Alert from "@/components/ui/alert/Alert";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appBaseUrl),
@@ -23,8 +25,9 @@ type RootLayoutProps = {
 };
 
 const WeatherLayout = ({ children }: RootLayoutProps) => (
-  <div>
-    <div>Testing</div>
+  <div className="mx-2">
+    <Alert variant="warning" title="Warning" message="This is a warning" />
+    <WeatherSubnav />
     {children}
   </div>
 );
