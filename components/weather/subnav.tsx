@@ -27,21 +27,23 @@ export function WeatherSubnav() {
 
   return (
     <nav aria-label="Weather sections" className="w-full mt-4">
-      <div className="mx-auto w-full max-w-4xl">
-        <Tabs value={active} className="w-full">
-          <TabsList className="w-full">
-            {items.map((item) => (
-              <TabsTrigger key={item.value} value={item.value} asChild>
-                <Link
-                  href={item.href}
-                  aria-current={active === item.value ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+      <div className="mx-4">
+        <div className="mx-auto w-full max-w-4xl">
+          <Tabs value={active} className="w-full">
+            <TabsList className="w-full">
+              {items.map((item) => (
+                <TabsTrigger key={item.value} value={item.value} asChild>
+                  <Link
+                    href={item.href}
+                    aria-current={active === item.value ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
       </div>
     </nav>
   );

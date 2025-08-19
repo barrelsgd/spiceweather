@@ -15,20 +15,22 @@ type RootLayoutProps = {
 };
 
 const WeatherLayout = ({ children }: RootLayoutProps) => (
-  <div className="mx-2">
-    <div className="mx-auto max-w-4xl">
-      <Alert>
-        <PopcornIcon />
-        <AlertTitle>There are no watches or warnings in effect!</AlertTitle>
-      </Alert>
+  <div>
+    <div className="mx-4">
+      <div className="mx-auto max-w-4xl">
+        <Alert>
+          <PopcornIcon />
+          <AlertTitle>There are no watches or warnings in effect!</AlertTitle>
+        </Alert>
+      </div>
     </div>
     <WeatherSubnav />
-    <div className="mx-auto max-w-4xl mt-4">
-      <Card>
-        <CardContent className="py-4">
-          {children}
-        </CardContent>
-      </Card>
+    <div className="mx-4 mt-4">
+      <div className="mx-auto max-w-4xl">
+        <Card>
+          <CardContent className="py-4">{children}</CardContent>
+        </Card>
+      </div>
     </div>
   </div>
 );
