@@ -100,7 +100,7 @@ export default function BufrFormPage() {
   }
 
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-6">
+    <main className="container  px-4 py-6">
       <h1 className="text-2xl font-semibold mb-4">
         SYNOP (BUFR 3 07 080) Submission
       </h1>
