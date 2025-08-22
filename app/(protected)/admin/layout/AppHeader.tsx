@@ -170,6 +170,12 @@ const AppHeader: React.FC = () => {
             className="hidden lg:flex items-center gap-4 ml-4"
           >
             <Link
+              href="/admin/alerts"
+              className="text-sm text-foreground/80 hover:text-foreground"
+            >
+              Alerts
+            </Link>
+            <Link
               href="/admin/calendar"
               className="text-sm text-foreground/80 hover:text-foreground"
             >
@@ -199,6 +205,12 @@ const AppHeader: React.FC = () => {
             aria-label="Quick tools"
             className="flex lg:hidden items-center gap-4"
           >
+            <Link
+              href="/admin/alerts"
+              className="text-sm text-foreground/80 hover:text-foreground"
+            >
+              Alerts
+            </Link>
             <Link
               href="/admin/calendar"
               className="text-sm text-foreground/80 hover:text-foreground"

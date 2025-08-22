@@ -4,7 +4,23 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
-import { Calendar, ChevronDown, Ellipsis, List, FileText } from "lucide-react";
+import {
+  ChevronDown,
+  PieChart,
+  Plug,
+  Plane,
+  CloudSun,
+  Database,
+  Map,
+  Megaphone,
+  BookOpen,
+  AlertTriangle,
+  Wrench,
+  Calendar as CalendarIcon,
+  Users,
+  LifeBuoy,
+  ClipboardList,
+} from "lucide-react";
 
 type NavItem = {
   name: string;
@@ -13,187 +29,395 @@ type NavItem = {
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
-const navItems: NavItem[] = [
-  // Quick access also available in header, but included here for completeness
-  { icon: <Calendar />, name: "Calendar", path: "/admin/calendar" },
-  { icon: <Calendar />, name: "Roster", path: "/admin/hrd/roster" },
-  { icon: <FileText />, name: "Tickets", path: "/admin/tickets" },
+// Narrow menu type to match each top-level group constant
+type MenuType =
+  | "main"
+  | "aviation"
+  | "publicWeather"
+  | "sectoralProducts"
+  | "dataObservationsClimatology"
+  | "modeling"
+  | "visualizationGis"
+  | "assetsInstrumentation"
+  | "communicationDissemination"
+  | "knowledgeDocumentation"
+  | "resources";
+
+const adminNavItems: NavItem[] = [
   {
-    name: "Administration",
-    icon: <FileText />,
+    icon: <CalendarIcon />,
+    name: "Calendar",
+    path: "/admin/calendar",
+  },
+  {
+    icon: <Users />,
+    name: "Roster",
+    path: "/admin/hrd/roster",
+  },
+  {
+    icon: <LifeBuoy />,
+    name: "Support Desk",
+    path: "/admin/support",
+  },
+  {
+    name: "HR Forms",
+    icon: <ClipboardList />,
     subItems: [
-      { name: "Users & Roles", path: "/error-404" },
-      { name: "Permissions", path: "/error-404" },
-      { name: "Settings", path: "/error-404" },
+      {
+        name: "Daily Status Report",
+        path: "/admin/hrd/dailystatus",
+        pro: false,
+      },
+      { name: "Leave Form", path: "/admin/hrd/leaves", pro: false },
+      { name: "Absentee Report", path: "/admin/hrd/abscent", pro: false },
+      { name: "Shift Exchange", path: "/admin/hrd/exchanges", pro: false },
+      { name: "Parking Access", path: "/admin/hrd/parking", pro: false },
+      { name: "Time Sheet", path: "/admin/hrd/timesheet", pro: false },
     ],
   },
+];
+
+const ResourceItems: NavItem[] = [
   {
-    name: "Forms",
-    icon: <List />,
+    name: "Alerts",
+    icon: <AlertTriangle />,
     subItems: [
-      { name: "Daily Status Report", path: "/admin/hrd/dailystatus" },
-      { name: "Leave Form", path: "/admin/hrd/leaves" },
-      { name: "Absentee Report", path: "/admin/hrd/abscent" },
-      { name: "Shift Exchange", path: "/admin/hrd/exchanges" },
-      { name: "Parking Access", path: "/admin/hrd/parking" },
-      { name: "Time Sheet", path: "/admin/hrd/timesheet" },
+      {
+        name: "Common Alerting Protocol",
+        path: "/admin/alerts/cap",
+        pro: false,
+      },
+      {
+        name: "Impact-Based Forecasts",
+        path: "/admin/alerts/ibf",
+        pro: false,
+      },
+      {
+        name: "Warnings & Advisories",
+        path: "/admin/alerts/warnings",
+        pro: false,
+      },
+      {
+        name: "Tropical Cyclone Advisories",
+        path: "/admin/alerts/tc",
+        pro: false,
+      },
+      {
+        name: "Tsunami Warnings",
+        path: "/admin/alerts/tsunami",
+        pro: false,
+      },
+      {
+        name: "Volcano Alerts",
+        path: "/admin/alerts/volcano",
+        pro: false,
+      },
+      {
+        name: "Warning & Impact Maps",
+        path: "/admin/alerts/impact-maps",
+        pro: false,
+      },
     ],
   },
+];
+
+const publicWeatherNavItems: NavItem[] = [
   {
-    name: "Alerts & Early Warning",
-    icon: <FileText />,
+    name: "Public Weather",
+    icon: <CloudSun />,
     subItems: [
-      { name: "Common Alerting Protocol (CAP)", path: "/error-404" },
-      { name: "Impact-Based Forecasts", path: "/error-404" },
-      { name: "Warnings & Advisories", path: "/error-404" },
-      { name: "Tropical Cyclone Advisories", path: "/error-404" },
-      { name: "Warning & Impact Map", path: "/error-404" },
+      {
+        name: "Morning Forecast",
+        path: "/admin/public-weather/morning",
+        pro: false,
+      },
+      {
+        name: "Midday Forecast",
+        path: "/admin/public-weather/midday",
+        pro: false,
+      },
+      {
+        name: "Evening Forecast",
+        path: "/admin/public-weather/evening",
+        pro: false,
+      },
+      {
+        name: "Marine Bulletin",
+        path: "/admin/public-weather/marine-bulletin",
+        pro: false,
+      },
+      {
+        name: "Tropical Weather Outlook",
+        path: "/admin/public-weather/two",
+        pro: false,
+      },
+      {
+        name: "Verification & Model Monitoring",
+        path: "/admin/public-weather/verification",
+        pro: false,
+      },
     ],
   },
+];
+
+const aviationMeteorologyNavItems: NavItem[] = [
   {
-    name: "Aviation Services",
-    icon: <FileText />,
+    name: "Aviation",
+    icon: <Plane />,
     subItems: [
-      { name: "ATS/MET Transmission", path: "/error-404" },
-      { name: "METAR/SPECI", path: "/blank" },
-      { name: "TAF", path: "/error-404" },
-      { name: "TAF Verification", path: "/error-404" },
-      { name: "Wind Shear", path: "/error-404" },
-      { name: "Pilot Briefings", path: "/error-404" },
-      { name: "Flight Folder", path: "/error-404" },
-      { name: "SIGMET", path: "/error-404" },
-      { name: "Aviation Map", path: "/error-404" },
+      { name: "METAR/SPECI", path: "/admin/aviation/metar", pro: false },
+      { name: "TAF", path: "/admin/aviation/taf", pro: false },
+      {
+        name: "TAF Verification",
+        path: "/admin/aviation/taf-verification",
+        pro: false,
+      },
+      { name: "SIGMET", path: "/admin/aviation/sigmet", pro: false },
+      {
+        name: "Wind Shear",
+        path: "/admin/aviation/wind-shear",
+        pro: false,
+      },
+      {
+        name: "Pilot Briefings",
+        path: "/admin/aviation/pilot-briefings",
+        pro: false,
+      },
+      {
+        name: "ATS/MET Transmission",
+        path: "/admin/aviation/ats-met-transmission",
+        pro: false,
+      },
+      { name: "Aviation Maps", path: "/admin/aviation/maps", pro: false },
     ],
   },
+];
+
+const sectoralProductsNavItems: NavItem[] = [
   {
-    name: "Public Weather Services",
-    icon: <FileText />,
+    name: "Sectoral Products",
+    icon: <PieChart />,
     subItems: [
-      { name: "Forecasts", path: "/error-404" },
-      { name: "Morning Forecast", path: "/blank" },
-      { name: "Midday Forecast", path: "/error-404" },
-      { name: "Evening Forecast", path: "/error-404" },
-      { name: "Marine Bulletin", path: "/error-404" },
-      { name: "Tropical Weather Outlook", path: "/error-404" },
-      { name: "Forecast Verification", path: "/error-404" },
+      {
+        name: "Health Index",
+        path: "/admin/sectoral/health-index",
+        pro: false,
+      },
+      {
+        name: "AgroBulletin",
+        path: "/admin/sectoral/agro-bulletin",
+        pro: false,
+      },
+      {
+        name: "Hydrology (NAWASA)",
+        path: "/admin/sectoral/hydrology",
+        pro: false,
+      },
+      {
+        name: "Air Quality Index",
+        path: "/admin/sectoral/aqi",
+        pro: false,
+      },
+      {
+        name: "Disaster Risk Reduction Reports",
+        path: "/admin/sectoral/drr-reports",
+        pro: false,
+      },
+      {
+        name: "Media Briefings",
+        path: "/admin/sectoral/media-briefings",
+        pro: false,
+      },
     ],
   },
-  {
-    name: "Sector Products",
-    icon: <FileText />,
-    subItems: [
-      { name: "Health Index", path: "/error-404" },
-      { name: "AgroBulletin", path: "/blank" },
-      { name: "Air Quality Index", path: "/error-404" },
-    ],
-  },
-  {
-    name: "Hydrology",
-    icon: <FileText />,
-    subItems: [{ name: "Streamflow", path: "/error-404" }],
-  },
-  {
-    name: "Disaster Risk Reduction",
-    icon: <FileText />,
-    subItems: [{ name: "DRR Dashboard", path: "/error-404" }],
-  },
-  {
-    name: "Health",
-    icon: <FileText />,
-    subItems: [{ name: "Health Products", path: "/error-404" }],
-  },
-  {
-    name: "Air Quality",
-    icon: <FileText />,
-    subItems: [{ name: "AQ Monitoring", path: "/error-404" }],
-  },
-  {
-    name: "Media",
-    icon: <FileText />,
-    subItems: [{ name: "Press & Media", path: "/error-404" }],
-  },
+];
+
+const dataObservationsClimatologyNavItems: NavItem[] = [
   {
     name: "Data & Climatology",
-    icon: <FileText />,
+    icon: <Database />,
     subItems: [
-      { name: "Geonetcast / Satellite Ingestion", path: "/blank" },
-      { name: "Central Meteorological Database", path: "/error-404" },
-      { name: "Local Server & Storage", path: "/error-404" },
-      { name: "BUFR eRegister", path: "/error-404" },
-      { name: "Monthly Climate Bulletin", path: "/blank" },
+      {
+        name: "Geonetcast / Satellite Data",
+        path: "/admin/data/geonetcast",
+        pro: false,
+      },
+      {
+        name: "Central Meteorological Database",
+        path: "/admin/data/cmd",
+        pro: false,
+      },
+      {
+        name: "BUFR & WMO Codes (eRegister)",
+        path: "/admin/data/wmo-bufr",
+        pro: false,
+      },
+      {
+        name: "Monthly Climate Bulletin",
+        path: "/admin/data/monthly-bulletin",
+        pro: false,
+      },
+      {
+        name: "Local Archives & Storage",
+        path: "/admin/data/archives",
+        pro: false,
+      },
     ],
   },
+];
+
+const modelingNavItems: NavItem[] = [
   {
-    name: "Modeling & HPC",
-    icon: <FileText />,
+    name: "Modeling",
+    icon: <Plug />,
     subItems: [
-      { name: "NWP/Ensemble Integration & Monitoring", path: "/error-404" },
+      {
+        name: "NWP & Ensemble Integration",
+        path: "/admin/modeling/nwp-ensemble",
+        pro: false,
+      },
+      {
+        name: "Radar-Based Nowcasting",
+        path: "/admin/modeling/nowcasting",
+        pro: false,
+      },
+      {
+        name: "Lightning/Thunderstorm Prediction",
+        path: "/admin/modeling/lightning",
+        pro: false,
+      },
+      {
+        name: "Seasonal Outlooks & Drought Modeling",
+        path: "/admin/modeling/seasonal",
+        pro: false,
+      },
+      {
+        name: "Severe Event Detection (Flood, Heatwave, etc.)",
+        path: "/admin/modeling/severe-events",
+        pro: false,
+      },
     ],
   },
-  {
-    name: "Assets & Instruments",
-    icon: <FileText />,
-    subItems: [
-      { name: "Digital Inventory", path: "/error-404" },
-      { name: "Instrument GUI Toolkit", path: "/error-404" },
-    ],
-  },
-  {
-    name: "Communication & Dissemination",
-    icon: <FileText />,
-    subItems: [
-      { name: "NaDMA Data-Sharing Interface", path: "/error-404" },
-      { name: "Website (SpiceWeather)", path: "/error-404" },
-      { name: "Social Media Portal", path: "/error-404" },
-      { name: "Mobile Application", path: "/error-404" },
-    ],
-  },
+];
+
+const visualizationGisNavItems: NavItem[] = [
   {
     name: "Visualization & GIS",
-    icon: <FileText />,
+    icon: <Map />,
     subItems: [
-      { name: "GIS & QGIS", path: "/error-404" },
-      { name: "Weather Element Map", path: "/error-404" },
-      { name: "Warning & Impact Map", path: "/error-404" },
-      { name: "Aviation Map", path: "/error-404" },
+      {
+        name: "GIS & QGIS Tools",
+        path: "/admin/visualisation/qgis",
+        pro: false,
+      },
+      {
+        name: "Weather Element Maps",
+        path: "/admin/visualisation/weather-maps",
+        pro: false,
+      },
+      {
+        name: "Aviation Maps",
+        path: "/admin/visualisation/aviation-maps",
+        pro: false,
+      },
+      {
+        name: "Warning & Impact Maps",
+        path: "/admin/visualisation/warning-maps",
+        pro: false,
+      },
     ],
   },
+];
+
+const assetsInstrumentationNavItems: NavItem[] = [
   {
-    name: "Machine Learning & Innovation",
-    icon: <FileText />,
+    name: "Instrumentation",
+    icon: <Wrench />,
     subItems: [
-      { name: "Radar-Based Nowcasting", path: "/error-404" },
-      { name: "Lightning/Thunderstorm Prediction", path: "/error-404" },
-      { name: "Severe Event Anomaly Detection", path: "/error-404" },
-      { name: "Seasonal Outlooks & Drought Risk Modeling", path: "/error-404" },
-      { name: "Flood-Risk Prediction", path: "/error-404" },
-      { name: "Heatwave Health-Risk Modeling", path: "/error-404" },
+      {
+        name: "Automatic Weather Stations",
+        path: "/admin/instruments/aws",
+        pro: false,
+      },
+      {
+        name: "Digital Instrument Inventory",
+        path: "/admin/instruments/inventory",
+        pro: false,
+      },
     ],
   },
+];
+
+const communicationDisseminationNavItems: NavItem[] = [
   {
-    name: "Knowledge & Documentation",
-    icon: <FileText />,
+    name: "Media",
+    icon: <Megaphone />,
     subItems: [
-      { name: "Wiki", path: "/error-404" },
-      { name: "Docs", path: "/error-404" },
-      { name: "Documentation System", path: "/error-404" },
+      { name: "Website (SpiceWeather)", path: "/", pro: false },
+      {
+        name: "Mobile Application",
+        path: "/admin/media/mobile",
+        pro: false,
+      },
+      {
+        name: "Social Media Portal",
+        path: "/admin/media/social",
+        pro: false,
+      },
+      {
+        name: "NaDMA Data Sharing Interface",
+        path: "/admin/media/nadma",
+        pro: false,
+      },
     ],
   },
+];
+
+const knowledgeDocumentationNavItems: NavItem[] = [
+  {
+    name: "Resources",
+    icon: <BookOpen />,
+    subItems: [
+      { name: "Wiki", path: "/admin/resources/wiki", pro: false },
+      {
+        name: "Technical Documentation",
+        path: "/admin/resources/docs",
+        pro: false,
+      },
+      {
+        name: "Training Material",
+        path: "/admin/resources/training",
+        pro: false,
+      },
+    ],
+  },
+];
+
+const othersNavItems: NavItem[] = [
+  ...aviationMeteorologyNavItems,
+  ...publicWeatherNavItems,
+  ...sectoralProductsNavItems,
+  ...dataObservationsClimatologyNavItems,
+  ...modelingNavItems,
+  ...visualizationGisNavItems,
+  ...assetsInstrumentationNavItems,
+  ...communicationDisseminationNavItems,
+  ...knowledgeDocumentationNavItems,
 ];
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
 
-  const renderMenuItems = (items: NavItem[]) => (
+  const renderMenuItems = (adminNavItems: NavItem[], menuType: MenuType) => (
     <ul className="flex flex-col gap-4">
-      {items.map((nav, index) => (
+      {adminNavItems.map((nav, index) => (
         <li key={nav.name}>
           {nav.subItems ? (
             <button
-              onClick={() => handleSubmenuToggle(index)}
+              onClick={() => handleSubmenuToggle(index, menuType)}
               className={`menu-item group  ${
-                openSubmenu === index
+                openSubmenu?.type === menuType && openSubmenu?.index === index
                   ? "menu-item-active"
                   : "menu-item-inactive"
               } cursor-pointer ${
@@ -202,12 +426,10 @@ const AppSidebar: React.FC = () => {
                   : "lg:justify-start"
               }`}
               type="button"
-              aria-expanded={openSubmenu === index}
-              aria-controls={`submenu-${index}`}
             >
               <span
-                className={`${
-                  openSubmenu === index
+                className={` ${
+                  openSubmenu?.type === menuType && openSubmenu?.index === index
                     ? "menu-item-icon-active"
                     : "menu-item-icon-inactive"
                 }`}
@@ -220,7 +442,10 @@ const AppSidebar: React.FC = () => {
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDown
                   className={`ml-auto w-5 h-5 transition-transform duration-200  ${
-                    openSubmenu === index ? "rotate-180 text-brand-500" : ""
+                    openSubmenu?.type === menuType &&
+                    openSubmenu?.index === index
+                      ? "rotate-180 text-brand-500"
+                      : ""
                   }`}
                 />
               )}
@@ -250,15 +475,14 @@ const AppSidebar: React.FC = () => {
           )}
           {nav.subItems && (isExpanded || isHovered || isMobileOpen) && (
             <div
-              id={`submenu-${index}`}
               ref={(el) => {
-                subMenuRefs.current[`${index}`] = el;
+                subMenuRefs.current[`${menuType}-${index}`] = el;
               }}
               className="overflow-hidden transition-all duration-300"
               style={{
                 height:
-                  openSubmenu === index
-                    ? `${subMenuHeight[`${index}`]}px`
+                  openSubmenu?.type === menuType && openSubmenu?.index === index
+                    ? `${subMenuHeight[`${menuType}-${index}`]}px`
                     : "0px",
               }}
             >
@@ -309,32 +533,63 @@ const AppSidebar: React.FC = () => {
     </ul>
   );
 
-  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
+  const [openSubmenu, setOpenSubmenu] = useState<{
+    type: MenuType;
+    index: number;
+  } | null>(null);
   const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
     {}
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
+  // const isActive = (path: string) => path === pathname;
   const isActive = useCallback((path: string) => path === pathname, [pathname]);
 
   useEffect(() => {
-    // Auto-open submenu if a subItem matches current path
-    let matchedIndex: number | null = null;
-    navItems.forEach((nav, index) => {
-      if (nav.subItems) {
-        nav.subItems.forEach((subItem) => {
-          if (isActive(subItem.path)) {
-            matchedIndex = index;
-          }
-        });
-      }
+    // Check if the current path matches any submenu item
+    let submenuMatched = false;
+    const groups: { type: MenuType; items: NavItem[] }[] = [
+      { type: "main", items: adminNavItems },
+      { type: "resources", items: ResourceItems },
+      { type: "aviation", items: aviationMeteorologyNavItems },
+      { type: "publicWeather", items: publicWeatherNavItems },
+      { type: "sectoralProducts", items: sectoralProductsNavItems },
+      {
+        type: "dataObservationsClimatology",
+        items: dataObservationsClimatologyNavItems,
+      },
+      { type: "modeling", items: modelingNavItems },
+      { type: "visualizationGis", items: visualizationGisNavItems },
+      { type: "assetsInstrumentation", items: assetsInstrumentationNavItems },
+      {
+        type: "communicationDissemination",
+        items: communicationDisseminationNavItems,
+      },
+      { type: "knowledgeDocumentation", items: knowledgeDocumentationNavItems },
+    ];
+    groups.forEach(({ type, items }) => {
+      items.forEach((nav, index) => {
+        if (nav.subItems) {
+          nav.subItems.forEach((subItem) => {
+            if (isActive(subItem.path)) {
+              setOpenSubmenu({ type, index });
+              submenuMatched = true;
+            }
+          });
+        }
+      });
     });
-    setOpenSubmenu(matchedIndex);
+
+    // If no submenu item matches, close the open submenu
+    if (!submenuMatched) {
+      setOpenSubmenu(null);
+    }
   }, [pathname, isActive]);
 
   useEffect(() => {
+    // Set the height of the submenu items when the submenu is opened
     if (openSubmenu !== null) {
-      const key = `${openSubmenu}`;
+      const key = `${openSubmenu.type}-${openSubmenu.index}`;
       if (subMenuRefs.current[key]) {
         setSubMenuHeight((prevHeights) => ({
           ...prevHeights,
@@ -344,8 +599,17 @@ const AppSidebar: React.FC = () => {
     }
   }, [openSubmenu]);
 
-  const handleSubmenuToggle = (index: number) => {
-    setOpenSubmenu((prev) => (prev === index ? null : index));
+  const handleSubmenuToggle = (index: number, menuType: MenuType) => {
+    setOpenSubmenu((prevOpenSubmenu) => {
+      if (
+        prevOpenSubmenu &&
+        prevOpenSubmenu.type === menuType &&
+        prevOpenSubmenu.index === index
+      ) {
+        return null;
+      }
+      return { type: menuType, index };
+    });
   };
 
   return (
@@ -398,22 +662,68 @@ const AppSidebar: React.FC = () => {
       </div>
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
-          <div className="flex flex-col gap-4">
-            <div>
-              <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-muted-foreground ${
-                  !isExpanded && !isHovered
-                    ? "lg:justify-center"
-                    : "justify-start"
-                }`}
-              >
-                {isExpanded || isHovered || isMobileOpen ? (
-                  "Modules"
-                ) : (
-                  <Ellipsis />
-                )}
-              </h2>
-              {renderMenuItems(navItems)}
+          <div className="flex flex-col">
+            <div>{renderMenuItems(adminNavItems, "main")}</div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+            <div className="">
+              {renderMenuItems(ResourceItems, "resources")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(aviationMeteorologyNavItems, "aviation")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(publicWeatherNavItems, "publicWeather")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(sectoralProductsNavItems, "sectoralProducts")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(
+                dataObservationsClimatologyNavItems,
+                "dataObservationsClimatology"
+              )}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(modelingNavItems, "modeling")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(visualizationGisNavItems, "visualizationGis")}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(
+                assetsInstrumentationNavItems,
+                "assetsInstrumentation"
+              )}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(
+                communicationDisseminationNavItems,
+                "communicationDissemination"
+              )}
+            </div>
+            <div className="my-3 border-t border-border" aria-hidden="true" />
+
+            <div className="">
+              {renderMenuItems(
+                knowledgeDocumentationNavItems,
+                "knowledgeDocumentation"
+              )}
             </div>
           </div>
         </nav>
