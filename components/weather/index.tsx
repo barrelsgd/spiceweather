@@ -2,6 +2,10 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useId } from "react";
+import { AirQuality } from "./airquality";
+import { UVIndex } from "./uvindex";
+import { Highlights } from "./highlights";
+import { WxNews } from "./wxnews";
 
 // Types
 export type Location = {
@@ -539,6 +543,87 @@ export const Weather = () => {
         {/* <HourlyStrip items={hourly} /> */}
 
         <MetricsCard m={metrics} />
+        <AirQuality
+          aqi={metrics.aqi ?? 1}
+          category={metrics.airQualityText ?? undefined}
+          pm25={12.3}
+          pm10={20.1}
+          o3={35}
+          no2={12}
+          so2={2}
+          co={0.4}
+          updatedIso={new Date().toISOString()}
+        />
+        <UVIndex
+          uv={metrics.uvIndex ?? 0}
+          maxToday={metrics.uvIndex}
+          sunriseIso={metrics.sunriseIso}
+          sunsetIso={metrics.sunsetIso}
+        />
+        <Highlights
+          title="Met Office Highlights"
+          items={[
+            {
+              id: "h1",
+              title: "Tropical wave approaching Windward Islands",
+              summary:
+                "Showers and isolated thunderstorms likely this afternoon and evening. Monitor official advisories.",
+              href: "/blog/tropical-wave-update",
+              dateIso: new Date().toISOString(),
+              source: "Met Office",
+            },
+            {
+              id: "h2",
+              title: "Heat advisory for low-lying areas",
+              summary:
+                "Feels-like temperatures may exceed 38°C at peak hours. Stay hydrated and limit outdoor activities.",
+              href: "/blog/heat-advisory",
+              dateIso: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),
+              source: "Met Office",
+            },
+            {
+              id: "h3",
+              title: "Small craft caution in effect",
+              summary:
+                "Moderate seas with occasional gusts near squalls. Mariners should exercise caution.",
+              href: "/blog/marine-caution",
+              dateIso: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
+              source: "Met Office",
+            },
+          ]}
+        />
+        <WxNews
+          title="Latest Weather News"
+          items={[
+            {
+              id: "n1",
+              title: "Morning forecast issued",
+              summary:
+                "Partly cloudy becoming cloudy at times with a few brief showers mainly over the windward side.",
+              href: "/blog/morning-forecast",
+              dateIso: new Date().toISOString(),
+              category: "Update",
+            },
+            {
+              id: "n2",
+              title: "Heat advisory remains in effect",
+              summary:
+                "High humidity and light winds will elevate feels-like temperatures. Stay hydrated and take breaks in the shade.",
+              href: "/blog/heat-advisory",
+              dateIso: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
+              category: "Advisory",
+            },
+            {
+              id: "n3",
+              title: "Marine bulletin: moderate seas",
+              summary:
+                "Waves 1.5–2.0m in open waters and 0.5–1.0m in sheltered areas. Small craft should exercise caution.",
+              href: "/blog/marine-bulletin",
+              dateIso: new Date(Date.now() - 9 * 3600 * 1000).toISOString(),
+              category: "Bulletin",
+            },
+          ]}
+        />
       </div>
     </div>
   );

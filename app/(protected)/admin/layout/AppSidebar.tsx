@@ -83,37 +83,37 @@ const ResourceItems: NavItem[] = [
     icon: <AlertTriangle />,
     subItems: [
       {
-        name: "Common Alerting Protocol",
+        name: "Public",
         path: "/admin/alerts/cap",
         pro: false,
       },
       {
-        name: "Impact-Based Forecasts",
+        name: "Aviation",
         path: "/admin/alerts/ibf",
         pro: false,
       },
       {
-        name: "Warnings & Advisories",
+        name: "Marine & Coastal",
         path: "/admin/alerts/warnings",
         pro: false,
       },
       {
-        name: "Tropical Cyclone Advisories",
+        name: "Hydrology",
         path: "/admin/alerts/tc",
         pro: false,
       },
       {
-        name: "Tsunami Warnings",
+        name: "Tsunami",
         path: "/admin/alerts/tsunami",
         pro: false,
       },
       {
-        name: "Volcano Alerts",
+        name: "Volcanoes",
         path: "/admin/alerts/volcano",
         pro: false,
       },
       {
-        name: "Warning & Impact Maps",
+        name: "Air & Environment",
         path: "/admin/alerts/impact-maps",
         pro: false,
       },
@@ -195,7 +195,7 @@ const aviationMeteorologyNavItems: NavItem[] = [
 
 const sectoralProductsNavItems: NavItem[] = [
   {
-    name: "Sectoral Products",
+    name: "More Products",
     icon: <PieChart />,
     subItems: [
       {
@@ -219,13 +219,13 @@ const sectoralProductsNavItems: NavItem[] = [
         pro: false,
       },
       {
-        name: "Disaster Risk Reduction Reports",
-        path: "/admin/sectoral/drr-reports",
+        name: "UV Index",
+        path: "/admin/sectoral/uv-index",
         pro: false,
       },
       {
-        name: "Media Briefings",
-        path: "/admin/sectoral/media-briefings",
+        name: "Disaster Risk Reduction Reports",
+        path: "/admin/sectoral/drr-reports",
         pro: false,
       },
     ],
@@ -302,11 +302,11 @@ const modelingNavItems: NavItem[] = [
 
 const visualizationGisNavItems: NavItem[] = [
   {
-    name: "Visualization & GIS",
+    name: "GIS & Maps",
     icon: <Map />,
     subItems: [
       {
-        name: "GIS & QGIS Tools",
+        name: "GIS",
         path: "/admin/visualisation/qgis",
         pro: false,
       },
@@ -340,7 +340,7 @@ const assetsInstrumentationNavItems: NavItem[] = [
         pro: false,
       },
       {
-        name: "Digital Instrument Inventory",
+        name: "Inventory",
         path: "/admin/instruments/inventory",
         pro: false,
       },
@@ -353,15 +353,20 @@ const communicationDisseminationNavItems: NavItem[] = [
     name: "Media",
     icon: <Megaphone />,
     subItems: [
-      { name: "Website (SpiceWeather)", path: "/", pro: false },
+      { name: "SpiceWeather (Website)", path: "/", pro: false },
       {
-        name: "Mobile Application",
+        name: "SpiceWeather (Mobile)",
         path: "/admin/media/mobile",
         pro: false,
       },
       {
-        name: "Social Media Portal",
+        name: "Social Media",
         path: "/admin/media/social",
+        pro: false,
+      },
+      {
+        name: "Briefings",
+        path: "/admin/media/briefings",
         pro: false,
       },
       {
@@ -380,13 +385,33 @@ const knowledgeDocumentationNavItems: NavItem[] = [
     subItems: [
       { name: "Wiki", path: "/admin/resources/wiki", pro: false },
       {
-        name: "Technical Documentation",
+        name: "Docs",
         path: "/admin/resources/docs",
         pro: false,
       },
       {
-        name: "Training Material",
+        name: "Training Materials",
         path: "/admin/resources/training",
+        pro: false,
+      },
+      {
+        name: "Common Alerting Protocol",
+        path: "/admin/resources/cap",
+        pro: false,
+      },
+      {
+        name: "IWXXM",
+        path: "/admin/resources/iwxxm",
+        pro: false,
+      },
+      {
+        name: "BUFR",
+        path: "/admin/resources/bufr",
+        pro: false,
+      },
+      {
+        name: "Impact-Based Forecasting",
+        path: "/admin/resources/impact-based",
         pro: false,
       },
     ],
