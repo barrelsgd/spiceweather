@@ -2,14 +2,12 @@ import { mono, sans } from "@/lib/fonts";
 import "./weather.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/weather/footer";
 import { Header } from "@/components/weather/header";
 import { JsonLd } from "@/components/json-ld";
-import { Navigation } from "@/components/navigation";
-import { Sidebar } from "@/components/sidebar";
+// import { Sidebar } from "@/components/sidebar";
 import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
@@ -23,17 +21,11 @@ type RootLayoutProps = {
 };
 
 const HomeRootLayout = ({ children }: RootLayoutProps) => (
-  <ThemeProvider
-    attribute="class"
-    defaultTheme="system"
-    disableTransitionOnChange
-    enableSystem
-  >
+  <>
     <Header />
-
     {children}
     <Footer />
-  </ThemeProvider>
+  </>
 );
 
 export default HomeRootLayout;

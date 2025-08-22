@@ -39,18 +39,18 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       )}
       suppressHydrationWarning
     >
-      {/* <ThemeProvider
+      <ThemeProvider
         attribute="class"
         defaultTheme="system"
         disableTransitionOnChange
         enableSystem
-      > */}
-      {children}
-      <Toaster />
-      {/* <WindowsEmojiPolyfill /> */}
-      {/* <JsonLd /> */}
-      <Analytics />
-      {/* </ThemeProvider> */}
+      >
+        {children}
+        <Toaster />
+        {/* <WindowsEmojiPolyfill /> */}
+        {/* <JsonLd /> */}
+        <Analytics />
+      </ThemeProvider>
     </body>
   </html>
 );

@@ -4,20 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
-import {
-  Box,
-  Calendar,
-  ChevronDown,
-  LayoutGrid,
-  Ellipsis,
-  List,
-  FileText,
-  PieChart,
-  Plug,
-  Table,
-  UserCircle,
-} from "lucide-react";
-import SidebarWidget from "./SidebarWidget";
+import { Calendar, ChevronDown, Ellipsis, List, FileText } from "lucide-react";
 
 type NavItem = {
   name: string;
@@ -27,132 +14,169 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
+  // Quick access also available in header, but included here for completeness
+  { icon: <Calendar />, name: "Calendar", path: "/admin/calendar" },
+  { icon: <Calendar />, name: "Roster", path: "/admin/hrd/roster" },
+  { icon: <FileText />, name: "Tickets", path: "/admin/tickets" },
   {
-    icon: <Calendar />,
-    name: "Calendar",
-    path: "/admin/calendar",
-  },
-  {
-    icon: <Calendar />,
-    name: "Roster",
-    path: "/admin/hrd/roster",
+    name: "Administration",
+    icon: <FileText />,
+    subItems: [
+      { name: "Users & Roles", path: "/error-404" },
+      { name: "Permissions", path: "/error-404" },
+      { name: "Settings", path: "/error-404" },
+    ],
   },
   {
     name: "Forms",
     icon: <List />,
     subItems: [
-      {
-        name: "Daily Status Report",
-        path: "/admin/hrd/dailystatus",
-        pro: false,
-      },
-      {
-        name: "Leaves",
-        path: "/admin/hrd/leaves",
-        pro: false,
-      },
-      {
-        name: "Absentee Report",
-        path: "/admin/hrd/abscent",
-        pro: false,
-      },
-      {
-        name: "Shift Exchange Requistion",
-        path: "/admin/hrd/exchanges",
-        pro: false,
-      },
-      {
-        name: "Parking Access Application",
-        path: "/admin/hrd/parking",
-        pro: false,
-      },
-      {
-        name: "Time Sheet",
-        path: "/admin/hrd/timesheet",
-        pro: false,
-      },
-    ],
-  },
-
-  // {
-  //   icon: <LayoutGrid />,
-  //   name: "Dashboard",
-  //   subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
-  // },
-  // {
-  //   icon: <UserCircle />,
-  //   name: "User Profile",
-  //   path: "/admin/profile",
-  // },
-  // {
-  //   name: "Tables",
-  //   icon: <Table />,
-  //   subItems: [
-  //     { name: "Basic Tables", path: "/admin/basic-tables", pro: false },
-  //   ],
-  // },
-  // {
-  //   name: "Pages",
-  //   icon: <FileText />,
-  //   subItems: [
-  //     { name: "Blank Page", path: "/blank", pro: false },
-  //     { name: "404 Error", path: "/error-404", pro: false },
-  //   ],
-  // },
-];
-
-const othersItems: NavItem[] = [
-  {
-    name: "Alerts",
-    icon: <FileText />,
-    subItems: [
-      { name: "Impact-Based Forecast", path: "/error-404", pro: false },
-      { name: "Common Alerting Protocol", path: "/error-404", pro: false },
-      { name: "Tsunami", path: "/error-404", pro: false },
-      { name: "Heat Index", path: "/error-404", pro: false },
-      { name: "Tropical Cyclones", path: "/error-404", pro: false },
-      { name: "Volcanic Advisory", path: "/error-404", pro: false },
-      { name: "Dust", path: "/error-404", pro: false },
+      { name: "Daily Status Report", path: "/admin/hrd/dailystatus" },
+      { name: "Leave Form", path: "/admin/hrd/leaves" },
+      { name: "Absentee Report", path: "/admin/hrd/abscent" },
+      { name: "Shift Exchange", path: "/admin/hrd/exchanges" },
+      { name: "Parking Access", path: "/admin/hrd/parking" },
+      { name: "Time Sheet", path: "/admin/hrd/timesheet" },
     ],
   },
   {
-    name: "Weather & Marine",
+    name: "Alerts & Early Warning",
     icon: <FileText />,
     subItems: [
-      { name: "Hourly", path: "/blank", pro: false },
-      { name: "Morning Forecast", path: "/blank", pro: false },
-      { name: "Midday Forecast", path: "/error-404", pro: false },
-      { name: "Evening Forecast", path: "/error-404", pro: false },
-      { name: "Marine Bulletin", path: "/error-404", pro: false },
-      { name: "Tropical Weather Outlook", path: "/error-404", pro: false },
+      { name: "Common Alerting Protocol (CAP)", path: "/error-404" },
+      { name: "Impact-Based Forecasts", path: "/error-404" },
+      { name: "Warnings & Advisories", path: "/error-404" },
+      { name: "Tropical Cyclone Advisories", path: "/error-404" },
+      { name: "Warning & Impact Map", path: "/error-404" },
     ],
   },
   {
-    name: "Aviation",
+    name: "Aviation Services",
     icon: <FileText />,
     subItems: [
-      { name: "METAR/SPECI", path: "/blank", pro: false },
-      { name: "TAF", path: "/error-404", pro: false },
-      { name: "Pilot Briefings", path: "/error-404", pro: false },
-      { name: "Air Traffic Services", path: "/error-404", pro: false },
+      { name: "ATS/MET Transmission", path: "/error-404" },
+      { name: "METAR/SPECI", path: "/blank" },
+      { name: "TAF", path: "/error-404" },
+      { name: "TAF Verification", path: "/error-404" },
+      { name: "Wind Shear", path: "/error-404" },
+      { name: "Pilot Briefings", path: "/error-404" },
+      { name: "Flight Folder", path: "/error-404" },
+      { name: "SIGMET", path: "/error-404" },
+      { name: "Aviation Map", path: "/error-404" },
     ],
   },
   {
-    name: "Products",
+    name: "Public Weather Services",
     icon: <FileText />,
     subItems: [
-      { name: "Satellite/GeoNetCast", path: "/blank", pro: false },
-      { name: "Instruments", path: "/blank", pro: false },
-      { name: "Numerical Weather Prediction", path: "/error-404", pro: false },
+      { name: "Forecasts", path: "/error-404" },
+      { name: "Morning Forecast", path: "/blank" },
+      { name: "Midday Forecast", path: "/error-404" },
+      { name: "Evening Forecast", path: "/error-404" },
+      { name: "Marine Bulletin", path: "/error-404" },
+      { name: "Tropical Weather Outlook", path: "/error-404" },
+      { name: "Forecast Verification", path: "/error-404" },
     ],
   },
   {
-    name: "Climatology",
+    name: "Sector Products",
     icon: <FileText />,
     subItems: [
-      { name: "Monthly Climo Bulletin", path: "/blank", pro: false },
-      { name: "AgroBulletin", path: "/blank", pro: false },
-      { name: "Statistics", path: "/error-404", pro: false },
+      { name: "Health Index", path: "/error-404" },
+      { name: "AgroBulletin", path: "/blank" },
+      { name: "Air Quality Index", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Hydrology",
+    icon: <FileText />,
+    subItems: [{ name: "Streamflow", path: "/error-404" }],
+  },
+  {
+    name: "Disaster Risk Reduction",
+    icon: <FileText />,
+    subItems: [{ name: "DRR Dashboard", path: "/error-404" }],
+  },
+  {
+    name: "Health",
+    icon: <FileText />,
+    subItems: [{ name: "Health Products", path: "/error-404" }],
+  },
+  {
+    name: "Air Quality",
+    icon: <FileText />,
+    subItems: [{ name: "AQ Monitoring", path: "/error-404" }],
+  },
+  {
+    name: "Media",
+    icon: <FileText />,
+    subItems: [{ name: "Press & Media", path: "/error-404" }],
+  },
+  {
+    name: "Data & Climatology",
+    icon: <FileText />,
+    subItems: [
+      { name: "Geonetcast / Satellite Ingestion", path: "/blank" },
+      { name: "Central Meteorological Database", path: "/error-404" },
+      { name: "Local Server & Storage", path: "/error-404" },
+      { name: "BUFR eRegister", path: "/error-404" },
+      { name: "Monthly Climate Bulletin", path: "/blank" },
+    ],
+  },
+  {
+    name: "Modeling & HPC",
+    icon: <FileText />,
+    subItems: [
+      { name: "NWP/Ensemble Integration & Monitoring", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Assets & Instruments",
+    icon: <FileText />,
+    subItems: [
+      { name: "Digital Inventory", path: "/error-404" },
+      { name: "Instrument GUI Toolkit", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Communication & Dissemination",
+    icon: <FileText />,
+    subItems: [
+      { name: "NaDMA Data-Sharing Interface", path: "/error-404" },
+      { name: "Website (SpiceWeather)", path: "/error-404" },
+      { name: "Social Media Portal", path: "/error-404" },
+      { name: "Mobile Application", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Visualization & GIS",
+    icon: <FileText />,
+    subItems: [
+      { name: "GIS & QGIS", path: "/error-404" },
+      { name: "Weather Element Map", path: "/error-404" },
+      { name: "Warning & Impact Map", path: "/error-404" },
+      { name: "Aviation Map", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Machine Learning & Innovation",
+    icon: <FileText />,
+    subItems: [
+      { name: "Radar-Based Nowcasting", path: "/error-404" },
+      { name: "Lightning/Thunderstorm Prediction", path: "/error-404" },
+      { name: "Severe Event Anomaly Detection", path: "/error-404" },
+      { name: "Seasonal Outlooks & Drought Risk Modeling", path: "/error-404" },
+      { name: "Flood-Risk Prediction", path: "/error-404" },
+      { name: "Heatwave Health-Risk Modeling", path: "/error-404" },
+    ],
+  },
+  {
+    name: "Knowledge & Documentation",
+    icon: <FileText />,
+    subItems: [
+      { name: "Wiki", path: "/error-404" },
+      { name: "Docs", path: "/error-404" },
+      { name: "Documentation System", path: "/error-404" },
     ],
   },
 ];
@@ -161,18 +185,15 @@ const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
 
-  const renderMenuItems = (
-    navItems: NavItem[],
-    menuType: "main" | "others"
-  ) => (
+  const renderMenuItems = (items: NavItem[]) => (
     <ul className="flex flex-col gap-4">
-      {navItems.map((nav, index) => (
+      {items.map((nav, index) => (
         <li key={nav.name}>
           {nav.subItems ? (
             <button
-              onClick={() => handleSubmenuToggle(index, menuType)}
+              onClick={() => handleSubmenuToggle(index)}
               className={`menu-item group  ${
-                openSubmenu?.type === menuType && openSubmenu?.index === index
+                openSubmenu === index
                   ? "menu-item-active"
                   : "menu-item-inactive"
               } cursor-pointer ${
@@ -180,10 +201,13 @@ const AppSidebar: React.FC = () => {
                   ? "lg:justify-center"
                   : "lg:justify-start"
               }`}
+              type="button"
+              aria-expanded={openSubmenu === index}
+              aria-controls={`submenu-${index}`}
             >
               <span
-                className={` ${
-                  openSubmenu?.type === menuType && openSubmenu?.index === index
+                className={`${
+                  openSubmenu === index
                     ? "menu-item-icon-active"
                     : "menu-item-icon-inactive"
                 }`}
@@ -196,10 +220,7 @@ const AppSidebar: React.FC = () => {
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDown
                   className={`ml-auto w-5 h-5 transition-transform duration-200  ${
-                    openSubmenu?.type === menuType &&
-                    openSubmenu?.index === index
-                      ? "rotate-180 text-brand-500"
-                      : ""
+                    openSubmenu === index ? "rotate-180 text-brand-500" : ""
                   }`}
                 />
               )}
@@ -229,14 +250,15 @@ const AppSidebar: React.FC = () => {
           )}
           {nav.subItems && (isExpanded || isHovered || isMobileOpen) && (
             <div
+              id={`submenu-${index}`}
               ref={(el) => {
-                subMenuRefs.current[`${menuType}-${index}`] = el;
+                subMenuRefs.current[`${index}`] = el;
               }}
               className="overflow-hidden transition-all duration-300"
               style={{
                 height:
-                  openSubmenu?.type === menuType && openSubmenu?.index === index
-                    ? `${subMenuHeight[`${menuType}-${index}`]}px`
+                  openSubmenu === index
+                    ? `${subMenuHeight[`${index}`]}px`
                     : "0px",
               }}
             >
@@ -287,48 +309,32 @@ const AppSidebar: React.FC = () => {
     </ul>
   );
 
-  const [openSubmenu, setOpenSubmenu] = useState<{
-    type: "main" | "others";
-    index: number;
-  } | null>(null);
+  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
   const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
     {}
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  // const isActive = (path: string) => path === pathname;
   const isActive = useCallback((path: string) => path === pathname, [pathname]);
 
   useEffect(() => {
-    // Check if the current path matches any submenu item
-    let submenuMatched = false;
-    ["main", "others"].forEach((menuType) => {
-      const items = menuType === "main" ? navItems : othersItems;
-      items.forEach((nav, index) => {
-        if (nav.subItems) {
-          nav.subItems.forEach((subItem) => {
-            if (isActive(subItem.path)) {
-              setOpenSubmenu({
-                type: menuType as "main" | "others",
-                index,
-              });
-              submenuMatched = true;
-            }
-          });
-        }
-      });
+    // Auto-open submenu if a subItem matches current path
+    let matchedIndex: number | null = null;
+    navItems.forEach((nav, index) => {
+      if (nav.subItems) {
+        nav.subItems.forEach((subItem) => {
+          if (isActive(subItem.path)) {
+            matchedIndex = index;
+          }
+        });
+      }
     });
-
-    // If no submenu item matches, close the open submenu
-    if (!submenuMatched) {
-      setOpenSubmenu(null);
-    }
+    setOpenSubmenu(matchedIndex);
   }, [pathname, isActive]);
 
   useEffect(() => {
-    // Set the height of the submenu items when the submenu is opened
     if (openSubmenu !== null) {
-      const key = `${openSubmenu.type}-${openSubmenu.index}`;
+      const key = `${openSubmenu}`;
       if (subMenuRefs.current[key]) {
         setSubMenuHeight((prevHeights) => ({
           ...prevHeights,
@@ -338,22 +344,13 @@ const AppSidebar: React.FC = () => {
     }
   }, [openSubmenu]);
 
-  const handleSubmenuToggle = (index: number, menuType: "main" | "others") => {
-    setOpenSubmenu((prevOpenSubmenu) => {
-      if (
-        prevOpenSubmenu &&
-        prevOpenSubmenu.type === menuType &&
-        prevOpenSubmenu.index === index
-      ) {
-        return null;
-      }
-      return { type: menuType, index };
-    });
+  const handleSubmenuToggle = (index: number) => {
+    setOpenSubmenu((prev) => (prev === index ? null : index));
   };
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-background text-foreground h-screen transition-all duration-300 ease-in-out z-50 border-r border-border 
         ${
           isExpanded || isMobileOpen
             ? "w-[290px]"
@@ -404,36 +401,19 @@ const AppSidebar: React.FC = () => {
           <div className="flex flex-col gap-4">
             <div>
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 text-xs uppercase flex leading-[20px] text-muted-foreground ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Internal"
+                  "Modules"
                 ) : (
                   <Ellipsis />
                 )}
               </h2>
-              {renderMenuItems(navItems, "main")}
-            </div>
-
-            <div className="">
-              <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
-                  !isExpanded && !isHovered
-                    ? "lg:justify-center"
-                    : "justify-start"
-                }`}
-              >
-                {isExpanded || isHovered || isMobileOpen ? (
-                  "SpiceWeather"
-                ) : (
-                  <Ellipsis />
-                )}
-              </h2>
-              {renderMenuItems(othersItems, "others")}
+              {renderMenuItems(navItems)}
             </div>
           </div>
         </nav>

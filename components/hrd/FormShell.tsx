@@ -40,7 +40,7 @@ export default function FormShell({
         <div className="mt-4 flex items-center gap-3">
           <button
             type="submit"
-            className="rounded-xl bg-black px-4 py-2 text-white hover:opacity-90"
+            className="rounded-xl bg-primary px-4 py-2 text-primary-foreground hover:opacity-90"
           >
             Submit
           </button>
