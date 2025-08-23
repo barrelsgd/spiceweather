@@ -21,11 +21,11 @@ type RootLayoutProps = {
 };
 
 const HomeRootLayout = ({ children }: RootLayoutProps) => (
-  <>
+  <div className="grid grid-cols-1">
     <Header />
     {children}
     <Footer />
-  </>
+  </div>
 );
 
 export default HomeRootLayout;

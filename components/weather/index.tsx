@@ -502,29 +502,6 @@ export const Weather = () => {
           className="mx-auto max-w-4xl mt-5 space-y-6 "
           role="region"
         >
-          {/* <div className="flex justify-center">
-        <SegmentedControl
-          value={activeTab}
-          onChange={(s) => {
-            if (s === "Hourly") {
-              router.push("/weather");
-              return;
-            }
-            const slug = s.toLowerCase();
-            router.push(`/weather/${slug}`);
-          }}
-          segments={[
-            "Hourly",
-            "Today",
-            "Tues",
-            "Wed",
-            "Thur",
-            "Outlook",
-            "Marine",
-          ]}
-        />
-      </div> */}
-
           {/* <LocationChips /> */}
           <LocationTitle name={"St. George's, Grenada"} />
 

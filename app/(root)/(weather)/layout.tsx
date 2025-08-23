@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { appBaseUrl } from "@/lib/env";
-import { WeatherSubnav } from "@/components/weather/subnav";
+
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { PopcornIcon } from "lucide-react";
@@ -9,6 +9,8 @@ import { AirQuality } from "@/components/weather/airquality";
 import { UVIndex } from "@/components/weather/uvindex";
 import { Highlights } from "@/components/weather/highlights";
 import { WxNews } from "@/components/weather/wxnews";
+import { WeatherSubnav } from "@/components/weather/subnav";
+import { AdCard } from "@/components/ads/AdCard";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appBaseUrl),
@@ -19,51 +21,94 @@ type RootLayoutProps = {
 };
 
 const WeatherLayout = ({ children }: RootLayoutProps) => (
-  <div>
+  <div className="grid grid-cols-1">
     <div className="mx-4">
       <div className="mx-auto max-w-4xl">
         <Alert>
           <PopcornIcon />
           <AlertTitle>There are no watches or warnings in effect!</AlertTitle>
         </Alert>
+        {/* Top banner ad (sponsored) */}
+        <div className="mt-4">
+          <AdCard
+            title="Fly Grenada: Limited-Time Fares"
+            description="Book your next trip to Barbados, Trinidad, and New York with exclusive weekend fares."
+            href="https://example.com/airlines"
+            advertiser="IslandAir"
+            imageSrc="/images/brand/brand-01.svg"
+            imageAlt="IslandAir limited-time fares"
+            aspectClass="aspect-[21/9] md:aspect-[63/9]"
+          />
+        </div>
       </div>
     </div>
-    <WeatherSubnav />
+
     <div className="mx-4 mt-4">
-      <div className="mx-auto max-w-4xl">
-        <Card>
-          <CardContent className="py-4">{children}</CardContent>
-        </Card>
-        <div className="mt-4 space-y-4">
-          <Card>
-            <CardContent className="py-4">
-              <AirQuality
-                aqi={18}
-                category="Good"
-                pm25={6.2}
-                pm10={12.1}
-                o3={32}
-                no2={9}
-                so2={1}
-                co={0.3}
-                updatedIso={new Date().toISOString()}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="py-4">
-              <UVIndex
-                uv={5}
-                maxToday={7}
-                sunriseIso={new Date(
-                  new Date().setHours(5, 55, 0, 0)
-                ).toISOString()}
-                sunsetIso={new Date(
-                  new Date().setHours(18, 29, 0, 0)
-                ).toISOString()}
-              />
-            </CardContent>
-          </Card>
+      <div className="mx-auto max-w-5xl">
+        {/* Two-column section (md+) */}
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] gap-4">
+          {/* Left: Tabs + Wx card */}
+          <div>
+            <WeatherSubnav />
+            <Card>
+              <CardContent className="py-4">{children}</CardContent>
+            </Card>
+          </div>
+
+          {/* Right: stacked AirQuality and UVIndex */}
+          <div className="grid grid-cols-1 gap-4">
+            {/* Sidebar ad (airlines) */}
+            <AdCard
+              title="Last-Minute Flight Deals"
+              description="Save up to 30% on late summer escapes. Seats are limited—book today."
+              href="https://example.com/last-minute"
+              advertiser="CaribWings"
+              imageSrc="/images/brand/brand-02.svg"
+              imageAlt="CaribWings last-minute flight deals"
+            />
+            <Card>
+              <CardContent className="py-4">
+                <AirQuality
+                  aqi={18}
+                  category="Good"
+                  pm25={6.2}
+                  pm10={12.1}
+                  o3={32}
+                  no2={9}
+                  so2={1}
+                  co={0.3}
+                  updatedIso={new Date().toISOString()}
+                />
+              </CardContent>
+            </Card>
+            {/* Sidebar ad (hotels) */}
+            <AdCard
+              title="Beachfront Hotels from $99"
+              description="Wake up to ocean views in Grand Anse. Flexible cancellation available."
+              href="https://example.com/hotels"
+              advertiser="SpiceBay Hotels"
+              imageSrc="/images/brand/brand-03.svg"
+              imageAlt="SpiceBay Hotels beachfront offers"
+            />
+            <Card>
+              <CardContent className="py-4">
+                <UVIndex
+                  uv={5}
+                  maxToday={7}
+                  sunriseIso={new Date(
+                    new Date().setHours(5, 55, 0, 0)
+                  ).toISOString()}
+                  sunsetIso={new Date(
+                    new Date().setHours(18, 29, 0, 0)
+                  ).toISOString()}
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Full-width section for highlights and news */}
+        <div className="mt-4 grid grid-cols-1 gap-4">
           <Card>
             <CardContent className="py-4">
               <Highlights
@@ -104,46 +149,58 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
               />
             </CardContent>
           </Card>
-          <Card>
-            <CardContent className="py-4">
-              <WxNews
-                title="Latest Weather News"
-                items={[
-                  {
-                    id: "n1",
-                    title: "Morning forecast issued",
-                    summary:
-                      "Partly cloudy becoming cloudy at times with a few brief showers mainly over the windward side.",
-                    href: "/blog/morning-forecast",
-                    dateIso: new Date().toISOString(),
-                    category: "Update",
-                  },
-                  {
-                    id: "n2",
-                    title: "Heat advisory remains in effect",
-                    summary:
-                      "High humidity and light winds will elevate feels-like temperatures. Stay hydrated and take breaks in the shade.",
-                    href: "/blog/heat-advisory",
-                    dateIso: new Date(
-                      Date.now() - 3 * 3600 * 1000
-                    ).toISOString(),
-                    category: "Advisory",
-                  },
-                  {
-                    id: "n3",
-                    title: "Marine bulletin: moderate seas",
-                    summary:
-                      "Waves 1.5–2.0m in open waters and 0.5–1.0m in sheltered areas. Small craft should exercise caution.",
-                    href: "/blog/marine-bulletin",
-                    dateIso: new Date(
-                      Date.now() - 9 * 3600 * 1000
-                    ).toISOString(),
-                    category: "Bulletin",
-                  },
-                ]}
-              />
-            </CardContent>
-          </Card>
+          {/* Latest Weather News with right-rail ad on md+; stacked on small */}
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(280px,340px)] gap-4 items-stretch">
+            <Card>
+              <CardContent className="py-4">
+                <WxNews
+                  title="Latest Weather News"
+                  items={[
+                    {
+                      id: "n1",
+                      title: "Morning forecast issued",
+                      summary:
+                        "Partly cloudy becoming cloudy at times with a few brief showers mainly over the windward side.",
+                      href: "/blog/morning-forecast",
+                      dateIso: new Date().toISOString(),
+                      category: "Update",
+                    },
+                    {
+                      id: "n2",
+                      title: "Heat advisory remains in effect",
+                      summary:
+                        "High humidity and light winds will elevate feels-like temperatures. Stay hydrated and take breaks in the shade.",
+                      href: "/blog/heat-advisory",
+                      dateIso: new Date(
+                        Date.now() - 3 * 3600 * 1000
+                      ).toISOString(),
+                      category: "Advisory",
+                    },
+                    {
+                      id: "n3",
+                      title: "Marine bulletin: moderate seas",
+                      summary:
+                        "Waves 1.5–2.0m in open waters and 0.5–1.0m in sheltered areas. Small craft should exercise caution.",
+                      href: "/blog/marine-bulletin",
+                      dateIso: new Date(
+                        Date.now() - 9 * 3600 * 1000
+                      ).toISOString(),
+                      category: "Bulletin",
+                    },
+                  ]}
+                />
+              </CardContent>
+            </Card>
+            <AdCard
+              title="Weekly Grocery Specials"
+              description="Fresh produce, bakery, and pantry staples on sale. Click to view this week's flyer."
+              href="https://example.com/supermarket-deals"
+              advertiser="SpiceMart"
+              imageSrc="/images/brand/brand-04.svg"
+              imageAlt="SpiceMart weekly grocery specials"
+              fill
+            />
+          </div>
         </div>
       </div>
     </div>

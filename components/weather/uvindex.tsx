@@ -61,10 +61,7 @@ export const UVIndex = ({
       <h2 id="uv-index" className="font-medium text-xl">
         UV Index
       </h2>
-      <article
-        aria-label="UV index summary"
-        className="rounded-xl border bg-card/60 p-4 backdrop-blur-sm"
-      >
+      <article aria-label="UV index summary" className="">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-muted-foreground text-sm">WHO scale</p>

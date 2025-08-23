@@ -75,10 +75,7 @@ export const AirQuality = ({
       <h2 id="air-quality" className="font-medium text-xl">
         Air Quality
       </h2>
-      <article
-        aria-label="Air quality summary"
-        className="rounded-xl border bg-card/60 p-4 backdrop-blur-sm"
-      >
+      <article aria-label="Air quality summary" className="">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-muted-foreground text-sm">{source}</p>
