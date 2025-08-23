@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
-import { JsonLd } from "@/components/json-ld";
-import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
+import { JsonLd } from "@/components/root/json-ld";
+import { WindowsEmojiPolyfill } from "@/components/root/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
 

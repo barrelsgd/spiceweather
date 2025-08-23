@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "../../link";
-import { NavigationDesktop } from "@/components/nav-desktop";
-import { NavigationMobileButton } from "@/components/nav-mobile";
+import { Link } from "@/components/root/link";
+import { NavigationDesktop } from "@/components/root/nav-desktop";
+import { NavigationMobileButton } from "@/components/root/nav-mobile";
 import spicewx from "./spicewx.png";
-import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
+import { ThemeToggleButton } from "@/components/admin/common/ThemeToggleButton";
 
 export const Header = () => {
   return (

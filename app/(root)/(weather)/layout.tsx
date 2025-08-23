@@ -45,29 +45,25 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
 
     <div className="mx-4 mt-4">
       <div className="mx-auto max-w-5xl">
-        {/* Two-column section (md+) */}
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] gap-4">
-          {/* Left: Tabs + Wx card */}
-          <div>
+        {/* Two-column, two-row section (md+):
+            Row 1 matches Wx Tabs height; Row 2 matches Content Card height */}
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] md:grid-rows-[auto_1fr] gap-0 items-stretch">
+          {/* Left Row 1: Wx Tabs */}
+          <div className="md:col-start-1 md:row-start-1">
             <WeatherSubnav />
-            <Card>
-              <CardContent className="py-4">{children}</CardContent>
+          </div>
+
+          {/* Left Row 2: Wx Content Card */}
+          <div className="md:col-start-1 md:row-start-2 h-full">
+            <Card className="h-full">
+              <CardContent className="h-full py-4">{children}</CardContent>
             </Card>
           </div>
 
-          {/* Right: stacked AirQuality and UVIndex */}
-          <div className="grid grid-cols-1 gap-4">
-            {/* Sidebar ad (airlines) */}
-            <AdCard
-              title="Last-Minute Flight Deals"
-              description="Save up to 30% on late summer escapes. Seats are limited—book today."
-              href="https://example.com/last-minute"
-              advertiser="CaribWings"
-              imageSrc="/images/brand/brand-02.svg"
-              imageAlt="CaribWings last-minute flight deals"
-            />
-            <Card>
-              <CardContent className="py-4">
+          {/* Right Row 1: Air Quality matches tabs height (graph-only) */}
+          <div className="md:col-start-2 md:row-start-1 h-full">
+            <Card className="h-full">
+              <CardContent className="h-full py-4">
                 <AirQuality
                   aqi={18}
                   category="Good"
@@ -78,18 +74,27 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
                   so2={1}
                   co={0.3}
                   updatedIso={new Date().toISOString()}
+                  variant="graph"
                 />
               </CardContent>
             </Card>
-            {/* Sidebar ad (hotels) */}
-            <AdCard
-              title="Beachfront Hotels from $99"
-              description="Wake up to ocean views in Grand Anse. Flexible cancellation available."
-              href="https://example.com/hotels"
-              advertiser="SpiceBay Hotels"
-              imageSrc="/images/brand/brand-03.svg"
-              imageAlt="SpiceBay Hotels beachfront offers"
-            />
+          </div>
+
+          {/* Right Row 2: Hotels (smaller on md+) + UV Index (content height) */}
+          <div className="md:col-start-2 md:row-start-2 grid md:grid-rows-[auto_auto] grid-rows-2 gap-0 h-full">
+            {/* Hotels Ad: smaller height on md+ */}
+            <div className="md:h-28">
+              <AdCard
+                title="Beachfront Hotels from $99"
+                description="Wake up to ocean views in Grand Anse. Flexible cancellation available."
+                href="https://example.com/hotels"
+                advertiser="SpiceBay Hotels"
+                imageSrc="/images/brand/brand-03.svg"
+                imageAlt="SpiceBay Hotels beachfront offers"
+                fill
+              />
+            </div>
+            {/* UV Index: auto height (content only) */}
             <Card>
               <CardContent className="py-4">
                 <UVIndex
@@ -108,7 +113,7 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
         </div>
 
         {/* Full-width section for highlights and news */}
-        <div className="mt-4 grid grid-cols-1 gap-4">
+        <div className="mt-4 grid grid-cols-1 gap-0">
           <Card>
             <CardContent className="py-4">
               <Highlights
@@ -150,7 +155,7 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
             </CardContent>
           </Card>
           {/* Latest Weather News with right-rail ad on md+; stacked on small */}
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(280px,340px)] gap-4 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(280px,340px)] gap-0 items-stretch">
             <Card>
               <CardContent className="py-4">
                 <WxNews
@@ -191,6 +196,7 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
                 />
               </CardContent>
             </Card>
+            {/* Sponsored: SpiceMart (right rail on md+, stacked on mobile) */}
             <AdCard
               title="Weekly Grocery Specials"
               description="Fresh produce, bakery, and pantry staples on sale. Click to view this week's flyer."
@@ -198,7 +204,7 @@ const WeatherLayout = ({ children }: RootLayoutProps) => (
               advertiser="SpiceMart"
               imageSrc="/images/brand/brand-04.svg"
               imageAlt="SpiceMart weekly grocery specials"
-              fill
+              aspectClass="aspect-[16/9] md:aspect-[21/9]"
             />
           </div>
         </div>

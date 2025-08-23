@@ -1,4 +1,4 @@
-import RosterForm from "@/components/hrd/Roster";
+import RosterForm from "@/components/admin/hrd/Roster";
 
 export default function FormsDemoPage() {
   return <RosterForm />;

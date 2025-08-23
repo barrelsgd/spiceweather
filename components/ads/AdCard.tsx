@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "@/components/link";
+import { Link } from "@/components/root/link";
 
 export type AdCardProps = {
   title: string;

@@ -1,11 +1,11 @@
-import { allPosts } from 'content-collections';
-import { ArrowLeftToLineIcon } from 'lucide-react';
-import type { Metadata } from 'next';
+import { allPosts } from "content-collections";
+import { ArrowLeftToLineIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { FC } from 'react';
-import { Link } from '@/components/link';
-import { Mdx } from '@/components/mdx';
+import { Link } from '@/components/root/link';
+import { Mdx } from '@/components/root/mdx';
 import { createMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +15,7 @@ type PageProperties = {
   }>;
 };
 
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
 export const generateMetadata = async ({
   params,
@@ -52,8 +52,8 @@ const Page: FC<PageProperties> = async ({ params }) => {
       <div className="-ml-28 absolute mt-1 hidden select-none lg:block">
         <Link
           className={cn(
-            'flex items-center gap-2 text-nowrap text-muted-foreground text-xs transition-colors',
-            'hover:text-foreground'
+            "flex items-center gap-2 text-nowrap text-muted-foreground text-xs transition-colors",
+            "hover:text-foreground"
           )}
           href="/blog"
         >
@@ -83,8 +83,8 @@ const Page: FC<PageProperties> = async ({ params }) => {
       </article>
       <div className="not-prose mt-12 grid gap-1 text-muted-foreground text-sm">
         <p>
-          Published on{' '}
-          {new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
+          Published on{" "}
+          {new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(
             page.date
           )}
         </p>

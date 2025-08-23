@@ -1,5 +1,5 @@
-import Calendar from "@/components/calendar/Calendar";
-import PageBreadcrumb from "@/components/common/PageBreadCrumb";
+import Calendar from "@/components/admin/calendar/Calendar";
+import PageBreadcrumb from "@/components/admin/common/PageBreadCrumb";
 import { Metadata } from "next";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import LeaveOfAbsenceForm from "@/components/hrd/LeaveOfAbs";
+import LeaveOfAbsenceForm from "@/components/admin/hrd/LeaveOfAbs";
 
 export default function FormsDemoPage() {
   return <LeaveOfAbsenceForm />;

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Link } from "@/components/link";
+import { Link } from "@/components/root/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const items = [
@@ -26,9 +26,9 @@ export function WeatherSubnav() {
       )?.value ?? items[0].value;
 
   return (
-    <nav aria-label="Weather sections" className="w-full mt-4">
-      <div className="mx-4">
-        <div className="mx-auto w-full max-w-4xl">
+    <nav aria-label="Weather sections" className="w-full">
+      <div className="">
+        <div className="mx-auto w-full max-w-4xl mb-0">
           <Tabs value={active} className="w-full">
             <TabsList className="w-full">
               {items.map((item) => (

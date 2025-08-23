@@ -6,9 +6,9 @@ import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/weather/footer";
 import { Header } from "@/components/weather/header";
-import { JsonLd } from "@/components/json-ld";
+import { JsonLd } from "@/components/root/json-ld";
 // import { Sidebar } from "@/components/sidebar";
-import { WindowsEmojiPolyfill } from "@/components/windows-emoji-polyfill";
+import { WindowsEmojiPolyfill } from "@/components/root/windows-emoji-polyfill";
 import { cn } from "@/lib/utils";
 import { appBaseUrl } from "@/lib/env";
 

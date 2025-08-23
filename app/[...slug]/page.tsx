@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Mdx } from '@/components/mdx';
-import { getPage } from '@/lib/content';
-import { createMetadata } from '@/lib/metadata';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Mdx } from "@/components/root/mdx";
+import { getPage } from "@/lib/content";
+import { createMetadata } from "@/lib/metadata";
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
@@ -12,7 +12,7 @@ export const generateMetadata = async ({
   params,
 }: PageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const page = getPage(slug?.join('/') ?? 'home');
+  const page = getPage(slug?.join("/") ?? "home");
 
   if (!page) {
     return {};
@@ -21,13 +21,13 @@ export const generateMetadata = async ({
   return createMetadata({
     title: page.title,
     description: page.description,
-    image: `/og?slug=${slug?.join('/')}`,
+    image: `/og?slug=${slug?.join("/")}`,
   });
 };
 
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
-  const page = getPage(slug?.join('/') ?? 'home');
+  const page = getPage(slug?.join("/") ?? "home");
 
   if (!page) {
     notFound();
