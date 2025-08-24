@@ -21,7 +21,7 @@ export const AdCard = ({
   advertiser,
   imageSrc,
   imageAlt,
-  aspectClass = "aspect-[16/9]",
+  aspectClass,
   fill = false,
 }: AdCardProps) => (
   <Card role="region" aria-label={`Advertisement: ${advertiser || title}`} className={fill ? "h-full" : undefined}>
@@ -33,11 +33,13 @@ export const AdCard = ({
       >
         {imageSrc ? (
           <>
-            <div className={fill ? "relative h-full w-full bg-muted" : `relative ${aspectClass} w-full bg-muted`}>
+            <div className={fill ? "relative h-full w-full bg-muted" : `relative ${aspectClass ? `${aspectClass} ` : ""}w-full bg-muted`}>
               <img
                 src={imageSrc}
                 alt={imageAlt ?? title}
-                className={fill ? "absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" : "absolute inset-0 h-full w-full object-contain sm:object-cover transition-transform duration-300 group-hover:scale-[1.02]"}
+                className={fill
+                  ? "absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  : `${aspectClass ? "absolute inset-0 h-full w-full" : "block w-full h-auto"} object-contain sm:object-cover transition-transform duration-300 group-hover:scale-[1.02]`}
                 loading="lazy"
               />
               <div className="pointer-events-none absolute left-2 top-2 rounded bg-background/80 px-2 py-0.5 text-[11px] font-medium text-muted-foreground shadow">

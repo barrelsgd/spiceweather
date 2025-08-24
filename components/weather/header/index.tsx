@@ -10,7 +10,7 @@ import { ThemeToggleButton } from "@/components/admin/common/ThemeToggleButton";
 export const Header = () => {
   return (
     <>
-      <div className="sticky top-0 z-50 mx-auto mt-4 flex h-16 max-w-7xl items-center justify-between bg-background p-4">
+      <div className="sticky top-0 z-50 mx-auto max-w-full mt-4 flex h-16 bg-background p-4">
         <Link className="flex items-center gap-4" href="/">
           <Image
             alt="SpiceWeather logo"
@@ -21,7 +21,6 @@ export const Header = () => {
             src={spicewx}
             width={299}
           />
-          <WeatherHeader appName="SpiceWeather" />
         </Link>
         {/* Desktop navigation */}
         <div className="hidden md:block">

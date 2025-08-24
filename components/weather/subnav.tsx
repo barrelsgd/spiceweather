@@ -28,7 +28,7 @@ export function WeatherSubnav() {
   return (
     <nav aria-label="Weather sections" className="w-full">
       <div className="">
-        <div className="mx-auto w-full max-w-4xl mb-0">
+        <div className="w-full mb-0">
           <Tabs value={active} className="w-full">
             <TabsList className="w-full">
               {items.map((item) => (
